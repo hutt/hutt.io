@@ -1,0 +1,23 @@
+{
+  "title": "Jannis Hutt",
+  "beschreibung": "Politische Kommunikation, Photographie, Videoproduktion, Layout und alles, was mit Internet zu tun hat.",
+  "url": "https://hutt.io",
+  "autor": "Jannis Hutt",
+  "plausible_domain": "hutt.io",
+  "kontakt": {
+    "email": "jannis@hutt.io",
+    "pgp_fingerprint": "C59B 6CD5 E980 6365 A69C 9046 9BAD 2EA1 5BCF 1DFF",
+    "signal": "https://signal.me/#eu/ROdReCjcEYMiVqI8-r0CA_08NCXJxobpe-ZjJ4BuEFs85_ZsCPNE7IIn-kqyCrED",
+    "mastodon": "https://hutt.social/@jannis",
+    "instagram": "https://www.instagram.com/aluhutt.jpg/",
+    "flickr": "https://www.flickr.com/photos/jannishutt/",
+    "github": "https://github.com/hutt",
+    "blog": "https://bloggenswertes.de/"
+  },
+  "impressum": {
+    "name": "Jannis Hutt",
+    "zusatz": "c/o Die Linke im Bundestag",
+    "strasse": "Platz der Republik 1",
+    "plz_ort": "11011 Berlin"
+  }
+}

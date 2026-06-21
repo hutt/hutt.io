@@ -1,0 +1,23 @@
+{
+  "name": "hutt.io",
+  "version": "3.0.0",
+  "description": "Portfolio-Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hutt/hutt.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hutt/hutt.github.io/issues"
+  },
+  "homepage": "https://github.com/hutt/hutt.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}
