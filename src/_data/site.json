@@ -14,6 +14,10 @@
     "github": "https://github.com/hutt",
     "blog": "https://bloggenswertes.de/"
   },
+  "portfolio": {
+    "num_items": 4,
+    "num_items_mobile": 2
+  },
   "impressum": {
     "name": "Jannis Hutt",
     "zusatz": "c/o Die Linke im Bundestag",

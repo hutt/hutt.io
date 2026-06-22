@@ -2,44 +2,29 @@
 layout: layouts/base.njk
 title: ""
 beschreibung: "Politische Kommunikation, Webentwicklung, Videoproduktion und alles dazwischen. Jannis Hutt, Berlin."
+eleventyImport:
+  collections: ["portfolio"]
 ---
 
 {# ── Hero ── #}
 <section class="hero" aria-label="Einleitung">
-  <div class="hero-cube-wrap" aria-hidden="true">
-    <div class="cube">
-      <div class="cube-face face-front"></div>
-      <div class="cube-face face-back"></div>
-      <div class="cube-face face-left"></div>
-      <div class="cube-face face-right"></div>
-      <div class="cube-face face-top"></div>
-      <div class="cube-face face-bottom"></div>
-    </div>
-  </div>
+  <canvas class="hero-network" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div class="hero-portrait">
-      <img
-        src="/assets/img/jannis-hutt.jpg"
-        alt="Jannis Hutt"
-        width="480"
-        height="640"
-        loading="eager"
-        decoding="async">
+      {% imageLCP "./src/assets/img/portrait.jpg", "Jannis Hutt", "(max-width: 860px) 6rem, 11rem" %}
     </div>
     <div class="hero-copy">
-      <p class="label">Jannis Hutt — Berlin</p>
+      <p class="label">Jannis Hutt</p>
       <h1 class="hero-title">
-        Schweizer<br>Taschenmesser<br>für alles <span class="accent">Digitale</span>
+        All things <span class="accent">Internet</span>
       </h1>
       <p class="hero-sub">
-        Zwischen Webentwicklung, politischer Kommunikation, Infrastruktur
-        und Kampagnenarbeit bringe ich Dinge schnell zusammen, die andere
-        erst einmal auf mehrere Rollen aufteilen würden.
+        Digitale politische Kommunikation von A bis Z.
       </p>
       <div class="hero-actions">
         <a href="#kontakt" class="btn btn-primary">Kontakt aufnehmen</a>
-        <a href="#ueber-mich" class="btn btn-secondary">Mehr erfahren</a>
-        <a href="#projekte" class="btn btn-ghost">Alle Projekte →</a>
+        <a href="#ueber-mich" class="btn btn-secondary">Über mich</a>
+        <a href="#portfolio" class="btn btn-ghost">Was ich mache →</a>
       </div>
     </div>
   </div>
@@ -51,170 +36,171 @@ beschreibung: "Politische Kommunikation, Webentwicklung, Videoproduktion und all
     <p class="label">Über mich</p>
     <h2 class="section-title" id="h-ueber-mich">Moin.</h2>
     <div class="about-grid">
-      <img
-        class="about-photo"
-        src="/assets/img/jannis-hutt-portrait.jpg"
-        alt="Jannis Hutt, Portrait"
-        width="400"
-        height="533"
-        loading="lazy"
-        decoding="async">
       <div class="about-copy">
         <p>Mein Name ist Jannis und ich lebe und arbeite in Berlin. Seit 2015 treibe ich mich in Parlamenten herum; seit 2017 im Bundestag, wo ich als fester Mitarbeiter für verschiedene Abgeordnete der Linksfraktion Öffentlichkeits- und Pressearbeit mache. Doch auch zwischen Nullen und Einsen fühle ich mich zuhause. Womit ich – das soll an dieser Stelle explizit gesagt sein – nicht meine Kolleg_innen meine, sondern die Werte, mit denen der kleinste aller digitalen Datentypen, das Bit, dargestellt werden kann.</p>
         <p>Dabei sitze ich schon immer an einer Schnittstelle: Mit meiner Leidenschaft für Politik und Kommunikation auf der einen Seite – und ihren digitalen Distributionswegen auf der anderen. Sei es Kampagnenplanung, Pressearbeit, Grafik- oder Webdesign, Photo- und Videographie oder Aufbau und Administration der darunterliegenden Infrastruktur. Ich kenne den kompletten Weg vom Anfang bis zum Ende.</p>
         <p>Wenn man so möchte, bin ich ein Zeitzeuge der Entwicklung hin zur digitalen Gesellschaft. Meine erste Website habe ich mit zwölf geschrieben und meinen ersten Twitter-Account mit vierzehn. Seitdem hat sich Einiges verändert: Aus dem freiheitlichen <em>Web 2.0</em> zum Plattformkapitalismus begann.</p>
         <p>Trotzdem oder gerade deshalb habe ich meinen Technikoptimismus nicht über Bord geworfen: Ich habe gesehen, ja selbst erlebt, wie das Internet als emanzipatives Medium Menschen zusammenbringen kann; wie sich dort Gesellschaft zum besseren verändern ließ und lässt. Diesen Idealismus, wie man ihn heute am ehesten beim jährlichen Congress des Chaos Computer Clubs spüren kann, möchte ich mir bewahren. Und ich finde, er hat mich bisher auch immer gut geleitet: <strong>Immer mittendrin, an der Schnittstelle zwischen Technologie, Politik und Gesellschaft</strong>.</p>
-        <p>Photographieren, das ist für mich ein Auge für die Details zu haben. Für Ecken, die man sonst nicht beachten würde, das Licht und die Menschen mit ihren Widersprüchen. Deshalb fühle ich mich vor allem der Reportage-, Portrait- und Street-Photographie verbunden. Immer mit dabei sind meine Fujifilm-Kameras mit ihren wunderbaren Filmsimulationen. Mein Portfolio mit einer Auswahl meiner Auftragsarbeiten sende ich auf Anfrage gerne zu. Da mir Creative Commons sehr am Herzen liegt, sind die meisten meiner Bilder auch auf <a href="{{ site.kontakt.flickr }}" target="_blank" rel="noopener">Flickr</a> unter CC-BY verfügbar.</p>
       </div>
     </div>
   </div>
 </section>
 
-{# ── Projekte ── #}
-<section class="section" id="projekte" aria-labelledby="h-projekte">
+{# ── Portfolio ── #}
+<section class="section" id="portfolio" aria-labelledby="h-portfolio">
   <div class="wrap">
     <p class="label">Portfolio</p>
-    <h2 class="section-title" id="h-projekte">Projekte</h2>
+    <h2 class="section-title" id="h-portfolio">Was ich so mache</h2>
 
-    {# Kategorien-Filter dynamisch aus den Daten #}
-    {% set alleKats = collections.projekte | alleKategorien %}
-    <div class="filter-bar" role="group" aria-label="Projekte nach Kategorie filtern">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">Alle</button>
-      {% for kat in alleKats %}
-        <button class="filter-chip" data-filter="{{ kat | slug }}" aria-pressed="false">{{ kat }}</button>
+    {# ── Filter-Zeile 1: Art (Festanstellung / Sidehustle) ── #}
+    {% set alleArten = collections.portfolio | alleWerte("art") %}
+    <div class="filter-bar filter-bar--primary" id="filter-art" role="group" aria-label="Nach Art filtern">
+      <button class="filter-chip" data-value="" aria-pressed="true">Alle</button>
+      {% for art in alleArten %}
+        <button class="filter-chip" data-value="{{ art }}" aria-pressed="false">{{ art }}</button>
       {% endfor %}
+
+      <button class="filter-chip" id="filter-featured" aria-pressed="true" style="margin-left: auto; display: inline-flex; align-items: center; gap: 0.3em;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+      </button>
     </div>
 
-    <div class="card-grid" id="projekte-grid">
-      {% for projekt in collections.projekte %}
-        <article
-          class="card"
-          data-category="{{ projekt.data.kategorien | katSlug }}"
-          aria-label="{{ projekt.data.title }}">
+    {# ── Filter-Zeile 2: Skills ── #}
+    {% set alleSkills = collections.portfolio | alleWerte("skills") %}
+    <div
+      class="filter-bar filter-bar--secondary is-collapsed"
+      id="filter-skills"
+      role="group"
+      aria-label="Nach Skill filtern"
+      data-filter-group="skills">
+      <button class="filter-chip filter-chip--sm" data-value="" aria-pressed="true">Alle</button>
+      {% for skill in alleSkills %}
+        <button class="filter-chip filter-chip--sm" data-value="{{ skill }}" aria-pressed="false">{{ skill }}</button>
+      {% endfor %}
+      <button
+        class="filter-expand-btn"
+        id="skills-expand-btn"
+        aria-expanded="false"
+        aria-controls="filter-skills">
+        Mehr ▾
+      </button>
+    </div>
 
-          {# Video-Thumbnail #}
-          {% if projekt.data.youtube %}
-            <div class="card-media">
-              <lite-youtube
-                videoid="{{ projekt.data.youtube }}"
-                playlabel="Video abspielen: {{ projekt.data.title }}"
-                style="background-image: url('https://i.ytimg.com/vi/{{ projekt.data.youtube }}/hqdefault.jpg');">
-              </lite-youtube>
-            </div>
-          {% elif projekt.data.bild %}
-            <div class="card-media">
-              <img
-                src="/assets/img/{{ projekt.data.bild }}"
-                alt="{{ projekt.data.title }}"
-                width="800" height="450"
-                loading="lazy"
-                decoding="async">
-            </div>
-          {% endif %}
+    {# ── Cards ── #}
+    <div class="card-grid-wrap">
+      <div class="card-grid" id="portfolio-grid"
+        data-limit="{{ site.portfolio.num_items }}"
+        data-limit-mobile="{{ site.portfolio.num_items_mobile }}">
+        {% for item in collections.portfolio %}
+          <article
+            class="card"
+            data-art="{{ item.data.art }}"
+            data-skills="{{ item.data.skills }}"
+            data-featured="{{ 'true' if item.data.featured else 'false' }}"
+            aria-label="{{ item.data.title }}">
 
-          <div class="card-body">
-            <span class="card-tag">{{ projekt.data.kategorien[0] }}</span>
-            <h3 class="card-title">{{ projekt.data.title }}</h3>
-            <div class="card-copy">{{ projekt.templateContent | safe }}</div>
-
-            <div class="meta-tags">
-              {% if projekt.data.zeitraum %}
-                <span class="meta-badge">{{ projekt.data.zeitraum }}</span>
-              {% endif %}
-              {% if projekt.data.tags_extra %}
-                {% for tag in projekt.data.tags_extra %}
-                  <span class="meta-badge">{{ tag }}</span>
-                {% endfor %}
-              {% endif %}
-            </div>
-
-            {# Links #}
-            {% if projekt.data.links %}
-              <div class="meta-tags">
-                {% for link in projekt.data.links %}
-                  <a href="{{ link.url }}" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
-                    {{ link.titel }} ↗
-                  </a>
-                {% endfor %}
+            {# Media #}
+            {% if item.data.youtube %}
+              <div class="card-media card-media--yt">
+                <lite-youtube
+                  videoid="{{ item.data.youtube }}"
+                  playlabel="Video abspielen: {{ item.data.title }}">
+                  {% ytThumb item.data.youtube,
+                  item.data.title %}
+                  <div class="yt-consent-hint" slot="button">
+                    Mit Klick wird eine Verbindung zu YouTube hergestellt.
+                  </div>
+                </lite-youtube>
+              </div>
+            {% elif item.data.bild %}
+              <div class="card-media">
+                <button type="button" class="lightbox-trigger" aria-label="Bild vergrößern: {{ item.data.title }}">
+                  {% image "./src/assets/img/" + item.data.bild, item.data.title, "(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px" %}
+                </button>
               </div>
             {% endif %}
 
-            {# Referenzen aufklappbar #}
-            {% if projekt.data.referenzen %}
-              <details>
-                <summary class="refs-summary">
-                  <span class="refs-arrow" aria-hidden="true">▶</span>
-                  Referenzen &amp; Presse ({{ projekt.data.referenzen | length }})
-                </summary>
-                <div class="refs-list">
-                  {% for ref in projekt.data.referenzen %}
-                    <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.titel }}</a>
+            <div class="card-body">
+
+              {# Art-Badge + Jahr in einer Zeile #}
+              <div class="card-meta-top">
+                {% set jahr = item.page.fileSlug | jahrAusSlug %}
+                {% if jahr %}
+                  <span class="card-year">{{ item.data.zeitraum }}</span>
+                {% endif %}
+                <span class="card-tag">{{ item.data.art }}</span>
+              </div>
+
+              <h3 class="card-title">
+                {% if item.data.title_url %}
+                  <a href="{{ item.data.title_url }}" target="_blank" rel="noopener">{{ item.data.title }}</a>
+                {% else %}
+                  {{ item.data.title }}
+                {% endif %}
+              </h3>
+
+              {% if item.data.rolle %}
+                <p class="card-rolle">{{ item.data.rolle }}</p>
+              {% endif %}
+
+              <div class="card-copy">{{ item.templateContent | safe }}</div>
+
+              {# Skills als Badges #}
+              {% if item.data.skills %}
+                <div class="meta-tags">
+                  {% for skill in item.data.skills %}
+                    <span class="meta-badge">{{ skill }}</span>
                   {% endfor %}
                 </div>
-              </details>
-            {% endif %}
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+              {% endif %}
 
-{# ── Jobs ── #}
-<section class="section" id="jobs" aria-labelledby="h-jobs">
-  <div class="wrap">
-    <p class="label">Werdegang</p>
-    <h2 class="section-title" id="h-jobs">Jobs</h2>
+              {# Externe Links #}
+              {% if item.data.links %}
+                <div class="meta-tags">
+                  {% for link in item.data.links %}
+                    <a href="{{ link.url }}" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
+                      {{ link.titel }} ↗
+                    </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
 
-    {% set alleJobKats = collections.jobs | alleKategorien %}
-    <div class="filter-bar" role="group" aria-label="Jobs nach Kategorie filtern">
-      <button class="filter-chip" data-filter="all" aria-pressed="true">Alle</button>
-      {% for kat in alleJobKats %}
-        <button class="filter-chip" data-filter="{{ kat | slug }}" aria-pressed="false">{{ kat }}</button>
-      {% endfor %}
-    </div>
+              {# Referenzen / Presse – Beschriftung per Markdown steuerbar #}
+              {% if item.data.referenzen %}
+                <details>
+                  <summary class="refs-summary">
+                    <span class="refs-arrow" aria-hidden="true">▶</span>
+                    {{ item.data.referenzen_label if item.data.referenzen_label else "Referenzen" }}
+                    ({{ item.data.referenzen | length }})
+                  </summary>
+                  <div class="refs-list">
+                    {% for ref in item.data.referenzen %}
+                      <a href="{{ ref.url }}" target="_blank" rel="noopener">{{ ref.titel }}</a>
+                    {% endfor %}
+                  </div>
+                </details>
+              {% endif %}
 
-    <div class="card-grid" id="jobs-grid">
-      {% for job in collections.jobs %}
-        <article
-          class="card"
-          data-category="{{ job.data.kategorien | katSlug }}"
-          aria-label="{{ job.data.rolle }} bei {{ job.data.title }}">
-          <div class="card-body">
-            <span class="card-tag">{{ job.data.kategorien[0] }}</span>
-            <h3 class="card-title">
-              {% if job.data.arbeitgeber_url %}
-                <a href="{{ job.data.arbeitgeber_url }}" target="_blank" rel="noopener">{{ job.data.title }}</a>
-              {% else %}
-                {{ job.data.title }}
-              {% endif %}
-            </h3>
-            <p style="font-size:var(--text-sm); font-weight:600; color:var(--color-text-muted)">{{ job.data.rolle }}</p>
-            <div class="card-copy">{{ job.templateContent | safe }}</div>
-            <div class="meta-tags">
-              {% if job.data.zeitraum %}
-                <span class="meta-badge">{{ job.data.zeitraum }}</span>
-              {% endif %}
-              {% if job.data.ort %}
-                <span class="meta-badge">{{ job.data.ort }}</span>
-              {% endif %}
-              {% if job.data.tags_extra %}
-                {% for tag in job.data.tags_extra %}
-                  <span class="meta-badge">{{ tag }}</span>
-                {% endfor %}
-              {% endif %}
             </div>
-          </div>
-        </article>
-      {% endfor %}
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="cards-more-btn-wrap">
+      <button id="cards-more-btn" class="btn btn-secondary">Mehr</button>
     </div>
   </div>
 </section>
 
 {# ── Accent Block ── #}
 <div class="accent-block">
-  <h2>Immer mittendrin.</h2>
-  <p>An der Schnittstelle zwischen Technologie, Politik und Gesellschaft.</p>
+  <canvas class="accent-network" aria-hidden="true"></canvas>
+  <div class="accent-block-content">
+    <h2>Immer mittendrin.</h2>
+    <p>An der Schnittstelle zwischen Technologie, Politik und Gesellschaft.</p>
+  </div>
 </div>
 
 {# ── Kontakt ── #}
@@ -229,13 +215,21 @@ beschreibung: "Politische Kommunikation, Webentwicklung, Videoproduktion und all
     <div class="contact-grid">
 
       <div class="contact-links">
-        <a href="mailto:{{ site.kontakt.email }}" class="contact-link">
-          <span class="contact-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-          </span>
-          {{ site.kontakt.email }}
-        </a>
-        <a href="{{ site.kontakt.signal }}" class="contact-link" target="_blank" rel="noopener">
+        <div class="contact-link-row">
+          <a href="mailto:{{ site.kontakt.email }}" class="contact-link">
+            <span class="contact-link-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            </span>
+            {{ site.kontakt.email }}
+          </a>
+          <a class="contact-link" id="pgp-modal-btn" aria-label="PGP Key Modal öffnen" style="padding-inline: var(--space-4);">
+            <span class="contact-link-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            PGP
+          </a>
+        </div>
+        <a href="{{ site.kontakt.signal }}" class="contact-link" target="_blank" rel="noopener" style="flex: 1;">
           <span class="contact-link-icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </span>
@@ -252,18 +246,6 @@ beschreibung: "Politische Kommunikation, Webentwicklung, Videoproduktion und all
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
           </span>
           github.com/hutt
-        </a>
-        <a href="{{ site.kontakt.flickr }}" class="contact-link" target="_blank" rel="noopener">
-          <span class="contact-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/></svg>
-          </span>
-          Flickr (CC-BY Fotos)
-        </a>
-        <a href="{{ site.kontakt.instagram }}" class="contact-link" target="_blank" rel="noopener">
-          <span class="contact-link-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
-          </span>
-          Instagram
         </a>
       </div>
 
@@ -327,3 +309,33 @@ beschreibung: "Politische Kommunikation, Webentwicklung, Videoproduktion und all
     </div>
   </div>
 </section>
+
+<!-- Modal Lightbox -->
+<dialog id="lightbox-modal" class="modal lightbox-modal">
+  <div class="modal-inner lightbox-inner">
+    <button type="button" class="modal-close" aria-label="Schließen" formmethod="dialog">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content">
+      <!-- Bild wird per JS eingefügt -->
+    </div>
+  </div>
+</dialog>
+
+<!-- Modal Dialog -->
+<dialog id="pgp-modal" class="modal">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" aria-label="Schließen" formmethod="dialog">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <h3 class="modal-title">Verschlüsselte E-Mails senden</h3>
+    <p class="modal-text">
+      Du kannst mir gerne PGP-verschlüsselte E-Mails senden. Für meine E-Mail-Adresse <a href="mailto:{{ site.kontakt.email }}">{{ site.kontakt.email }}</a> gibt es einen PGP-Key mit folgendem Fingerprint:<br>
+      <code style="display: block; margin-top: var(--space-2); padding: var(--space-2); background: var(--color-surface-offset); border-radius: var(--radius-sm); font-size: var(--text-xs); color: var(--color-text);">{{ site.kontakt.pgp_fingerprint }}</code>
+    </p>
+    <div class="modal-actions">
+      {# <button type="button" class="btn btn-secondary modal-close-btn">Fenster schließen</button> #}
+      <a href="/pubkey.asc" download class="btn btn-primary">PGP-Key herunterladen</a>
+    </div>
+  </div>
+</dialog>

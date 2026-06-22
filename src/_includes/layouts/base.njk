@@ -1,35 +1,50 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Theme: blocking, ganz früh — verhindert FOUC -->
+  <script>
+    (function(){
+      var stored;
+      try { stored = localStorage.getItem('theme'); } catch(_){}
+      var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- Preload: Fonts und CSS früh ankündigen -->
+  <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/css/style.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/css/style.min.css"></noscript>
+
+  <!-- Analytics: defer, blockiert nichts -->
+  <script defer data-domain="{{ site.plausible_domain }}"
+          data-api="/pa/event"
+          src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
+
+  <!-- Meta, Title, SEO -->
+  {% if noindex %}
+  <meta name="robots" content="noindex, nofollow">
+  {% endif %}
   <title>{% if title %}{{ title }} – {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
   <meta name="author" content="{{ site.autor }}">
-
-  <!-- Open Graph -->
   <meta property="og:title" content="{% if title %}{{ title }} – {% endif %}{{ site.title }}">
   <meta property="og:description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ site.url }}">
-
-  <!-- Canonical -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
-  <!-- Favicons -->
-  <link rel="icon" href="/assets/img/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-
-  <!-- Fonts (self-hosted – kein Third-Party-Request) -->
-  <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
-
-  <!-- Plausible Analytics (self-hosted, DSGVO-konform, kein Cookie) -->
-  <script defer data-domain="{{ site.plausible_domain }}" data-api="/pa/event" src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
+  <!-- Icons und Manifest: niedrigste Priorität, ganz ans Ende -->
+  <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-180x180.png">
+  <link rel="manifest" href="/assets/img/favicons/manifest.json">
+  <meta name="theme-color" content="#0a4445">
 </head>
 <body>
 
@@ -42,8 +57,7 @@
     <a href="/" class="logo" aria-label="{{ site.title }} – Startseite">hutt<span>.</span></a>
     <nav aria-label="Hauptnavigation">
       <a href="/#ueber-mich" class="nav-link">Über mich</a>
-      <a href="/#projekte" class="nav-link">Projekte</a>
-      <a href="/#jobs" class="nav-link">Jobs</a>
+      <a href="/#portfolio" class="nav-link">Portfolio</a>
       <a href="/#kontakt" class="nav-link">Kontakt</a>
       <button class="theme-toggle" data-theme-toggle aria-label="Zum hellen Modus wechseln">
         <!-- Icon wird per JS gesetzt -->
@@ -66,12 +80,14 @@
       <a href="/impressum/">Impressum</a>
     </p>
     <p class="footer-meta">
-      Gebaut mit <a href="https://www.11ty.dev" target="_blank" rel="noopener">Eleventy</a>.
-      Kein Tracking außer <a href="https://plausible.io" target="_blank" rel="noopener">Plausible</a>.
+      Gebaut mit <a href="https://www.11ty.dev" target="_blank" rel="noopener">11ty</a>.
     </p>
   </div>
 </footer>
 
-<script src="/assets/js/main.js"></script>
+<script>
+  {%- set js %}{% include "../../assets/js/main.js" %}{%- endset %}
+  {{ js | jsmin | safe }}
+</script>
 </body>
 </html>

@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jannis Hutt</title>
+  <meta name="description" content="Politische Kommunikation, Webentwicklung, Videoproduktion und alles dazwischen. Jannis Hutt, Berlin.">
+  <meta name="author" content="Jannis Hutt">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Jannis Hutt">
+  <meta property="og:description" content="Politische Kommunikation, Webentwicklung, Videoproduktion und alles dazwischen. Jannis Hutt, Berlin.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hutt.io">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://hutt.io/">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  <!-- Fonts (self-hosted – kein Third-Party-Request) -->
+  <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Theme: sofort setzen, kein FOUC -->
+  <script>
+    (function(){
+      var stored;
+      try { stored = localStorage.getItem('theme'); } catch(_){}
+      var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- CSS -->
+  <style>
+    @font-face{font-family:'Cabinet Grotesk';src:url('/assets/fonts/CabinetGrotesk-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}@font-face{font-family:'General Sans';src:url('/assets/fonts/GeneralSans-Variable.woff2') format('woff2');font-weight:200 700;font-display:swap}:root,[data-theme=light]{--font-display:'Cabinet Grotesk','Helvetica Neue',sans-serif;--font-body:'General Sans','Inter',sans-serif;--text-xs:clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);--text-sm:clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);--text-base:clamp(1rem,     0.95rem + 0.25vw, 1.125rem);--text-lg:clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);--text-xl:clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);--text-2xl:clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);--text-3xl:clamp(2.6rem,   1rem    + 4.4vw,  5.4rem);--space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;--color-bg:#f5f4f0;--color-surface:#f8f7f4;--color-surface-2:#fbfaf7;--color-surface-offset:#edeae3;--color-surface-offset-2:#e4e0d8;--color-divider:#d4d1c9;--color-border:#c9c5bb;--color-text:#181713;--color-text-muted:#68665e;--color-text-faint:#a5a29a;--color-text-inverse:#f5f4f0;--color-primary:#0a4445;--color-primary-hover:#0d5657;--color-primary-active:#083537;--color-primary-soft:#dbe8e8;--color-primary-edge:color-mix(in oklab, #0a4445 28%, transparent);--shadow-sm:0 1px 3px oklch(0.15 0.01 190 / 0.08);--shadow-md:0 6px 20px oklch(0.15 0.01 190 / 0.10);--shadow-lg:0 16px 40px oklch(0.15 0.01 190 / 0.14);--radius-sm:0.375rem;--radius-md:0.625rem;--radius-lg:0.875rem;--radius-xl:1.125rem;--radius-2xl:1.5rem;--radius-full:9999px;--transition-fast:180ms cubic-bezier(0.16, 1, 0.3, 1);--transition-med:300ms cubic-bezier(0.16, 1, 0.3, 1);--transition-interactive:180ms cubic-bezier(0.16, 1, 0.3, 1);--content-narrow:42rem;--content-default:68rem;--content-wide:80rem}[data-theme=dark]{--color-bg:#101210;--color-surface:#151714;--color-surface-2:#191c19;--color-surface-offset:#1d211d;--color-surface-offset-2:#232722;--color-divider:#292d29;--color-border:#343833;--color-text:#e8e4dc;--color-text-muted:#8c8a80;--color-text-faint:#5a584f;--color-text-inverse:#101210;--color-primary:#4ca6a8;--color-primary-hover:#66b8ba;--color-primary-active:#2d8486;--color-primary-soft:#172f30;--color-primary-edge:color-mix(in oklab, #4ca6a8 28%, transparent);--shadow-sm:0 1px 3px oklch(0 0 0 / 0.28);--shadow-md:0 6px 20px oklch(0 0 0 / 0.36);--shadow-lg:0 16px 40px oklch(0 0 0 / 0.46)}@media (prefers-color-scheme:dark){:root:not([data-theme]){--color-bg:#101210;--color-surface:#151714;--color-surface-2:#191c19;--color-surface-offset:#1d211d;--color-surface-offset-2:#232722;--color-divider:#292d29;--color-border:#343833;--color-text:#e8e4dc;--color-text-muted:#8c8a80;--color-text-faint:#5a584f;--color-text-inverse:#101210;--color-primary:#4ca6a8;--color-primary-hover:#66b8ba;--color-primary-active:#2d8486;--color-primary-soft:#172f30;--color-primary-edge:color-mix(in oklab, #4ca6a8 28%, transparent);--shadow-sm:0 1px 3px oklch(0 0 0 / 0.28);--shadow-md:0 6px 20px oklch(0 0 0 / 0.36);--shadow-lg:0 16px 40px oklch(0 0 0 / 0.46)}}*,::after,::before{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;text-size-adjust:none;scroll-behavior:smooth;scroll-padding-top:var(--space-16);hanging-punctuation:first last}body{font-family:var(--font-body);font-size:var(--text-base);line-height:1.65;color:var(--color-text);background:var(--color-bg);transition:background var(--transition-med),color var(--transition-med)}img,picture,svg,video{display:block;max-width:100%;height:auto}a{color:inherit;text-decoration:none}button{border:0;background:0 0;cursor:pointer;font:inherit;color:inherit}input,select,textarea{font:inherit;color:inherit}ol[role=list],ul[role=list]{list-style:none}h1,h2,h3,h4{text-wrap:balance;line-height:1.1}figcaption,li,p{text-wrap:pretty}table{border-collapse:collapse;width:100%}::selection{background:oklch(from var(--color-primary) l c h / .22);color:var(--color-text)}:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}[role=button],a,button,input,select,textarea{transition:color var(--transition-fast),background var(--transition-fast),border-color var(--transition-fast),box-shadow var(--transition-fast)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media (prefers-reduced-motion:reduce){*,::after,::before{animation-duration:0s!important;animation-iteration-count:1!important;transition-duration:0s!important;scroll-behavior:auto!important}}#kontakt,#portfolio,.accent-block{content-visibility:auto;contain-intrinsic-size:0 600px}.wrap{width:min(100% - 2rem,var(--content-default));margin-inline:auto}.wrap--narrow{width:min(100% - 2rem,var(--content-narrow));margin-inline:auto}.section{padding-block:clamp(var(--space-12),7vw,var(--space-20));border-bottom:1px solid var(--color-divider)}.section:last-of-type{border-bottom:none}.skip-link{position:absolute;top:-100%;left:var(--space-4);padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);background:var(--color-primary);color:var(--color-text-inverse);font-size:var(--text-sm);font-weight:600;z-index:100}.skip-link:focus{top:var(--space-2)}.label{display:block;margin-bottom:var(--space-2);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--color-primary)}.section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;letter-spacing:-.025em;line-height:1;margin-bottom:var(--space-10)}.section-title+.filter-bar{margin-top:calc(-1 * var(--space-4))}.header{position:sticky;top:0;z-index:30;border-bottom:1px solid var(--color-divider);background:color-mix(in oklab,var(--color-bg) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background var(--transition-med),border-color var(--transition-med)}.header-inner{width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}.logo{font-family:var(--font-display);font-size:var(--text-lg);font-weight:900;letter-spacing:-.025em;line-height:1}.logo span{color:var(--color-primary)}.header nav{display:flex;align-items:center;gap:var(--space-6)}.nav-link{position:relative;padding-block:var(--space-1);font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted)}.nav-link::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;border-radius:var(--radius-full);background:var(--color-primary);transition:width 260ms cubic-bezier(.16, 1, .3, 1)}.nav-link:hover{color:var(--color-text)}.nav-link:hover::after,.nav-link[aria-current=page]::after{width:100%}.theme-toggle{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:var(--radius-md);color:var(--color-text-muted)}.theme-toggle:hover{color:var(--color-text);background:var(--color-surface-offset);box-shadow:var(--shadow-sm)}.hero{position:relative;overflow:clip;border-bottom:1px solid var(--color-divider)}.hero-inner{position:relative;z-index:2;width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:grid;grid-template-columns:minmax(12rem,28fr) minmax(0,72fr);grid-template-areas:"portrait copy";gap:clamp(var(--space-8),4vw,var(--space-16));align-items:center;padding-block:clamp(var(--space-12),9vw,var(--space-20));min-height:64vh}.hero-copy{display:grid;gap:var(--space-5)}.hero-copy .label{margin-bottom:0}.hero-title{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:900;line-height:.96;letter-spacing:-.01em}.hero-title .accent{color:var(--color-primary)}.hero-sub{max-width:46ch;font-size:var(--text-lg);color:var(--color-text-muted);line-height:1.65}.hero-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center}.hero-portrait{grid-area:portrait;order:2;justify-self:start;width:100%;aspect-ratio:3/4;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:linear-gradient(165deg,color-mix(in oklab,var(--color-primary) 10%,var(--color-surface)) 0,var(--color-surface-offset) 100%);box-shadow:var(--shadow-md);overflow:hidden;user-select:none;-webkit-user-select:none}@keyframes portrait-wobble{0%{transform:rotate(0)}15%{transform:rotate(-3deg)}35%{transform:rotate(3.5deg)}55%{transform:rotate(-2.5deg)}72%{transform:rotate(2deg)}86%{transform:rotate(-1deg)}100%{transform:rotate(0)}}.hero-portrait.is-wobbling{transform-origin:top center;animation:portrait-wobble .55s cubic-bezier(.36,.07,.19,.97) both}.hero-portrait img{width:100%;height:100%;object-fit:cover;animation:fade-in .2s ease forwards}@keyframes fade-in{from{opacity:0}to{opacity:1}}.hero-cube-wrap{position:absolute;z-index:1;right:-6rem;bottom:-8rem;width:28rem;height:28rem;pointer-events:none;perspective:900px}.cube{width:100%;height:100%;transform-style:preserve-3d;animation:cube-spin 120s linear infinite;--tilt-x:0deg;--tilt-z:0deg}@keyframes cube-spin{from{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(0)}to{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(360deg)}}.cube-face{position:absolute;inset:0;border:1.5px solid var(--color-primary-edge);border-radius:1px;background:color-mix(in oklab,var(--color-primary) 3%,transparent)}.face-front{transform:translateZ(14rem)}.face-back{transform:translateZ(-14rem) rotateY(180deg)}.face-left{transform:translateX(-14rem) rotateY(-90deg)}.face-right{transform:translateX(14rem) rotateY(90deg)}.face-top{transform:translateY(-14rem) rotateX(90deg)}.face-bottom{transform:translateY(14rem) rotateX(-90deg)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:.8rem 1.15rem;min-height:2.875rem;border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;border:1px solid transparent;white-space:nowrap}.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);box-shadow:var(--shadow-sm)}.btn-primary:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md)}.btn-secondary{background:var(--color-surface-offset);color:var(--color-text);border-color:var(--color-border);box-shadow:var(--shadow-sm)}.btn-secondary:hover{background:var(--color-surface-offset-2);border-color:color-mix(in oklab,var(--color-text) 20%,var(--color-border));box-shadow:var(--shadow-md)}.btn-ghost{padding-inline:0.9rem;color:var(--color-primary)}.btn-ghost:hover{background:var(--color-primary-soft);box-shadow:var(--shadow-sm)}.about-copy{display:grid;gap:var(--space-6)}.about-copy p{color:var(--color-text-muted);line-height:1.75;max-width:62ch}.about-copy p strong{color:var(--color-text)}.filter-bar{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6)}.filter-chip{display:inline-flex;align-items:center;padding:.4rem .85rem;border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:500;border:1px solid var(--color-border);color:var(--color-text-muted);background:var(--color-surface)}.filter-chip:hover{background:var(--color-surface-offset);color:var(--color-text)}.filter-chip[aria-pressed=true]{background:var(--color-primary);color:var(--color-text-inverse);border-color:var(--color-primary);box-shadow:var(--shadow-sm)}.filter-chip--sm{font-size:var(--text-xs);padding:.3rem .7rem}.filter-bar--secondary{position:relative;padding-right:5.5rem;padding-bottom:var(--space-6);border-bottom:1px solid var(--color-divider);margin-bottom:var(--space-12)}.filter-bar--secondary.is-collapsed{max-height:2.6rem;overflow:hidden;border-bottom:unset}.filter-bar--secondary.is-collapsed::after{content:'';position:absolute;top:0;right:5.5rem;width:3rem;height:2.4rem;background:linear-gradient(to right,transparent,var(--color-bg) 85%);pointer-events:none}.filter-expand-btn{position:absolute;top:0;right:0;height:2.4rem;padding:0 var(--space-3);font-size:var(--text-xs);font-weight:600;color:var(--color-primary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-full);white-space:nowrap;transition:color var(--transition-fast),border-color var(--transition-fast)}.filter-expand-btn:hover{color:var(--color-primary-hover);border-color:var(--color-primary)}.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(22rem,100%),1fr));gap:var(--space-6)}.card{display:grid;grid-template-rows:auto 1fr;overflow:hidden;background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}.card:hover{box-shadow:var(--shadow-md);border-color:color-mix(in oklab,var(--color-primary) 14%,var(--color-border))}.card[hidden]{display:none}.card-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:linear-gradient(135deg,color-mix(in oklab,var(--color-primary) 12%,var(--color-surface-offset)) 0,var(--color-surface-2) 100%);border-bottom:1px solid var(--color-divider)}.card-media iframe,.card-media img{width:100%;height:100%;object-fit:cover}.card-media lite-youtube{width:100%;max-width:100%;height:100%}.card-body{display:grid;gap:var(--space-4);padding:var(--space-6);align-content:start}.card-meta-top{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}.card-tag{display:inline-flex;width:fit-content;padding:.2rem .65rem;border-radius:var(--radius-full);background:var(--color-primary-soft);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.04em}.card-year{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:var(--radius-full);border:1px solid var(--color-border);background:0 0;color:var(--color-text-faint);font-size:var(--text-xs);font-weight:500;font-variant-numeric:tabular-nums}.card-title{font-family:var(--font-display);font-size:var(--text-lg);font-weight:900;line-height:1.06;letter-spacing:-.01em}.card-rolle{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);line-height:1.3}.card-copy{color:var(--color-text-muted);font-size:var(--text-sm);line-height:1.65;max-width:55ch}.card-copy p+p{margin-top:var(--space-3)}.card-copy a{color:var(--color-primary);border-bottom:1px solid color-mix(in oklab,var(--color-primary) 35%,transparent)}.card-copy a:hover{border-bottom-color:var(--color-primary)}.meta-tags{display:flex;flex-wrap:wrap;gap:var(--space-2)}.meta-badge{padding:.2rem .6rem;border-radius:var(--radius-full);background:var(--color-surface-offset);color:var(--color-text-muted);font-size:var(--text-xs);font-weight:500}.refs-summary{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;color:var(--color-primary);cursor:pointer;list-style:none;padding-bottom:1px;border-bottom:1px solid color-mix(in oklab,var(--color-primary) 35%,transparent);width:fit-content}.refs-summary::-webkit-details-marker{display:none}.refs-summary:hover{color:var(--color-primary-hover)}details[open] .refs-summary{border-bottom-color:transparent}.refs-arrow{display:inline-block;font-style:normal;transition:transform 220ms cubic-bezier(.16, 1, .3, 1);font-size:.65rem}details[open] .refs-arrow{transform:rotate(90deg)}.refs-list{display:grid;gap:var(--space-2);margin-top:var(--space-3);padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-offset);border:1px solid var(--color-border)}.refs-list a{display:flex;align-items:flex-start;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5}.refs-list a:hover{color:var(--color-primary)}.refs-list a::before{content:"↗";flex-shrink:0;color:var(--color-primary);margin-top:1px}.yt-consent-hint{position:absolute;bottom:var(--space-3);left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - var(--space-8));padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);background:oklch(.08 0 0 / .72);color:#fff;font-size:var(--text-xs);text-align:center;pointer-events:none;backdrop-filter:blur(4px);line-height:1.4}lite-youtube.lyt-activated .yt-consent-hint{display:none}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(var(--space-8),4vw,var(--space-16));align-items:start}.contact-links{display:grid;gap:var(--space-4)}.contact-link-row{display:grid;grid-template-columns:1fr auto;gap:var(--space-4)}.contact-link{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);font-size:var(--text-sm);font-weight:500;box-shadow:var(--shadow-sm)}.contact-link:hover{background:var(--color-surface-offset);box-shadow:var(--shadow-md);color:var(--color-primary)}.contact-link-icon{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:var(--radius-md);background:var(--color-primary-soft);color:var(--color-primary);flex-shrink:0}.modal{margin:auto;padding:0;border:none;border-radius:var(--radius-xl);background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-lg);max-width:32rem;width:calc(100% - 2rem);overflow:visible}.modal::backdrop{background:color-mix(in oklab,var(--color-bg) 80%,transparent);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}.modal-inner{position:relative;padding:var(--space-6) var(--space-6) var(--space-6)}.modal-close{position:absolute;top:var(--space-4);right:var(--space-4);color:var(--color-text-faint);display:grid;place-items:center;width:2rem;height:2rem;border-radius:var(--radius-full);transition:color var(--transition-fast),background var(--transition-fast)}.modal-close:hover{color:var(--color-text);background:var(--color-surface-offset)}.modal-title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:800;margin-bottom:var(--space-3);padding-right:var(--space-6)}.modal-text{color:var(--color-text-muted);font-size:var(--text-sm);line-height:1.6;margin-bottom:var(--space-6)}.modal-actions{display:flex;gap:var(--space-3);justify-content:flex-end;flex-wrap:wrap}@media (max-width:600px){.modal-actions{flex-direction:column-reverse}.modal-actions .btn{width:100%}}.form{display:grid;gap:var(--space-5)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}.field{display:grid;gap:var(--space-2)}.field label{font-size:var(--text-sm);font-weight:600}.field input,.field textarea{padding:.85rem 1rem;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface);outline:0;width:100%}.field textarea{min-height:8rem;resize:vertical}.field input::placeholder,.field textarea::placeholder{color:var(--color-text-faint)}.field input:focus,.field textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px oklch(from var(--color-primary) l c h / .14)}.form-status{padding:var(--space-4);border-radius:var(--radius-lg);font-size:var(--text-sm);font-weight:500;display:none}.form-status.success{display:block;background:color-mix(in oklab,#437a22 12%,var(--color-surface));color:#437a22;border:1px solid color-mix(in oklab,#437a22 25%,var(--color-border))}.form-status.error{display:block;background:color-mix(in oklab,#a12c7b 10%,var(--color-surface));color:#a12c7b;border:1px solid color-mix(in oklab,#a12c7b 22%,var(--color-border))}.accent-block{position:relative;overflow:hidden;padding:clamp(var(--space-12),7vw,var(--space-20)) 1rem;background:var(--color-primary);text-align:center}.accent-block-content{position:relative;z-index:2}.accent-block h2{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;letter-spacing:-.025em;color:var(--color-text-inverse);margin-bottom:var(--space-4)}.accent-block p{max-width:52ch;margin-inline:auto;color:color-mix(in oklab,var(--color-text-inverse) 82%,transparent)}.accent-cube-wrap{position:absolute;z-index:1;left:-5rem;top:50%;transform:translateY(-50%);width:16rem;height:16rem;pointer-events:none;perspective:800px}.accent-cube-wrap--right{left:auto;right:-8rem;top:50%;transform:translateY(-50%)}.accent-cube{width:100%;height:100%;transform-style:preserve-3d;animation:accent-cube-spin 24s linear infinite;--tilt-x:20deg;--tilt-z:0deg}@keyframes accent-cube-spin{from{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(0)}to{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(360deg)}}.accent-block .cube-face{position:absolute;inset:0;border:1.5px solid oklch(from var(--color-text-inverse) l c h / .25);border-radius:1px;background:oklch(from var(--color-text-inverse) l c h / .04)}.accent-cube-wrap .face-front{transform:translateZ(8rem)}.accent-cube-wrap .face-back{transform:translateZ(-8rem) rotateY(180deg)}.accent-cube-wrap .face-left{transform:translateX(-8rem) rotateY(-90deg)}.accent-cube-wrap .face-right{transform:translateX(8rem) rotateY(90deg)}.accent-cube-wrap .face-top{transform:translateY(-8rem) rotateX(90deg)}.accent-cube-wrap .face-bottom{transform:translateY(8rem) rotateX(-90deg)}.footer{padding-block:var(--space-8);border-top:1px solid var(--color-divider)}.footer-inner{width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-3)}.footer-copy,.footer-meta{font-size:var(--text-xs);color:var(--color-text-faint)}.footer-copy a,.footer-meta a{color:var(--color-text-muted);border-bottom:1px solid transparent}.footer-copy a:hover,.footer-meta a:hover{color:var(--color-primary);border-bottom-color:var(--color-primary)}@media (max-width:860px){.hero-inner{display:block;min-height:auto}.hero-portrait{float:right;width:33vw;aspect-ratio:3/4;border-radius:var(--radius-lg);margin-left:var(--space-6);margin-bottom:var(--space-4);margin-top:1rem;shape-outside:margin-box}.hero-copy{display:block}.hero-title{margin-top:var(--space-2);hyphens:auto}.hero-sub{margin-top:var(--space-3)}.hero-actions{margin-top:var(--space-6)}.hero-cube-wrap{right:-8rem;bottom:-10rem;width:20rem;height:20rem}.face-front{transform:translateZ(10rem)}.face-back{transform:translateZ(-10rem) rotateY(180deg)}.face-left{transform:translateX(-10rem) rotateY(-90deg)}.face-right{transform:translateX(10rem) rotateY(90deg)}.face-top{transform:translateY(-10rem) rotateX(90deg)}.face-bottom{transform:translateY(10rem) rotateX(-90deg)}.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.filter-bar--secondary{padding-right:0}.filter-bar--secondary.is-collapsed{max-height:none;overflow:visible}.filter-bar--secondary.is-collapsed::after{display:none}.filter-expand-btn{display:none}}@media (max-width:600px){.header nav{gap:var(--space-3)}.section-title{font-size:var(--text-xl)}.footer-inner{flex-direction:column;align-items:flex-start}}
+  </style>
+
+  <!-- Plausible Analytics -->
+  <script defer data-domain="hutt.io" data-api="/pa/event" src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
+
+  <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-180x180.png">
+  <link rel="manifest" href="/assets/img/favicons/manifest.json">
+  <meta name="theme-color" content="#0a4445">
+</head>
+<body>
+
+<!-- Skip Link -->
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<!-- Header -->
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="Jannis Hutt – Startseite">hutt<span>.</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="/#ueber-mich" class="nav-link">Über mich</a>
+      <a href="/#portfolio" class="nav-link">Portfolio</a>
+      <a href="/#kontakt" class="nav-link">Kontakt</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Zum hellen Modus wechseln">
+        <!-- Icon wird per JS gesetzt -->
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Main -->
+<main id="main">
+  
+
+<section class="hero" aria-label="Einleitung">
+  <div class="hero-cube-wrap" aria-hidden="true">
+    <div class="cube">
+      <div class="cube-face face-front"></div>
+      <div class="cube-face face-back"></div>
+      <div class="cube-face face-left"></div>
+      <div class="cube-face face-right"></div>
+      <div class="cube-face face-top"></div>
+      <div class="cube-face face-bottom"></div>
+    </div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-portrait">
+      <picture>
+  <source type="image/avif" srcset="/assets/img/portrait-96w.avif 96w, /assets/img/portrait-176w.avif 176w, /assets/img/portrait-352w.avif 352w, /assets/img/portrait-480w.avif 480w, /assets/img/portrait-960w.avif 960w" sizes="(max-width: 860px) 6rem, 11rem">
+  <source type="image/webp" srcset="/assets/img/portrait-96w.webp 96w, /assets/img/portrait-176w.webp 176w, /assets/img/portrait-352w.webp 352w, /assets/img/portrait-480w.webp 480w, /assets/img/portrait-960w.webp 960w" sizes="(max-width: 860px) 6rem, 11rem">
+  <img
+    src="/assets/img/portrait-96w.jpeg"
+    srcset="/assets/img/portrait-96w.jpeg 96w, /assets/img/portrait-176w.jpeg 176w, /assets/img/portrait-352w.jpeg 352w, /assets/img/portrait-480w.jpeg 480w, /assets/img/portrait-960w.jpeg 960w"
+    sizes="(max-width: 860px) 6rem, 11rem"
+    alt="Jannis Hutt"
+    width="960"
+    height="1280"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high"
+    style="background-image: url('data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAbABQDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAQFA//EAB4QAAICAgMBAQAAAAAAAAAAAAECAAMEERITIQUx/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAMEAQL/xAAaEQEBAAIDAAAAAAAAAAAAAAABAAIhAxES/9oADAMBAAIRAxEAPwCNUG5gAx297MdAVaIV2aYexm+3sqA3FnddzeRJinNdqwSYSelqouiYTdylwss6o0toTDsbhrcrfRVT6RJLgCdlMq7bFmO/2ECIQi//2Q=='); background-size: cover; background-position: center;">
+</picture>
+    </div>
+    <div class="hero-copy">
+      <p class="label">Jannis Hutt</p>
+      <h1 class="hero-title">
+        Schweizer<br>Taschenmesser<br>für alles <span class="accent">Digitale</span>
+      </h1>
+      <p class="hero-sub">
+        Zwischen Webentwicklung, politischer Kommunikation, Infrastruktur
+        und Kampagnenarbeit bringe ich Dinge schnell zusammen, die andere
+        erst einmal auf mehrere Rollen aufteilen würden.
+      </p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn btn-primary">Kontakt aufnehmen</a>
+        <a href="#ueber-mich" class="btn btn-secondary">Über mich</a>
+        <a href="#portfolio" class="btn btn-ghost">Was ich mache →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="ueber-mich" aria-labelledby="h-ueber-mich">
+  <div class="wrap">
+    <p class="label">Über mich</p>
+    <h2 class="section-title" id="h-ueber-mich">Moin.</h2>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>Mein Name ist Jannis und ich lebe und arbeite in Berlin. Seit 2015 treibe ich mich in Parlamenten herum; seit 2017 im Bundestag, wo ich als fester Mitarbeiter für verschiedene Abgeordnete der Linksfraktion Öffentlichkeits- und Pressearbeit mache. Doch auch zwischen Nullen und Einsen fühle ich mich zuhause. Womit ich – das soll an dieser Stelle explizit gesagt sein – nicht meine Kolleg_innen meine, sondern die Werte, mit denen der kleinste aller digitalen Datentypen, das Bit, dargestellt werden kann.</p>
+        <p>Dabei sitze ich schon immer an einer Schnittstelle: Mit meiner Leidenschaft für Politik und Kommunikation auf der einen Seite – und ihren digitalen Distributionswegen auf der anderen. Sei es Kampagnenplanung, Pressearbeit, Grafik- oder Webdesign, Photo- und Videographie oder Aufbau und Administration der darunterliegenden Infrastruktur. Ich kenne den kompletten Weg vom Anfang bis zum Ende.</p>
+        <p>Wenn man so möchte, bin ich ein Zeitzeuge der Entwicklung hin zur digitalen Gesellschaft. Meine erste Website habe ich mit zwölf geschrieben und meinen ersten Twitter-Account mit vierzehn. Seitdem hat sich Einiges verändert: Aus dem freiheitlichen <em>Web 2.0</em> zum Plattformkapitalismus begann.</p>
+        <p>Trotzdem oder gerade deshalb habe ich meinen Technikoptimismus nicht über Bord geworfen: Ich habe gesehen, ja selbst erlebt, wie das Internet als emanzipatives Medium Menschen zusammenbringen kann; wie sich dort Gesellschaft zum besseren verändern ließ und lässt. Diesen Idealismus, wie man ihn heute am ehesten beim jährlichen Congress des Chaos Computer Clubs spüren kann, möchte ich mir bewahren. Und ich finde, er hat mich bisher auch immer gut geleitet: <strong>Immer mittendrin, an der Schnittstelle zwischen Technologie, Politik und Gesellschaft</strong>.</p>
+        <p>Photographieren, das ist für mich ein Auge für die Details zu haben. Für Ecken, die man sonst nicht beachten würde, das Licht und die Menschen mit ihren Widersprüchen. Deshalb fühle ich mich vor allem der Reportage-, Portrait- und Street-Photographie verbunden. Immer mit dabei sind meine Fujifilm-Kameras mit ihren wunderbaren Filmsimulationen. Mein Portfolio mit einer Auswahl meiner Auftragsarbeiten sende ich auf Anfrage gerne zu. Da mir Creative Commons sehr am Herzen liegt, sind die meisten meiner Bilder auch auf <a href="https://www.flickr.com/photos/jannishutt/" target="_blank" rel="noopener">Flickr</a> unter CC-BY verfügbar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="portfolio" aria-labelledby="h-portfolio">
+  <div class="wrap">
+    <p class="label">Portfolio</p>
+    <h2 class="section-title" id="h-portfolio">Was ich so mache</h2>
+
+    
+    
+    <div
+      class="filter-bar"
+      id="filter-art"
+      role="group"
+      aria-label="Nach Art filtern"
+      data-filter-group="art">
+      <button class="filter-chip" data-filter="all" aria-pressed="true">Alle</button>
+      
+        <button
+          class="filter-chip"
+          data-filter="festanstellung"
+          aria-pressed="false">Festanstellung</button>
+      
+        <button
+          class="filter-chip"
+          data-filter="sidehustle"
+          aria-pressed="false">Sidehustle</button>
+      
+        <button
+          class="filter-chip"
+          data-filter="sonstiges"
+          aria-pressed="false">Sonstiges</button>
+      
+    </div>
+
+    
+    
+    <div
+      class="filter-bar filter-bar--secondary is-collapsed"
+      id="filter-skills"
+      role="group"
+      aria-label="Nach Skill filtern"
+      data-filter-group="skills">
+      <button class="filter-chip filter-chip--sm" data-filter="all" aria-pressed="true">Alle Skills</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="api"
+          aria-pressed="false">API</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="administration"
+          aria-pressed="false">Administration</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="backend"
+          aria-pressed="false">Backend</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="backupautomatisierung"
+          aria-pressed="false">Backupautomatisierung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="beratung"
+          aria-pressed="false">Beratung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="bueroorganisation"
+          aria-pressed="false">Büroorganisation</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="cloudflare-worker"
+          aria-pressed="false">Cloudflare Worker</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="community-management"
+          aria-pressed="false">Community-Management</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="crowdfunding-website"
+          aria-pressed="false">Crowdfunding Website</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="dampsoft"
+          aria-pressed="false">Dampsoft</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="entwicklung"
+          aria-pressed="false">Entwicklung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="fediverse"
+          aria-pressed="false">Fediverse</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="ghost-cms"
+          aria-pressed="false">Ghost CMS</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="grafik-und-layout"
+          aria-pressed="false">Grafik und Layout</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="it-infrastruktur"
+          aria-pressed="false">IT-Infrastruktur</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="javascript"
+          aria-pressed="false">JavaScript</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="kampagnenplanung"
+          aria-pressed="false">Kampagnenplanung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="konzeption"
+          aria-pressed="false">Konzeption</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="livestreaming"
+          aria-pressed="false">Livestreaming</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="mastodon"
+          aria-pressed="false">Mastodon</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="networking"
+          aria-pressed="false">Networking</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="netzwerkvirtualisierung"
+          aria-pressed="false">Netzwerkvirtualisierung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="open-source"
+          aria-pressed="false">Open Source</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="photographische-begleitung"
+          aria-pressed="false">Photographische Begleitung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="pitches"
+          aria-pressed="false">Pitches</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="plakatphotos"
+          aria-pressed="false">Plakatphotos</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="politische-kommunikation"
+          aria-pressed="false">Politische Kommunikation</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="prozessumbau"
+          aria-pressed="false">Prozessumbau</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="recherche"
+          aria-pressed="false">Recherche</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="reportage-photographie"
+          aria-pressed="false">Reportage-Photographie</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="scripting"
+          aria-pressed="false">Scripting</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="social-media"
+          aria-pressed="false">Social Media</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="social-media-management"
+          aria-pressed="false">Social-Media-Management</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="videoproduktion"
+          aria-pressed="false">Videoproduktion</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="web-entwicklung"
+          aria-pressed="false">Web-Entwicklung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="webentwicklung"
+          aria-pressed="false">Webentwicklung</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="wordpress-theme-development"
+          aria-pressed="false">WordPress Theme Development</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="workshops"
+          aria-pressed="false">Workshops</button>
+      
+        <button
+          class="filter-chip filter-chip--sm"
+          data-filter="oeffentlichkeitsarbeit"
+          aria-pressed="false">Öffentlichkeitsarbeit</button>
+      
+      <button
+        class="filter-expand-btn"
+        id="skills-expand-btn"
+        aria-expanded="false"
+        aria-controls="filter-skills">
+        Mehr ▾
+      </button>
+    </div>
+
+    
+    <div class="card-grid" id="portfolio-grid">
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="web-entwicklung grafik-und-layout ghost-cms open-source"
+          aria-label="Spectre">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/spectre-mockup-200w.avif 200w, /assets/img/spectre-mockup-350w.avif 350w, /assets/img/spectre-mockup-400w.avif 400w, /assets/img/spectre-mockup-600w.avif 600w, /assets/img/spectre-mockup-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/spectre-mockup-200w.webp 200w, /assets/img/spectre-mockup-350w.webp 350w, /assets/img/spectre-mockup-400w.webp 400w, /assets/img/spectre-mockup-600w.webp 600w, /assets/img/spectre-mockup-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/spectre-mockup-200w.jpeg" alt="Spectre" loading="lazy" decoding="async" width="800" height="499" srcset="/assets/img/spectre-mockup-200w.jpeg 200w, /assets/img/spectre-mockup-350w.jpeg 350w, /assets/img/spectre-mockup-400w.jpeg 400w, /assets/img/spectre-mockup-600w.jpeg 600w, /assets/img/spectre-mockup-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2026</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Spectre
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Auf dem Augsburger Parteitag im November 2023 stellte Die Linke ein neues Corporate Design vor. Pünktlich zum Launch stand auch <em>Spectre</em>, mein <strong>Theme für <a href="https://ghost.org">Ghost CMS</a></strong> bereit. Es ist responsive, barrierearm, individuell konfigurierbar und selbstverständlich Open Source.</p>
+<p>Den Code findet man <a href="https://github.com/hutt/spectre/">bei GitHub</a>, in Aktion sehen kann man es bei der Parteivorsitzenden <a href="https://inesschwerdtner.eu">Ines Schwerdtner</a> oder der <a href="https://betriebundgewerkschaft.de">Bundesarbeitsgemeinschaft Betrieb &amp; Gewerkschaft</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Ghost CMS</span>
+                
+                  <span class="meta-badge">Open Source</span>
+                
+              </div>
+            
+
+            
+            
+              <div class="meta-tags">
+                
+                  <a href="https://github.com/hutt/spectre/" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
+                    GitHub Repository ↗
+                  </a>
+                
+                  <a href="https://spectre.hutt.io" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
+                    Theme-Website ↗
+                  </a>
+                
+              </div>
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="politische-kommunikation videoproduktion grafik-und-layout social-media-management community-management"
+          aria-label="Die Linke">
+
+          
+          
+            <div class="card-media">
+              <lite-youtube
+                videoid="4aQpvI2WVjA"
+                playlabel="Video abspielen: Die Linke"
+                style="background-image: url('/assets/img/thumbs/4aQpvI2WVjA.jpg');">
+                <div class="yt-consent-hint" slot="button">
+                  Mit Klick wird eine Verbindung zu YouTube hergestellt.
+                </div>
+              </lite-youtube>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2025</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Die Linke
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Im Bundestagswahlkampf 2025 habe ich die Linke-Bundesgeschäftsstelle beim <strong>Online- und Social-Media-Wahlkampf</strong> unterstützt. Mit unserem Content haben wir ein Millionenpublikum erreicht und das Blatt wenden können, um den Einzug in den 21. Deutschen Bundestag zu sichern.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Social-Media-Management</span>
+                
+                  <span class="meta-badge">Community-Management</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+              <details>
+                <summary class="refs-summary">
+                  <span class="refs-arrow" aria-hidden="true">▶</span>
+                  Referenzen
+                  (4)
+                </summary>
+                <div class="refs-list">
+                  
+                    <a href="https://meedia.de/news/beitrag/18758-tiktok-dominiert-den-deutschen-wahlkampf-und-befluegelt-die-linke.html" target="_blank" rel="noopener">MEEDIA: TikTok dominiert den deutschen Wahlkampf – und beflügelt Die Linke (21. Februar 2025)</a>
+                  
+                    <a href="https://www.berliner-zeitung.de/politik-gesellschaft/7-gruende-fuer-den-erfolg-der-linken-vor-allem-bei-der-jugend-es-ist-nicht-nur-heidi-li.2301510" target="_blank" rel="noopener">Berliner Zeitung: Sieben Gründe für den Erfolg der Linken – vor allem bei der Jugend (24. Februar 2025)</a>
+                  
+                    <a href="https://www.rnd.de/politik/die-linke-schafft-es-in-den-bundestag-fuenf-gruende-fuer-ihren-erfolg-BU6RMMPY4VDU5DMAJY53375YHI.html" target="_blank" rel="noopener">Redaktionsnetzwerk Deutschland: Fünf Gründe, warum es die Linke über 5 Prozent geschafft hat (24. Februar 2025)</a>
+                  
+                    <a href="https://www.nytimes.com/2025/02/24/world/europe/germany-election-die-linke.html" target="_blank" rel="noopener">The New York Times: How TikTok Helped the Left Surprise in Germany (24. Februar 2025)</a>
+                  
+                </div>
+              </details>
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="videoproduktion"
+          aria-label="Trailer Surplus">
+
+          
+          
+            <div class="card-media">
+              <lite-youtube
+                videoid="lwarnkTsmvg"
+                playlabel="Video abspielen: Trailer Surplus"
+                style="background-image: url('/assets/img/thumbs/lwarnkTsmvg.jpg');">
+                <div class="yt-consent-hint" slot="button">
+                  Mit Klick wird eine Verbindung zu YouTube hergestellt.
+                </div>
+              </lite-youtube>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2025</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Trailer Surplus
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Trailer zum Launch des Wirtschaftsmagazins <a href="https://surplusmagazin.de/">Surplus</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation web-entwicklung prozessumbau beratung entwicklung administration"
+          aria-label="Deutscher Bundestag">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2025</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://www.dielinkebt.de/" target="_blank" rel="noopener">Deutscher Bundestag</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Referent für Digitalisierung und Digitale politische Kommunikation</p>
+            
+
+            <div class="card-copy"><p><strong>Referent für Digitalisierung und Digitale politische Kommunikation</strong> in der <a href="https://www.dielinkebt.de/">Fraktion Die Linke im Bundestag</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Prozessumbau</span>
+                
+                  <span class="meta-badge">Beratung</span>
+                
+                  <span class="meta-badge">Entwicklung</span>
+                
+                  <span class="meta-badge">Administration</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="grafik-und-layout"
+          aria-label="DIE LINKE.queer">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/bag-queer-sticker-2024-200w.avif 200w, /assets/img/bag-queer-sticker-2024-350w.avif 350w, /assets/img/bag-queer-sticker-2024-400w.avif 400w, /assets/img/bag-queer-sticker-2024-600w.avif 600w, /assets/img/bag-queer-sticker-2024-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/bag-queer-sticker-2024-200w.webp 200w, /assets/img/bag-queer-sticker-2024-350w.webp 350w, /assets/img/bag-queer-sticker-2024-400w.webp 400w, /assets/img/bag-queer-sticker-2024-600w.webp 600w, /assets/img/bag-queer-sticker-2024-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/bag-queer-sticker-2024-200w.jpeg" alt="DIE LINKE.queer" loading="lazy" decoding="async" width="800" height="533" srcset="/assets/img/bag-queer-sticker-2024-200w.jpeg 200w, /assets/img/bag-queer-sticker-2024-350w.jpeg 350w, /assets/img/bag-queer-sticker-2024-400w.jpeg 400w, /assets/img/bag-queer-sticker-2024-600w.jpeg 600w, /assets/img/bag-queer-sticker-2024-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2024</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                DIE LINKE.queer
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Konzeption und grafische Umsetzung der <strong>jährlichen CSD-Kampagnenmotive</strong>. Vornehmlich Sticker und Plakate.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+              <details>
+                <summary class="refs-summary">
+                  <span class="refs-arrow" aria-hidden="true">▶</span>
+                  Referenzen
+                  (1)
+                </summary>
+                <div class="refs-list">
+                  
+                    <a href="https://www.dielinke-queer.de/aktuelles/presse/detail/pride-kampagne-wir-wollen-kein-europa-der-vaterlaender-wir-wollen-gerechtigkeit-freiheit-und-lebensfreude/" target="_blank" rel="noopener">Pride-Kampagne auf dielinke-queer.de</a>
+                  
+                </div>
+              </details>
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sonstiges"
+          data-skills="web-entwicklung api cloudflare-worker"
+          aria-label="API Tagesordnung des Bundestags">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/screenshot-bt-to-200w.avif 200w, /assets/img/screenshot-bt-to-350w.avif 350w, /assets/img/screenshot-bt-to-400w.avif 400w, /assets/img/screenshot-bt-to-600w.avif 600w, /assets/img/screenshot-bt-to-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/screenshot-bt-to-200w.webp 200w, /assets/img/screenshot-bt-to-350w.webp 350w, /assets/img/screenshot-bt-to-400w.webp 400w, /assets/img/screenshot-bt-to-600w.webp 600w, /assets/img/screenshot-bt-to-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/screenshot-bt-to-200w.jpeg" alt="API Tagesordnung des Bundestags" loading="lazy" decoding="async" width="800" height="496" srcset="/assets/img/screenshot-bt-to-200w.jpeg 200w, /assets/img/screenshot-bt-to-350w.jpeg 350w, /assets/img/screenshot-bt-to-400w.jpeg 400w, /assets/img/screenshot-bt-to-600w.jpeg 600w, /assets/img/screenshot-bt-to-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sonstiges</span>
+              
+              
+                <span class="card-year">2024</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                API Tagesordnung des Bundestags
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Der Deutsche Bundestag stellt seine Tagesordnung online zur Verfügung – nur leider in keinem maschinenlesbaren Format. Das führt dazu, dass in Sitzungswochen mindestens 734 Abgeordnetenbüros händisch die Tagesordnungspunkte in ihren Kalendern aktualisieren müssen. Deshalb habe ich eine inoffizielle API entwickelt, mit der man sich die aktuelle Tagesordnung direkt als iCal-Feed holen und so in den eigenen Kalender einbetten kann. Immer aktuell, mit allen Infos, die man auch auf der Website findet. Mehr Informationen gibt es unter <a href="https://api.hutt.io/bt-to/">api.hutt.io/bt-to/</a> oder direkt <a href="https://github.com/hutt/bt-to">bei GitHub</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">API</span>
+                
+                  <span class="meta-badge">Cloudflare Worker</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+              <details>
+                <summary class="refs-summary">
+                  <span class="refs-arrow" aria-hidden="true">▶</span>
+                  Referenzen
+                  (2)
+                </summary>
+                <div class="refs-list">
+                  
+                    <a href="https://www.politico.eu/newsletter/berlin-playbook/der-polizistenmord-und-die-politischen-folgen/" target="_blank" rel="noopener">POLITICO Europe: „Berlin Playbook&quot; vom 3. Juni 2024</a>
+                  
+                    <a href="https://www.sz-dossier.de/newsletters/platz-der-republik/2024-06-07-bleibt-die-amtsstube-bald-leer" target="_blank" rel="noopener">Süddeutsche Zeitung Dossier: „Platz der Republik&quot; vom 7. Juni 2024</a>
+                  
+                </div>
+              </details>
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="politische-kommunikation videoproduktion grafik-und-layout oeffentlichkeitsarbeit reportage-photographie it-infrastruktur"
+          aria-label="Kampagne Ines Schwerdtner">
+
+          
+          
+            <div class="card-media">
+              <lite-youtube
+                videoid="BAr3rJdekrY"
+                playlabel="Video abspielen: Kampagne Ines Schwerdtner"
+                style="background-image: url('/assets/img/thumbs/BAr3rJdekrY.jpg');">
+                <div class="yt-consent-hint" slot="button">
+                  Mit Klick wird eine Verbindung zu YouTube hergestellt.
+                </div>
+              </lite-youtube>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2023</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Kampagne Ines Schwerdtner
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Ich bin stolz, Teil des ehrenamtlichen Kampagnen- und Wahlkampf-Teams von <a href="https://inesschwerdtner.eu">Ines Schwerdtner</a> zu sein.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Öffentlichkeitsarbeit</span>
+                
+                  <span class="meta-badge">Reportage-Photographie</span>
+                
+                  <span class="meta-badge">IT-Infrastruktur</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="videoproduktion"
+          aria-label="Wahlspot DIE LINKE. Niedersachsen">
+
+          
+          
+            <div class="card-media">
+              <lite-youtube
+                videoid="Rgv31P7mK2U"
+                playlabel="Video abspielen: Wahlspot DIE LINKE. Niedersachsen"
+                style="background-image: url('/assets/img/thumbs/Rgv31P7mK2U.jpg');">
+                <div class="yt-consent-hint" slot="button">
+                  Mit Klick wird eine Verbindung zu YouTube hergestellt.
+                </div>
+              </lite-youtube>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2022</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Wahlspot DIE LINKE. Niedersachsen
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p><strong>Wahlwerbespot für DIE LINKE. Niedersachsen</strong> zur Landtagswahl 2021.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sonstiges"
+          data-skills="web-entwicklung scripting javascript"
+          aria-label="Follower Count Widgets">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/follower-count-widgets-mockup-200w.avif 200w, /assets/img/follower-count-widgets-mockup-350w.avif 350w, /assets/img/follower-count-widgets-mockup-400w.avif 400w, /assets/img/follower-count-widgets-mockup-600w.avif 600w, /assets/img/follower-count-widgets-mockup-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/follower-count-widgets-mockup-200w.webp 200w, /assets/img/follower-count-widgets-mockup-350w.webp 350w, /assets/img/follower-count-widgets-mockup-400w.webp 400w, /assets/img/follower-count-widgets-mockup-600w.webp 600w, /assets/img/follower-count-widgets-mockup-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/follower-count-widgets-mockup-200w.jpeg" alt="Follower Count Widgets" loading="lazy" decoding="async" width="800" height="586" srcset="/assets/img/follower-count-widgets-mockup-200w.jpeg 200w, /assets/img/follower-count-widgets-mockup-350w.jpeg 350w, /assets/img/follower-count-widgets-mockup-400w.jpeg 400w, /assets/img/follower-count-widgets-mockup-600w.jpeg 600w, /assets/img/follower-count-widgets-mockup-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sonstiges</span>
+              
+              
+                <span class="card-year">2022</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Follower Count Widgets
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Mit diesen Widgets kann man Follower Counts auf Social Media vom Homescreen aus im Blick behalten und tracken. Das Skript lässt sich sehr leicht und vergleichsweise einfach an die eigenen Bedürfnisse anpassen. Man braucht lediglich <a href="https://github.com/simonbs">@simonbs</a>' kostenlose iOS-App <a href="https://scriptable.app/">Scriptable</a> und mein <a href="https://github.com/hutt/scriptable-follower-count-widget">auf GitHub zur Verfügung gestelltes Skript</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Scripting</span>
+                
+                  <span class="meta-badge">JavaScript</span>
+                
+              </div>
+            
+
+            
+            
+              <div class="meta-tags">
+                
+                  <a href="https://github.com/hutt/scriptable-follower-count-widget" class="btn btn-ghost" target="_blank" rel="noopener" style="font-size:var(--text-xs)">
+                    GitHub Repository ↗
+                  </a>
+                
+              </div>
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sonstiges"
+          data-skills="web-entwicklung scripting mastodon fediverse"
+          aria-label="Bundestags-Bots">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/bt-bots-200w.avif 200w, /assets/img/bt-bots-350w.avif 350w, /assets/img/bt-bots-400w.avif 400w, /assets/img/bt-bots-600w.avif 600w, /assets/img/bt-bots-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/bt-bots-200w.webp 200w, /assets/img/bt-bots-350w.webp 350w, /assets/img/bt-bots-400w.webp 400w, /assets/img/bt-bots-600w.webp 600w, /assets/img/bt-bots-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/bt-bots-200w.jpeg" alt="Bundestags-Bots" loading="lazy" decoding="async" width="800" height="533" srcset="/assets/img/bt-bots-200w.jpeg 200w, /assets/img/bt-bots-350w.jpeg 350w, /assets/img/bt-bots-400w.jpeg 400w, /assets/img/bt-bots-600w.jpeg 600w, /assets/img/bt-bots-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sonstiges</span>
+              
+              
+                <span class="card-year">2022</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Bundestags-Bots
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Nach der Twitter-Übernahme durch Elon Musk gewannen dezentrale Plattformen wie <em>Mastodon</em> schlagartig an Bedeutung. Damit politisch interessierte Nutzer_innen den Bundestag dort besser im Blick behalten können, stelle ich auf meiner eigenen Instanz <strong>fünf kleine Bots</strong> zur Verfügung:</p>
+<ul>
+<li><a href="https://hutt.social/@bt_hib">@bt_hib@hutt.social</a> postet neue Artikel der <em>Heute im Bundestag (hib)</em>-Redaktion.</li>
+<li><a href="https://hutt.social/@bt_wd">@bt_wd@hutt.social</a> postet neue Gutachten und Ausarbeitungen der <em>Wissenschaftlichen Dienste</em>.</li>
+<li><a href="https://hutt.social/@bt_drs">@bt_drs@hutt.social</a> postet neu veröffentlichte Drucksachen.</li>
+<li><a href="https://hutt.social/@bt_protokolle">@bt_protokolle@hutt.social</a> postet neue Plenarprotokolle.</li>
+</ul>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Scripting</span>
+                
+                  <span class="meta-badge">Mastodon</span>
+                
+                  <span class="meta-badge">Fediverse</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="politische-kommunikation grafik-und-layout videoproduktion kampagnenplanung konzeption photographische-begleitung"
+          aria-label="DIE LINKE.queer">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/bag-queer-flyer-mockup-200w.avif 200w, /assets/img/bag-queer-flyer-mockup-350w.avif 350w, /assets/img/bag-queer-flyer-mockup-400w.avif 400w, /assets/img/bag-queer-flyer-mockup-600w.avif 600w, /assets/img/bag-queer-flyer-mockup-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/bag-queer-flyer-mockup-200w.webp 200w, /assets/img/bag-queer-flyer-mockup-350w.webp 350w, /assets/img/bag-queer-flyer-mockup-400w.webp 400w, /assets/img/bag-queer-flyer-mockup-600w.webp 600w, /assets/img/bag-queer-flyer-mockup-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/bag-queer-flyer-mockup-200w.jpeg" alt="DIE LINKE.queer" loading="lazy" decoding="async" width="800" height="533" srcset="/assets/img/bag-queer-flyer-mockup-200w.jpeg 200w, /assets/img/bag-queer-flyer-mockup-350w.jpeg 350w, /assets/img/bag-queer-flyer-mockup-400w.jpeg 400w, /assets/img/bag-queer-flyer-mockup-600w.jpeg 600w, /assets/img/bag-queer-flyer-mockup-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2021</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                DIE LINKE.queer
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p>Konzeption und grafische Umsetzung der <strong>Kampagne für die Bundestags- und Berliner Abgeordnetenhauswahl 2021</strong>. Von Plakaten, Stickern und Informationsmaterialien bis zu Sharepics und Videos.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Kampagnenplanung</span>
+                
+                  <span class="meta-badge">Konzeption</span>
+                
+                  <span class="meta-badge">Photographische Begleitung</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+              <details>
+                <summary class="refs-summary">
+                  <span class="refs-arrow" aria-hidden="true">▶</span>
+                  Referenzen
+                  (1)
+                </summary>
+                <div class="refs-list">
+                  
+                    <a href="https://www.dielinke-queer.de/aktuelles/presse/detail/plakat-aktion-lack-und-lederer-im-regenbogenkiez/" target="_blank" rel="noopener">Kampagne auf dielinke-queer.de</a>
+                  
+                </div>
+              </details>
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="sidehustle"
+          data-skills="politische-kommunikation videoproduktion grafik-und-layout kampagnenplanung plakatphotos"
+          aria-label="#wärmteuch">
+
+          
+          
+            <div class="card-media">
+              <picture><source type="image/avif" srcset="/assets/img/kaeltehilfe-plakat-200w.avif 200w, /assets/img/kaeltehilfe-plakat-350w.avif 350w, /assets/img/kaeltehilfe-plakat-400w.avif 400w, /assets/img/kaeltehilfe-plakat-600w.avif 600w, /assets/img/kaeltehilfe-plakat-800w.avif 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><source type="image/webp" srcset="/assets/img/kaeltehilfe-plakat-200w.webp 200w, /assets/img/kaeltehilfe-plakat-350w.webp 350w, /assets/img/kaeltehilfe-plakat-400w.webp 400w, /assets/img/kaeltehilfe-plakat-600w.webp 600w, /assets/img/kaeltehilfe-plakat-800w.webp 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"><img src="/assets/img/kaeltehilfe-plakat-200w.jpeg" alt="#wärmteuch" loading="lazy" decoding="async" width="800" height="533" srcset="/assets/img/kaeltehilfe-plakat-200w.jpeg 200w, /assets/img/kaeltehilfe-plakat-350w.jpeg 350w, /assets/img/kaeltehilfe-plakat-400w.jpeg 400w, /assets/img/kaeltehilfe-plakat-600w.jpeg 600w, /assets/img/kaeltehilfe-plakat-800w.jpeg 800w" sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 400px"></picture>
+            </div>
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Sidehustle</span>
+              
+              
+                <span class="card-year">2020</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                #wärmteuch
+              
+            </h3>
+
+            
+
+            <div class="card-copy"><p><strong>Kampagne der Linksjugend für die Kältehilfe Berlin</strong>. Mit einem Linsenraster-Großflächenplakat, welches abhängig vom Betrachtungswinkel ein anderes Motiv zeigt, wurde am Berliner U-Bahnhof Alexanderplatz für Spenden geworben.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Kampagnenplanung</span>
+                
+                  <span class="meta-badge">Plakatphotos</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation videoproduktion grafik-und-layout oeffentlichkeitsarbeit social-media recherche"
+          aria-label="Deutscher Bundestag">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2020</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://jankorte.de" target="_blank" rel="noopener">Deutscher Bundestag</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Mitarbeiter für Öffentlichkeitsarbeit</p>
+            
+
+            <div class="card-copy"><p><strong>Mitarbeiter für Öffentlichkeitsarbeit</strong> bei <a href="https://jankorte.de">Jan Korte, MdB</a>; Erster Parlamentarischer Geschäftsführer der Fraktion DIE LINKE.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Grafik und Layout</span>
+                
+                  <span class="meta-badge">Öffentlichkeitsarbeit</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">Recherche</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation social-media kampagnenplanung workshops"
+          aria-label="Public Impact UG">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2017</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://publicimpact.de" target="_blank" rel="noopener">Public Impact UG</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Projektassistent für Kommunikations- und Social-Media-Beratung</p>
+            
+
+            <div class="card-copy"><p><strong>Projektassistent für Kommunikations- und Social-Media-Beratung</strong> bei <a href="https://publicimpact.de">Sebastian Jabbusch</a>. Beratung verschiedener Nichtregierungsorganisationen und der <a href="https://ec.europa.eu/germany/home_de">Vertretung der Europäischen Kommission in Deutschland</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">Kampagnenplanung</span>
+                
+                  <span class="meta-badge">Workshops</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation videoproduktion web-entwicklung social-media recherche webentwicklung"
+          aria-label="Deutscher Bundestag">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2017</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://mdb.anke.domscheit-berg.de" target="_blank" rel="noopener">Deutscher Bundestag</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Studentischer Mitarbeiter</p>
+            
+
+            <div class="card-copy"><p><strong>Studentischer Mitarbeiter</strong> bei <a href="https://mdb.anke.domscheit-berg.de">Anke Domscheit-Berg, MdB</a>; Netzpolitische Sprecherin der <a href="https://www.linksfraktion.de">Fraktion DIE LINKE.</a></p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Videoproduktion</span>
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">Recherche</span>
+                
+                  <span class="meta-badge">Webentwicklung</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation web-entwicklung oeffentlichkeitsarbeit social-media wordpress-theme-development"
+          aria-label="Europäisches Parlament">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2016</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://felixreda.eu" target="_blank" rel="noopener">Europäisches Parlament</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Communications Trainee</p>
+            
+
+            <div class="card-copy"><p><strong>Communications Trainee</strong> bei <a href="https://felixreda.eu">Felix Reda, MdEP</a>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Öffentlichkeitsarbeit</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">WordPress Theme Development</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="web-entwicklung backend pitches"
+          aria-label="Votesapp">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2015</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://votesapp.net" target="_blank" rel="noopener">Votesapp</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Kollege für alles</p>
+            
+
+            <div class="card-copy"><p>Demokratische Partizipation ins 21. Jahrhundert bringen. <a href="https://votesapp.net">Votesapp</a> hatte sich die Entwicklung einer App zum Ziel gesetzt, mit der das gemeinsame Treffen von Entscheidungen diskurs- und konsensorientiert ermöglicht werden sollte.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Backend</span>
+                
+                  <span class="meta-badge">Pitches</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation networking pitches"
+          aria-label="Tersee">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2015</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://tersee.com" target="_blank" rel="noopener">Tersee</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Public Relations Officer</p>
+            
+
+            <div class="card-copy"><p><a href="https://tersee.com">Tersee</a> war eine schnelle Echtzeit-Suchmaschine für News und Events.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Networking</span>
+                
+                  <span class="meta-badge">Pitches</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation web-entwicklung crowdfunding-website social-media oeffentlichkeitsarbeit"
+          aria-label="Sanktionsfrei">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2015</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://sanktionsfrei.de" target="_blank" rel="noopener">Sanktionsfrei</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Kollege für alles</p>
+            
+
+            <div class="card-copy"><p>Die deutschen Jobcenter dürfen ihre Hilfen unter das Existenzminimum kürzen. Das ist nicht okay. <a href="https://sanktionsfrei.de">Sanktionsfrei</a> informiert ALG II-Leistungsberechtigte über ihre Rechte und hilft bei deren Durchsetzung. Im Rahmen einer Crowdfunding-Kampagne haben wir über 126.000 € gesammelt. Ich bin stolz, als <strong>Kollege für alles</strong> bei der Gründung mit dabei gewesen zu sein.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Crowdfunding Website</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">Öffentlichkeitsarbeit</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation web-entwicklung oeffentlichkeitsarbeit social-media livestreaming"
+          aria-label="Mein Grundeinkommen">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2015</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="https://mein-grundeinkommen.de" target="_blank" rel="noopener">Mein Grundeinkommen</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Bedingungsloser Praktikant</p>
+            
+
+            <div class="card-copy"><p>Als <strong>bedingungsloser Praktikant</strong> habe ich hier jeden Bereich der Arbeit in einer kleinen NGO kennengelernt. Von Kampagnenplanung über Social Media bis hin zur Programmierung des Kampagnen-Onepagers und den technischen Details beim Livestreaming.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Öffentlichkeitsarbeit</span>
+                
+                  <span class="meta-badge">Social Media</span>
+                
+                  <span class="meta-badge">Livestreaming</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="politische-kommunikation recherche bueroorganisation"
+          aria-label="Deutscher Bundestag">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2015</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                <a href="http://www.karin-binder.de" target="_blank" rel="noopener">Deutscher Bundestag</a>
+              
+            </h3>
+
+            
+              <p class="card-rolle">Praktikum</p>
+            
+
+            <div class="card-copy"><p><strong>Praktikum</strong> bei <a href="http://www.karin-binder.de">Karin Binder, MdB</a>. Unter anderem Mitarbeit an einem Gutachten zur Nutzung von Pfefferspray auf Versammlungen. Weiterer Schwerpunkt: Glyphosat.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Politische Kommunikation</span>
+                
+                  <span class="meta-badge">Recherche</span>
+                
+                  <span class="meta-badge">Büroorganisation</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+        <article
+          class="card"
+          data-art="festanstellung"
+          data-skills="web-entwicklung backupautomatisierung netzwerkvirtualisierung dampsoft"
+          aria-label="Systembetreuung und IT-Support">
+
+          
+          
+
+          <div class="card-body">
+
+            
+            <div class="card-meta-top">
+              <span class="card-tag">Festanstellung</span>
+              
+              
+                <span class="card-year">2014</span>
+              
+            </div>
+
+            <h3 class="card-title">
+              
+                Systembetreuung und IT-Support
+              
+            </h3>
+
+            
+              <p class="card-rolle">IT-Infrastruktur</p>
+            
+
+            <div class="card-copy"><p>Aufbau von rechts- und datenschutzkonformer <strong>IT-Infrastruktur in Zahnarztpraxen</strong>.</p>
+</div>
+
+            
+            
+              <div class="meta-tags">
+                
+                  <span class="meta-badge">Web-Entwicklung</span>
+                
+                  <span class="meta-badge">Backupautomatisierung</span>
+                
+                  <span class="meta-badge">Netzwerkvirtualisierung</span>
+                
+                  <span class="meta-badge">Dampsoft</span>
+                
+              </div>
+            
+
+            
+            
+
+            
+            
+
+          </div>
+        </article>
+      
+    </div>
+  </div>
+</section>
+
+
+<div class="accent-block">
+  <div class="accent-cube-wrap" aria-hidden="true">
+    <div class="accent-cube">
+      <div class="cube-face face-front"></div>
+      <div class="cube-face face-back"></div>
+      <div class="cube-face face-left"></div>
+      <div class="cube-face face-right"></div>
+      <div class="cube-face face-top"></div>
+      <div class="cube-face face-bottom"></div>
+    </div>
+  </div>
+  <div class="accent-block-content">
+    <h2>Immer mittendrin.</h2>
+    <p>An der Schnittstelle zwischen Technologie, Politik und Gesellschaft.</p>
+  </div>
+</div>
+
+
+<section class="section" id="kontakt" aria-labelledby="h-kontakt">
+  <div class="wrap">
+    <p class="label">Kontakt</p>
+    <h2 class="section-title" id="h-kontakt">Schreib mir.</h2>
+    <p style="max-width:56ch; color:var(--color-text-muted); margin-bottom:var(--space-10)">
+      Nein, wirklich, schreib mir. Solange es keine wüsten Beschimpfungen
+      oder Morddrohungen sind, freue ich mich über jede Nachricht.
+    </p>
+    <div class="contact-grid">
+
+      <div class="contact-links">
+        <div class="contact-link-row">
+          <a href="mailto:jannis@hutt.io" class="contact-link">
+            <span class="contact-link-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            </span>
+            jannis@hutt.io
+          </a>
+          <a class="contact-link" id="pgp-modal-btn" aria-label="PGP Key Modal öffnen" style="padding-inline: var(--space-4);">
+            <span class="contact-link-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            PGP
+          </a>
+        </div>
+        <a href="https://signal.me/#eu/ROdReCjcEYMiVqI8-r0CA_08NCXJxobpe-ZjJ4BuEFs85_ZsCPNE7IIn-kqyCrED" class="contact-link" target="_blank" rel="noopener" style="flex: 1;">
+          <span class="contact-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          Signal
+        </a>
+        <a href="https://hutt.social/@jannis" class="contact-link" target="_blank" rel="noopener me">
+          <span class="contact-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.327 8.566c0-4.339-2.843-5.61-2.843-5.61-1.433-.658-3.894-.935-6.451-.956h-.063c-2.557.021-5.016.298-6.45.956 0 0-2.843 1.272-2.843 5.61 0 .993-.019 2.181.012 3.441.103 4.243.778 8.425 4.701 9.463 1.809.479 3.362.579 4.612.51 2.268-.126 3.541-.809 3.541-.809l-.075-1.646s-1.621.511-3.441.449c-1.804-.062-3.707-.194-3.999-2.409a4.523 4.523 0 0 1-.04-.621s1.77.433 4.014.536c1.372.063 2.658-.08 3.965-.236 2.506-.299 4.688-1.843 4.962-3.254.434-2.223.398-5.424.398-5.424zm-3.353 5.59h-2.081V9.057c0-1.075-.452-1.62-1.357-1.62-1 0-1.501.647-1.501 1.927v2.791h-2.069V9.364c0-1.28-.501-1.927-1.501-1.927-.905 0-1.357.545-1.357 1.62v5.099H6.026V8.903c0-1.074.273-1.927.823-2.558.566-.631 1.307-.955 2.228-.955 1.065 0 1.872.409 2.405 1.228l.518.869.519-.869c.533-.819 1.34-1.228 2.405-1.228.92 0 1.662.324 2.228.955.549.631.822 1.484.822 2.558v5.253z"/></svg>
+          </span>
+          @jannis@hutt.social
+        </a>
+        <a href="https://github.com/hutt" class="contact-link" target="_blank" rel="noopener">
+          <span class="contact-link-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </span>
+          github.com/hutt
+        </a>
+      </div>
+
+      
+      <form
+        class="form"
+        id="kontakt-form"
+        action="/api/kontakt"
+        method="POST"
+        novalidate
+        aria-label="Kontaktformular">
+        <div class="form-row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input
+              id="f-name"
+              name="name"
+              type="text"
+              placeholder="Dein Name"
+              autocomplete="name"
+              required>
+          </div>
+          <div class="field">
+            <label for="f-email">E-Mail</label>
+            <input
+              id="f-email"
+              name="email"
+              type="email"
+              placeholder="mail@example.com"
+              autocomplete="email"
+              required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-betreff">Betreff</label>
+          <input
+            id="f-betreff"
+            name="betreff"
+            type="text"
+            placeholder="Worum geht es?"
+            required>
+        </div>
+        <div class="field">
+          <label for="f-nachricht">Nachricht</label>
+          <textarea
+            id="f-nachricht"
+            name="nachricht"
+            placeholder="Deine Nachricht …"
+            required></textarea>
+        </div>
+        
+        <div style="display:none" aria-hidden="true">
+          <input name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Nachricht senden</button>
+        </div>
+        <div class="form-status" id="form-status" role="alert" aria-live="polite"></div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEU: Das Modal (dialog) am Ende der Kontakt-Section einfügen -->
+<dialog id="pgp-modal" class="modal">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" aria-label="Schließen" formmethod="dialog">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <h3 class="modal-title">Verschlüsselte E-Mails senden</h3>
+    <p class="modal-text">
+      Du kannst mir gerne PGP-verschlüsselte E-Mails senden. Für meine E-Mail-Adresse <a href="mailto:jannis@hutt.io">jannis@hutt.io</a> gibt es einen PGP-Key mit folgendem Fingerprint:<br>
+      <code style="display: block; margin-top: var(--space-2); padding: var(--space-2); background: var(--color-surface-offset); border-radius: var(--radius-sm); font-size: var(--text-xs); color: var(--color-text);">C59B 6CD5 E980 6365 A69C 9046 9BAD 2EA1 5BCF 1DFF</code>
+    </p>
+    <div class="modal-actions">
+      
+      <a href="/pubkey.asc" download class="btn btn-primary">PGP-Key herunterladen</a>
+    </div>
+  </div>
+</dialog>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-copy">
+      © 2010 – 2026 Jannis Hutt &nbsp;·&nbsp;
+      <a href="/datenschutz/">Datenschutz</a> &nbsp;·&nbsp;
+      <a href="/impressum/">Impressum</a>
+    </p>
+    <p class="footer-meta">
+      Gebaut mit <a href="https://www.11ty.dev" target="_blank" rel="noopener">Eleventy</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+  !function(){const e=document.documentElement,t=document.querySelector("[data-theme-toggle]");function n(n){e.setAttribute("data-theme",n),t&&(t.innerHTML="dark"===n?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',t.setAttribute("aria-label","dark"===n?"Zum hellen Modus wechseln":"Zum dunklen Modus wechseln"))}var r;try{r=localStorage.getItem("theme")}catch(e){}n(r||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(e){try{if(localStorage.getItem("theme"))return}catch(e){}n(e.matches?"dark":"light")}),t&&t.addEventListener("click",function(){const t="dark"===e.getAttribute("data-theme")?"light":"dark";try{localStorage.setItem("theme",t)}catch(e){}n(t)})}(),function(){const e=document.getElementById("portfolio-grid");if(!e)return;const t=Array.from(e.querySelectorAll(".card")),n={art:"all",skills:"all"};document.querySelectorAll(".filter-bar[data-filter-group]").forEach(function(e){const r=e.dataset.filterGroup,o=e.querySelectorAll(".filter-chip");o.forEach(function(e){e.addEventListener("click",function(){o.forEach(e=>e.setAttribute("aria-pressed","false")),e.setAttribute("aria-pressed","true"),n[r]=e.dataset.filter,t.forEach(function(e){const t="all"===n.art||e.dataset.art===n.art,r=(e.dataset.skills||"").split(" ").filter(Boolean),o="all"===n.skills||r.includes(n.skills);t&&o?e.removeAttribute("hidden"):e.setAttribute("hidden","")})})})})}(),function(){const e=document.getElementById("filter-skills"),t=document.getElementById("skills-expand-btn");e&&t&&t.addEventListener("click",function(){const n=e.classList.toggle("is-collapsed");t.textContent=n?"Mehr ▾":"Weniger ▴",t.setAttribute("aria-expanded",String(!n))})}(),function(){if(!document.querySelector("lite-youtube"))return;const e=document.createElement("script");e.src="/assets/js/lite-yt-embed.js",e.defer=!0,document.head.appendChild(e);const t=document.createElement("link");t.rel="stylesheet",t.href="/assets/css/lite-yt-embed.css",document.head.appendChild(t)}(),function(){const e=document.getElementById("kontakt-form"),t=document.getElementById("form-status");e&&t&&e.addEventListener("submit",async function(n){if(n.preventDefault(),e.elements.website&&e.elements.website.value)return;const r=e.querySelector('[type="submit"]');r.disabled=!0,r.textContent="Wird gesendet …",t.className="form-status",t.textContent="";const o={name:e.elements.name.value.trim(),email:e.elements.email.value.trim(),betreff:e.elements.betreff.value.trim(),nachricht:e.elements.nachricht.value.trim()};if(!o.name||!o.email||!o.nachricht)return t.className="form-status error",t.textContent="Bitte fülle alle Pflichtfelder aus.",r.disabled=!1,void(r.textContent="Nachricht senden");try{const n=await fetch("/api/kontakt",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});if(!n.ok)throw new Error(n.statusText);t.className="form-status success",t.textContent="Danke! Deine Nachricht ist angekommen. Ich melde mich so schnell wie möglich.",e.reset()}catch(e){t.className="form-status error",t.textContent="Etwas ist schiefgelaufen. Schreib mir direkt an jannis@hutt.io."}finally{r.disabled=!1,r.textContent="Nachricht senden"}})}(),function(){const e=document.querySelectorAll('.nav-link[href^="/#"]'),t=document.querySelectorAll("section[id], div[id]"),n=new IntersectionObserver(function(t){t.forEach(function(t){t.isIntersecting&&e.forEach(function(e){const n=e.getAttribute("href").replace("/","");e.setAttribute("aria-current",n==="#"+t.target.id?"true":"false")})})},{rootMargin:"-40% 0px -55% 0px"});t.forEach(e=>n.observe(e))}(),function(){const e=document.getElementById("pgp-modal"),t=document.getElementById("pgp-modal-btn");if(!e||!t)return;t.addEventListener("click",()=>{e.showModal()});e.querySelectorAll(".modal-close, .modal-close-btn").forEach(t=>{t.addEventListener("click",()=>{e.close()})}),e.addEventListener("click",t=>{const n=e.getBoundingClientRect();(t.clientX<n.left||t.clientX>n.right||t.clientY<n.top||t.clientY>n.bottom)&&e.close()})}(),function(){const e=document.querySelector(".hero-portrait");if(!e)return;let t,n=0;e.style.cursor="pointer",e.addEventListener("click",function(){if(e.classList.remove("is-wobbling"),e.offsetWidth,e.classList.add("is-wobbling"),e.addEventListener("animationend",()=>{e.classList.remove("is-wobbling")},{once:!0}),n++,clearTimeout(t),n>=5){n=0;const t=e.querySelector("img"),r=t.src.includes("telephon.jpg");t.src=r?"/assets/img/portrait.jpg":"/assets/img/telephon.jpg",t.alt=r?"Jannis Hutt":"Jannis Hutt am Telefon"}else t=setTimeout(()=>{n=0},2e3)})}(),function(){const e=document.querySelector(".hero .cube");if(!e)return;const t=30*Math.random()-15,n=20*Math.random()-10,r=22+20*Math.random(),o=Math.random()>.5?"normal":"reverse";e.style.setProperty("--tilt-x",`${t}deg`),e.style.setProperty("--tilt-z",`${n}deg`),e.style.animationDuration=`${r}s`,e.style.animationDirection=o}(),function(){const e=document.querySelector(".accent-cube-wrap"),t=document.querySelector(".accent-cube");if(!e||!t)return;const n=80*Math.random();e.style.left=`calc(${n}% - 8rem)`;const r=20+60*Math.random();e.style.top=`${r}%`,e.style.transform="translateY(-50%)";const o=50*Math.random()-25,s=30*Math.random()-15,a=Math.random()>.5?1:-1,i=20+20*Math.random();e.style.setProperty("--tilt-x",`${o}deg`),e.style.setProperty("--tilt-z",`${s}deg`),t.style.animationDuration=`${i}s`,t.style.animationDirection=a>0?"normal":"reverse"}();
+</script>
+</body>
+</html>

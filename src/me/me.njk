@@ -1,0 +1,157 @@
+---
+permalink: /me/index.html
+eleventyExcludeFromCollections: true
+noindex: true
+---
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Jannis Hutt — vCard</title>
+  <style>
+    @font-face {
+      font-family: 'Cabinet Grotesk';
+      src: url('/assets/fonts/CabinetGrotesk-Variable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'General Sans';
+      src: url('/assets/fonts/GeneralSans-Variable.woff2') format('woff2');
+      font-weight: 200 700;
+      font-display: swap;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; }
+    body {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      font-family: 'General Sans', system-ui, sans-serif;
+      background: #f5f4f0;
+      color: #181713;
+      padding: 2rem;
+    }
+    .card {
+      background: #f8f7f4;
+      border: 1px solid #d4d1c9;
+      border-radius: 1.125rem;
+      box-shadow: 0 6px 20px oklch(0.15 0.01 190 / 0.10);
+      padding: 2.5rem 2rem;
+      max-width: 22rem;
+      width: 100%;
+      text-align: center;
+      display: grid;
+      gap: 1rem;
+    }
+    .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #0a4445;
+    }
+    h1 {
+      font-family: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+      font-size: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #68665e;
+      line-height: 1.6;
+    }
+    .spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid #dbe8e8;
+      border-top-color: #0a4445;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-inline: auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.15rem;
+      border-radius: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      text-decoration: none;
+      background: #0a4445;
+      color: #f5f4f0;
+      box-shadow: 0 1px 3px oklch(0.15 0.01 190 / 0.08);
+    }
+    .btn:hover { background: #0d5657; }
+    .btn-secondary {
+      background: #edeae3;
+      color: #181713;
+      border-color: #c9c5bb;
+    }
+    .btn-secondary:hover { background: #e4e0d8; }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      html:not([data-theme="light"]) body { background: #101210; color: #e8e4dc; }
+      html:not([data-theme="light"]) .card { background: #151714; border-color: #343833; }
+      html:not([data-theme="light"]) p { color: #8c8a80; }
+      html:not([data-theme="light"]) .spinner { border-color: #172f30; border-top-color: #4ca6a8; }
+      html:not([data-theme="light"]) .btn { background: #4ca6a8; color: #101210; }
+      html:not([data-theme="light"]) .btn-secondary { background: #1d211d; color: #e8e4dc; border-color: #343833; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="label">Jannis Hutt</p>
+    <h1>Kontakt speichern</h1>
+    <div class="spinner" id="spinner"></div>
+    <p id="msg">Deine vCard wird heruntergeladen…</p>
+    <div class="actions" id="actions" hidden>
+      <a href="/me/jannis_hutt.vcf" download class="btn">↓ Nochmal herunterladen</a>
+      <a href="/" class="btn btn-secondary">Zur Startseite</a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      // System-Theme übernehmen
+      if (matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.removeAttribute('data-theme');
+      }
+
+      const spinner = document.getElementById('spinner');
+      const msg = document.getElementById('msg');
+      const actions = document.getElementById('actions');
+
+      // Download triggern
+      const a = document.createElement('a');
+      a.href = '/me/jannis_hutt.vcf';
+      a.download = 'jannis_hutt.vcf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      // Nach kurzer Pause: Spinner ausblenden, Buttons zeigen
+      setTimeout(() => {
+        spinner.style.display = 'none';
+        msg.textContent = 'Download gestartet. Bis gleich!';
+        actions.hidden = false;
+        // Weiterleitung zur Startseite nach weiteren 3 Sekunden
+        setTimeout(() => window.location.replace('/'), 3000);
+      }, 800);
+    })();
+  </script>
+</body>
+</html>

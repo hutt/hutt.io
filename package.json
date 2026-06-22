@@ -4,20 +4,31 @@
   "description": "Portfolio-Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "thumbs": "node scripts/fetch-thumbs.js",
+    "start": "npm run thumbs && eleventy --config=.eleventy.cjs --serve",
+    "build": "npm run thumbs && eleventy --config=.eleventy.cjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hutt/hutt.github.io.git"
+    "url": "git+https://github.com/hutt/hutt.io.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Jannis Hutt",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/hutt/hutt.github.io/issues"
+    "url": "https://github.com/hutt/hutt.io/issues"
   },
-  "homepage": "https://github.com/hutt/hutt.github.io#readme",
+  "homepage": "https://github.com/hutt/hutt.io#readme",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6"
+  },
+  "dependencies": {
+    "@11ty/eleventy-img": "^6.0.4",
+    "autoprefixer": "^10.5.0",
+    "critical": "^8.0.0",
+    "cssnano": "^7.1.9",
+    "lite-youtube-embed": "^0.3.4",
+    "postcss": "^8.5.15",
+    "terser": "^5.48.0"
   }
 }

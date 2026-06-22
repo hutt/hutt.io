@@ -25,10 +25,6 @@ class LiteYTEmbed extends HTMLElement {
          *
          * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md
          */
-        if (!this.style.backgroundImage) {
-          this.style.backgroundImage = `url("https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg")`;
-          this.upgradePosterImage();
-        }
 
         // Set up play button, and its visually hidden label
         if (!playBtnEl) {
@@ -100,18 +96,10 @@ class LiteYTEmbed extends HTMLElement {
      * But TBH, I don't think it'll happen soon with Site Isolation and split caches adding serious complexity.
      */
     static warmConnections() {
-        if (LiteYTEmbed.preconnected) return;
-
-        // The iframe document and most of its subresources come right off youtube.com
-        LiteYTEmbed.addPrefetch('preconnect', 'https://www.youtube-nocookie.com');
-        // The botguard script is fetched off from google.com
-        LiteYTEmbed.addPrefetch('preconnect', 'https://www.google.com');
-
-        // Not certain if these ad related domains are in the critical path. Could verify with domain-specific throttling.
-        LiteYTEmbed.addPrefetch('preconnect', 'https://googleads.g.doubleclick.net');
-        LiteYTEmbed.addPrefetch('preconnect', 'https://static.doubleclick.net');
-
-        LiteYTEmbed.preconnected = true;
+    if (LiteYTEmbed.preconnected) return;
+    // Nur youtube-nocookie, keine Ads/Tracker
+    LiteYTEmbed.addPrefetch('preconnect', 'https://www.youtube-nocookie.com');
+    LiteYTEmbed.preconnected = true;
     }
 
     fetchYTPlayerApi() {

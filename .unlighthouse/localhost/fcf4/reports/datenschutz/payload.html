@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutz – Jannis Hutt</title>
+  <meta name="description" content="Datenschutzerklärung für hutt.io – Jannis Hutt.">
+  <meta name="author" content="Jannis Hutt">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Datenschutz – Jannis Hutt">
+  <meta property="og:description" content="Datenschutzerklärung für hutt.io – Jannis Hutt.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hutt.io">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://hutt.io/datenschutz/">
+
+  <!-- Favicons -->
+  <link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  <!-- Fonts (self-hosted – kein Third-Party-Request) -->
+  <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Theme: sofort setzen, kein FOUC -->
+  <script>
+    (function(){
+      var stored;
+      try { stored = localStorage.getItem('theme'); } catch(_){}
+      var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- CSS -->
+  <style>
+    @font-face{font-family:'Cabinet Grotesk';src:url('/assets/fonts/CabinetGrotesk-Variable.woff2') format('woff2');font-weight:100 900;font-display:swap}@font-face{font-family:'General Sans';src:url('/assets/fonts/GeneralSans-Variable.woff2') format('woff2');font-weight:200 700;font-display:swap}:root,[data-theme=light]{--font-display:'Cabinet Grotesk','Helvetica Neue',sans-serif;--font-body:'General Sans','Inter',sans-serif;--text-xs:clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);--text-sm:clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);--text-base:clamp(1rem,     0.95rem + 0.25vw, 1.125rem);--text-lg:clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);--text-xl:clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);--text-2xl:clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);--text-3xl:clamp(2.6rem,   1rem    + 4.4vw,  5.4rem);--space-1:0.25rem;--space-2:0.5rem;--space-3:0.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--space-20:5rem;--space-24:6rem;--color-bg:#f5f4f0;--color-surface:#f8f7f4;--color-surface-2:#fbfaf7;--color-surface-offset:#edeae3;--color-surface-offset-2:#e4e0d8;--color-divider:#d4d1c9;--color-border:#c9c5bb;--color-text:#181713;--color-text-muted:#68665e;--color-text-faint:#a5a29a;--color-text-inverse:#f5f4f0;--color-primary:#0a4445;--color-primary-hover:#0d5657;--color-primary-active:#083537;--color-primary-soft:#dbe8e8;--color-primary-edge:color-mix(in oklab, #0a4445 28%, transparent);--shadow-sm:0 1px 3px oklch(0.15 0.01 190 / 0.08);--shadow-md:0 6px 20px oklch(0.15 0.01 190 / 0.10);--shadow-lg:0 16px 40px oklch(0.15 0.01 190 / 0.14);--radius-sm:0.375rem;--radius-md:0.625rem;--radius-lg:0.875rem;--radius-xl:1.125rem;--radius-2xl:1.5rem;--radius-full:9999px;--transition-fast:180ms cubic-bezier(0.16, 1, 0.3, 1);--transition-med:300ms cubic-bezier(0.16, 1, 0.3, 1);--transition-interactive:180ms cubic-bezier(0.16, 1, 0.3, 1);--content-narrow:42rem;--content-default:68rem;--content-wide:80rem}[data-theme=dark]{--color-bg:#101210;--color-surface:#151714;--color-surface-2:#191c19;--color-surface-offset:#1d211d;--color-surface-offset-2:#232722;--color-divider:#292d29;--color-border:#343833;--color-text:#e8e4dc;--color-text-muted:#8c8a80;--color-text-faint:#5a584f;--color-text-inverse:#101210;--color-primary:#4ca6a8;--color-primary-hover:#66b8ba;--color-primary-active:#2d8486;--color-primary-soft:#172f30;--color-primary-edge:color-mix(in oklab, #4ca6a8 28%, transparent);--shadow-sm:0 1px 3px oklch(0 0 0 / 0.28);--shadow-md:0 6px 20px oklch(0 0 0 / 0.36);--shadow-lg:0 16px 40px oklch(0 0 0 / 0.46)}@media (prefers-color-scheme:dark){:root:not([data-theme]){--color-bg:#101210;--color-surface:#151714;--color-surface-2:#191c19;--color-surface-offset:#1d211d;--color-surface-offset-2:#232722;--color-divider:#292d29;--color-border:#343833;--color-text:#e8e4dc;--color-text-muted:#8c8a80;--color-text-faint:#5a584f;--color-text-inverse:#101210;--color-primary:#4ca6a8;--color-primary-hover:#66b8ba;--color-primary-active:#2d8486;--color-primary-soft:#172f30;--color-primary-edge:color-mix(in oklab, #4ca6a8 28%, transparent);--shadow-sm:0 1px 3px oklch(0 0 0 / 0.28);--shadow-md:0 6px 20px oklch(0 0 0 / 0.36);--shadow-lg:0 16px 40px oklch(0 0 0 / 0.46)}}*,::after,::before{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;text-size-adjust:none;scroll-behavior:smooth;scroll-padding-top:var(--space-16);hanging-punctuation:first last}body{font-family:var(--font-body);font-size:var(--text-base);line-height:1.65;color:var(--color-text);background:var(--color-bg);transition:background var(--transition-med),color var(--transition-med)}img,picture,svg,video{display:block;max-width:100%;height:auto}a{color:inherit;text-decoration:none}button{border:0;background:0 0;cursor:pointer;font:inherit;color:inherit}input,select,textarea{font:inherit;color:inherit}ol[role=list],ul[role=list]{list-style:none}h1,h2,h3,h4{text-wrap:balance;line-height:1.1}figcaption,li,p{text-wrap:pretty}table{border-collapse:collapse;width:100%}::selection{background:oklch(from var(--color-primary) l c h / .22);color:var(--color-text)}:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}[role=button],a,button,input,select,textarea{transition:color var(--transition-fast),background var(--transition-fast),border-color var(--transition-fast),box-shadow var(--transition-fast)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}@media (prefers-reduced-motion:reduce){*,::after,::before{animation-duration:0s!important;animation-iteration-count:1!important;transition-duration:0s!important;scroll-behavior:auto!important}}#kontakt,#portfolio,.accent-block{content-visibility:auto;contain-intrinsic-size:0 600px}.wrap{width:min(100% - 2rem,var(--content-default));margin-inline:auto}.wrap--narrow{width:min(100% - 2rem,var(--content-narrow));margin-inline:auto}.section{padding-block:clamp(var(--space-12),7vw,var(--space-20));border-bottom:1px solid var(--color-divider)}.section:last-of-type{border-bottom:none}.skip-link{position:absolute;top:-100%;left:var(--space-4);padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);background:var(--color-primary);color:var(--color-text-inverse);font-size:var(--text-sm);font-weight:600;z-index:100}.skip-link:focus{top:var(--space-2)}.label{display:block;margin-bottom:var(--space-2);font-family:var(--font-body);font-size:var(--text-xs);font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--color-primary)}.section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;letter-spacing:-.025em;line-height:1;margin-bottom:var(--space-10)}.section-title+.filter-bar{margin-top:calc(-1 * var(--space-4))}.header{position:sticky;top:0;z-index:30;border-bottom:1px solid var(--color-divider);background:color-mix(in oklab,var(--color-bg) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background var(--transition-med),border-color var(--transition-med)}.header-inner{width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);min-height:4.25rem}.logo{font-family:var(--font-display);font-size:var(--text-lg);font-weight:900;letter-spacing:-.025em;line-height:1}.logo span{color:var(--color-primary)}.header nav{display:flex;align-items:center;gap:var(--space-6)}.nav-link{position:relative;padding-block:var(--space-1);font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted)}.nav-link::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;border-radius:var(--radius-full);background:var(--color-primary);transition:width 260ms cubic-bezier(.16, 1, .3, 1)}.nav-link:hover{color:var(--color-text)}.nav-link:hover::after,.nav-link[aria-current=page]::after{width:100%}.theme-toggle{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:var(--radius-md);color:var(--color-text-muted)}.theme-toggle:hover{color:var(--color-text);background:var(--color-surface-offset);box-shadow:var(--shadow-sm)}.hero{position:relative;overflow:clip;border-bottom:1px solid var(--color-divider)}.hero-inner{position:relative;z-index:2;width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:grid;grid-template-columns:minmax(12rem,28fr) minmax(0,72fr);grid-template-areas:"portrait copy";gap:clamp(var(--space-8),4vw,var(--space-16));align-items:center;padding-block:clamp(var(--space-12),9vw,var(--space-20));min-height:64vh}.hero-copy{display:grid;gap:var(--space-5)}.hero-copy .label{margin-bottom:0}.hero-title{font-family:var(--font-display);font-size:var(--text-3xl);font-weight:900;line-height:.96;letter-spacing:-.01em}.hero-title .accent{color:var(--color-primary)}.hero-sub{max-width:46ch;font-size:var(--text-lg);color:var(--color-text-muted);line-height:1.65}.hero-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center}.hero-portrait{grid-area:portrait;order:2;justify-self:start;width:100%;aspect-ratio:3/4;border-radius:var(--radius-xl);border:1px solid var(--color-border);background:linear-gradient(165deg,color-mix(in oklab,var(--color-primary) 10%,var(--color-surface)) 0,var(--color-surface-offset) 100%);box-shadow:var(--shadow-md);overflow:hidden;user-select:none;-webkit-user-select:none}@keyframes portrait-wobble{0%{transform:rotate(0)}15%{transform:rotate(-3deg)}35%{transform:rotate(3.5deg)}55%{transform:rotate(-2.5deg)}72%{transform:rotate(2deg)}86%{transform:rotate(-1deg)}100%{transform:rotate(0)}}.hero-portrait.is-wobbling{transform-origin:top center;animation:portrait-wobble .55s cubic-bezier(.36,.07,.19,.97) both}.hero-portrait img{width:100%;height:100%;object-fit:cover;animation:fade-in .2s ease forwards}@keyframes fade-in{from{opacity:0}to{opacity:1}}.hero-cube-wrap{position:absolute;z-index:1;right:-6rem;bottom:-8rem;width:28rem;height:28rem;pointer-events:none;perspective:900px}.cube{width:100%;height:100%;transform-style:preserve-3d;animation:cube-spin 120s linear infinite;--tilt-x:0deg;--tilt-z:0deg}@keyframes cube-spin{from{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(0)}to{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(360deg)}}.cube-face{position:absolute;inset:0;border:1.5px solid var(--color-primary-edge);border-radius:1px;background:color-mix(in oklab,var(--color-primary) 3%,transparent)}.face-front{transform:translateZ(14rem)}.face-back{transform:translateZ(-14rem) rotateY(180deg)}.face-left{transform:translateX(-14rem) rotateY(-90deg)}.face-right{transform:translateX(14rem) rotateY(90deg)}.face-top{transform:translateY(-14rem) rotateX(90deg)}.face-bottom{transform:translateY(14rem) rotateX(-90deg)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:.8rem 1.15rem;min-height:2.875rem;border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;border:1px solid transparent;white-space:nowrap}.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);box-shadow:var(--shadow-sm)}.btn-primary:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md)}.btn-secondary{background:var(--color-surface-offset);color:var(--color-text);border-color:var(--color-border);box-shadow:var(--shadow-sm)}.btn-secondary:hover{background:var(--color-surface-offset-2);border-color:color-mix(in oklab,var(--color-text) 20%,var(--color-border));box-shadow:var(--shadow-md)}.btn-ghost{padding-inline:0.9rem;color:var(--color-primary)}.btn-ghost:hover{background:var(--color-primary-soft);box-shadow:var(--shadow-sm)}.about-copy{display:grid;gap:var(--space-6)}.about-copy p{color:var(--color-text-muted);line-height:1.75;max-width:62ch}.about-copy p strong{color:var(--color-text)}.filter-bar{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-6)}.filter-chip{display:inline-flex;align-items:center;padding:.4rem .85rem;border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:500;border:1px solid var(--color-border);color:var(--color-text-muted);background:var(--color-surface)}.filter-chip:hover{background:var(--color-surface-offset);color:var(--color-text)}.filter-chip[aria-pressed=true]{background:var(--color-primary);color:var(--color-text-inverse);border-color:var(--color-primary);box-shadow:var(--shadow-sm)}.filter-chip--sm{font-size:var(--text-xs);padding:.3rem .7rem}.filter-bar--secondary{position:relative;padding-right:5.5rem;padding-bottom:var(--space-6);border-bottom:1px solid var(--color-divider);margin-bottom:var(--space-12)}.filter-bar--secondary.is-collapsed{max-height:2.6rem;overflow:hidden;border-bottom:unset}.filter-bar--secondary.is-collapsed::after{content:'';position:absolute;top:0;right:5.5rem;width:3rem;height:2.4rem;background:linear-gradient(to right,transparent,var(--color-bg) 85%);pointer-events:none}.filter-expand-btn{position:absolute;top:0;right:0;height:2.4rem;padding:0 var(--space-3);font-size:var(--text-xs);font-weight:600;color:var(--color-primary);background:var(--color-bg);border:1px solid var(--color-border);border-radius:var(--radius-full);white-space:nowrap;transition:color var(--transition-fast),border-color var(--transition-fast)}.filter-expand-btn:hover{color:var(--color-primary-hover);border-color:var(--color-primary)}.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(22rem,100%),1fr));gap:var(--space-6)}.card{display:grid;grid-template-rows:auto 1fr;overflow:hidden;background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}.card:hover{box-shadow:var(--shadow-md);border-color:color-mix(in oklab,var(--color-primary) 14%,var(--color-border))}.card[hidden]{display:none}.card-media{aspect-ratio:16/9;position:relative;overflow:hidden;background:linear-gradient(135deg,color-mix(in oklab,var(--color-primary) 12%,var(--color-surface-offset)) 0,var(--color-surface-2) 100%);border-bottom:1px solid var(--color-divider)}.card-media iframe,.card-media img{width:100%;height:100%;object-fit:cover}.card-media lite-youtube{width:100%;max-width:100%;height:100%}.card-body{display:grid;gap:var(--space-4);padding:var(--space-6);align-content:start}.card-meta-top{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}.card-tag{display:inline-flex;width:fit-content;padding:.2rem .65rem;border-radius:var(--radius-full);background:var(--color-primary-soft);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.04em}.card-year{display:inline-flex;align-items:center;padding:.2rem .6rem;border-radius:var(--radius-full);border:1px solid var(--color-border);background:0 0;color:var(--color-text-faint);font-size:var(--text-xs);font-weight:500;font-variant-numeric:tabular-nums}.card-title{font-family:var(--font-display);font-size:var(--text-lg);font-weight:900;line-height:1.06;letter-spacing:-.01em}.card-rolle{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);line-height:1.3}.card-copy{color:var(--color-text-muted);font-size:var(--text-sm);line-height:1.65;max-width:55ch}.card-copy p+p{margin-top:var(--space-3)}.card-copy a{color:var(--color-primary);border-bottom:1px solid color-mix(in oklab,var(--color-primary) 35%,transparent)}.card-copy a:hover{border-bottom-color:var(--color-primary)}.meta-tags{display:flex;flex-wrap:wrap;gap:var(--space-2)}.meta-badge{padding:.2rem .6rem;border-radius:var(--radius-full);background:var(--color-surface-offset);color:var(--color-text-muted);font-size:var(--text-xs);font-weight:500}.refs-summary{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;color:var(--color-primary);cursor:pointer;list-style:none;padding-bottom:1px;border-bottom:1px solid color-mix(in oklab,var(--color-primary) 35%,transparent);width:fit-content}.refs-summary::-webkit-details-marker{display:none}.refs-summary:hover{color:var(--color-primary-hover)}details[open] .refs-summary{border-bottom-color:transparent}.refs-arrow{display:inline-block;font-style:normal;transition:transform 220ms cubic-bezier(.16, 1, .3, 1);font-size:.65rem}details[open] .refs-arrow{transform:rotate(90deg)}.refs-list{display:grid;gap:var(--space-2);margin-top:var(--space-3);padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-offset);border:1px solid var(--color-border)}.refs-list a{display:flex;align-items:flex-start;gap:var(--space-2);font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5}.refs-list a:hover{color:var(--color-primary)}.refs-list a::before{content:"↗";flex-shrink:0;color:var(--color-primary);margin-top:1px}.yt-consent-hint{position:absolute;bottom:var(--space-3);left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - var(--space-8));padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);background:oklch(.08 0 0 / .72);color:#fff;font-size:var(--text-xs);text-align:center;pointer-events:none;backdrop-filter:blur(4px);line-height:1.4}lite-youtube.lyt-activated .yt-consent-hint{display:none}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(var(--space-8),4vw,var(--space-16));align-items:start}.contact-links{display:grid;gap:var(--space-4)}.contact-link-row{display:grid;grid-template-columns:1fr auto;gap:var(--space-4)}.contact-link{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h / .08);font-size:var(--text-sm);font-weight:500;box-shadow:var(--shadow-sm)}.contact-link:hover{background:var(--color-surface-offset);box-shadow:var(--shadow-md);color:var(--color-primary)}.contact-link-icon{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:var(--radius-md);background:var(--color-primary-soft);color:var(--color-primary);flex-shrink:0}.modal{margin:auto;padding:0;border:none;border-radius:var(--radius-xl);background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-lg);max-width:32rem;width:calc(100% - 2rem);overflow:visible}.modal::backdrop{background:color-mix(in oklab,var(--color-bg) 80%,transparent);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}.modal-inner{position:relative;padding:var(--space-6) var(--space-6) var(--space-6)}.modal-close{position:absolute;top:var(--space-4);right:var(--space-4);color:var(--color-text-faint);display:grid;place-items:center;width:2rem;height:2rem;border-radius:var(--radius-full);transition:color var(--transition-fast),background var(--transition-fast)}.modal-close:hover{color:var(--color-text);background:var(--color-surface-offset)}.modal-title{font-family:var(--font-display);font-size:var(--text-xl);font-weight:800;margin-bottom:var(--space-3);padding-right:var(--space-6)}.modal-text{color:var(--color-text-muted);font-size:var(--text-sm);line-height:1.6;margin-bottom:var(--space-6)}.modal-actions{display:flex;gap:var(--space-3);justify-content:flex-end;flex-wrap:wrap}@media (max-width:600px){.modal-actions{flex-direction:column-reverse}.modal-actions .btn{width:100%}}.form{display:grid;gap:var(--space-5)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}.field{display:grid;gap:var(--space-2)}.field label{font-size:var(--text-sm);font-weight:600}.field input,.field textarea{padding:.85rem 1rem;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface);outline:0;width:100%}.field textarea{min-height:8rem;resize:vertical}.field input::placeholder,.field textarea::placeholder{color:var(--color-text-faint)}.field input:focus,.field textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px oklch(from var(--color-primary) l c h / .14)}.form-status{padding:var(--space-4);border-radius:var(--radius-lg);font-size:var(--text-sm);font-weight:500;display:none}.form-status.success{display:block;background:color-mix(in oklab,#437a22 12%,var(--color-surface));color:#437a22;border:1px solid color-mix(in oklab,#437a22 25%,var(--color-border))}.form-status.error{display:block;background:color-mix(in oklab,#a12c7b 10%,var(--color-surface));color:#a12c7b;border:1px solid color-mix(in oklab,#a12c7b 22%,var(--color-border))}.accent-block{position:relative;overflow:hidden;padding:clamp(var(--space-12),7vw,var(--space-20)) 1rem;background:var(--color-primary);text-align:center}.accent-block-content{position:relative;z-index:2}.accent-block h2{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:900;letter-spacing:-.025em;color:var(--color-text-inverse);margin-bottom:var(--space-4)}.accent-block p{max-width:52ch;margin-inline:auto;color:color-mix(in oklab,var(--color-text-inverse) 82%,transparent)}.accent-cube-wrap{position:absolute;z-index:1;left:-5rem;top:50%;transform:translateY(-50%);width:16rem;height:16rem;pointer-events:none;perspective:800px}.accent-cube-wrap--right{left:auto;right:-8rem;top:50%;transform:translateY(-50%)}.accent-cube{width:100%;height:100%;transform-style:preserve-3d;animation:accent-cube-spin 24s linear infinite;--tilt-x:20deg;--tilt-z:0deg}@keyframes accent-cube-spin{from{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(0)}to{transform:rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) rotateY(360deg)}}.accent-block .cube-face{position:absolute;inset:0;border:1.5px solid oklch(from var(--color-text-inverse) l c h / .25);border-radius:1px;background:oklch(from var(--color-text-inverse) l c h / .04)}.accent-cube-wrap .face-front{transform:translateZ(8rem)}.accent-cube-wrap .face-back{transform:translateZ(-8rem) rotateY(180deg)}.accent-cube-wrap .face-left{transform:translateX(-8rem) rotateY(-90deg)}.accent-cube-wrap .face-right{transform:translateX(8rem) rotateY(90deg)}.accent-cube-wrap .face-top{transform:translateY(-8rem) rotateX(90deg)}.accent-cube-wrap .face-bottom{transform:translateY(8rem) rotateX(-90deg)}.footer{padding-block:var(--space-8);border-top:1px solid var(--color-divider)}.footer-inner{width:min(100% - 2rem,var(--content-default));margin-inline:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-3)}.footer-copy,.footer-meta{font-size:var(--text-xs);color:var(--color-text-faint)}.footer-copy a,.footer-meta a{color:var(--color-text-muted);border-bottom:1px solid transparent}.footer-copy a:hover,.footer-meta a:hover{color:var(--color-primary);border-bottom-color:var(--color-primary)}@media (max-width:860px){.hero-inner{display:block;min-height:auto}.hero-portrait{float:right;width:33vw;aspect-ratio:3/4;border-radius:var(--radius-lg);margin-left:var(--space-6);margin-bottom:var(--space-4);margin-top:1rem;shape-outside:margin-box}.hero-copy{display:block}.hero-title{margin-top:var(--space-2);hyphens:auto}.hero-sub{margin-top:var(--space-3)}.hero-actions{margin-top:var(--space-6)}.hero-cube-wrap{right:-8rem;bottom:-10rem;width:20rem;height:20rem}.face-front{transform:translateZ(10rem)}.face-back{transform:translateZ(-10rem) rotateY(180deg)}.face-left{transform:translateX(-10rem) rotateY(-90deg)}.face-right{transform:translateX(10rem) rotateY(90deg)}.face-top{transform:translateY(-10rem) rotateX(90deg)}.face-bottom{transform:translateY(10rem) rotateX(-90deg)}.contact-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.filter-bar--secondary{padding-right:0}.filter-bar--secondary.is-collapsed{max-height:none;overflow:visible}.filter-bar--secondary.is-collapsed::after{display:none}.filter-expand-btn{display:none}}@media (max-width:600px){.header nav{gap:var(--space-3)}.section-title{font-size:var(--text-xl)}.footer-inner{flex-direction:column;align-items:flex-start}}
+  </style>
+
+  <!-- Plausible Analytics -->
+  <script defer data-domain="hutt.io" data-api="/pa/event" src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
+
+  <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-180x180.png">
+  <link rel="manifest" href="/assets/img/favicons/manifest.json">
+  <meta name="theme-color" content="#0a4445">
+</head>
+<body>
+
+<!-- Skip Link -->
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<!-- Header -->
+<header class="header" role="banner">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="Jannis Hutt – Startseite">hutt<span>.</span></a>
+    <nav aria-label="Hauptnavigation">
+      <a href="/#ueber-mich" class="nav-link">Über mich</a>
+      <a href="/#portfolio" class="nav-link">Portfolio</a>
+      <a href="/#kontakt" class="nav-link">Kontakt</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Zum hellen Modus wechseln">
+        <!-- Icon wird per JS gesetzt -->
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Main -->
+<main id="main">
+  
+
+<div class="legal-hero">
+  <div class="wrap wrap--narrow">
+    <a href="/" class="back-link" aria-label="Zurück zur Startseite">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Startseite
+    </a>
+    <h1 class="legal-title">Datenschutz&shy;erklärung</h1>
+    <p class="legal-lead">Diese Datenschutzerklärung klärt dich über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten innerhalb dieses Onlineangebotes auf.</p>
+  </div>
+</div>
+
+
+<main id="main-content" class="legal-body">
+  <div class="wrap wrap--narrow">
+
+    <section class="legal-section">
+      <h2>Verantwortlicher</h2>
+      <address>
+        Jannis Hutt<br>
+        &incare; Die Linke im Bundestag<br>
+        Platz der Republik 1<br>
+        11011 Berlin<br><br>
+        Kontakt: <a href="/#kontakt">siehe Kontaktformular auf der Startseite</a>
+      </address>
+    </section>
+
+    <section class="legal-section">
+      <h2>Art der verarbeiteten Daten</h2>
+      <ul>
+        <li>Bestandsdaten (z.B. Namen, Adressen)</li>
+        <li>Kontaktdaten (z.B. E-Mail, Telefonnummern)</li>
+        <li>Inhaltsdaten (z.B. Texteingaben, Fotografien, Videos)</li>
+        <li>Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten)</li>
+        <li>Meta-/Kommunikationsdaten (z.B. Geräte-Informationen, IP-Adressen)</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Kategorien betroffener Personen</h2>
+      <p>Besucherinnen und Nutzerinnen des Onlineangebotes (nachfolgend „Nutzerinnen"). Bei Nutzung von <a href="https://events.hutt.io" target="_blank" rel="noopener noreferrer">events.hutt.io</a>: Teilnehmerinnen von mir geplanter Veranstaltungen, die dazu dieses Ticketsystem nutzen.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Zweck der Verarbeitung</h2>
+      <ul>
+        <li>Zurverfügungstellung des Onlineangebotes, seiner Funktionen und Inhalte</li>
+        <li>Beantwortung von Kontaktanfragen und Kommunikation mit Nutzerinnen</li>
+        <li>Sicherheitsmaßnahmen</li>
+        <li>Reichweitenmessung / Marketing</li>
+      </ul>
+    </section>
+
+    <section class="legal-section">
+      <h2>Verwendete Begrifflichkeiten</h2>
+      <p><strong>Personenbezogene Daten</strong> sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.</p>
+      <p><strong>Verarbeitung</strong> ist jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang im Zusammenhang mit personenbezogenen Daten.</p>
+      <p><strong>Pseudonymisierung</strong> bezeichnet die Verarbeitung personenbezogener Daten in einer Weise, dass diese ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer spezifischen betroffenen Person zugeordnet werden können.</p>
+      <p><strong>Profiling</strong> ist jede Art der automatisierten Verarbeitung personenbezogener Daten, um bestimmte persönliche Aspekte einer natürlichen Person zu bewerten oder vorherzusagen.</p>
+      <p><strong>Verantwortlicher</strong> ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+      <p><strong>Auftragsverarbeiter</strong> ist eine natürliche oder juristische Person, die personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Maßgebliche Rechtsgrundlagen</h2>
+      <p>Nach Maßgabe des Art. 13 DSGVO teile ich die Rechtsgrundlagen meiner Datenverarbeitungen mit. Sofern die Rechtsgrundlage in dieser Datenschutzerklärung nicht genannt wird, gilt Folgendes: Die Rechtsgrundlage für die Einholung von Einwilligungen ist Art. 6 Abs. 1 lit. a und Art. 7 DSGVO, die Rechtsgrundlage für die Verarbeitung zur Erfüllung meiner Leistungen und Beantwortung von Anfragen ist Art. 6 Abs. 1 lit. b DSGVO, die Rechtsgrundlage für die Verarbeitung zur Erfüllung rechtlicher Verpflichtungen ist Art. 6 Abs. 1 lit. c DSGVO, und die Rechtsgrundlage für die Verarbeitung zur Wahrung berechtigter Interessen ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Sicherheitsmaßnahmen</h2>
+      <p>Ich treffe nach Maßgabe des Art. 32 DSGVO geeignete technische und organisatorische Maßnahmen, um ein dem Risiko angemessenes Schutzniveau zu gewährleisten. Zu den Maßnahmen gehören insbesondere die Sicherung der Vertraulichkeit, Integrität und Verfügbarkeit von Daten durch Kontrolle des physischen Zugangs zu den Daten sowie des Zugriffs, der Eingabe, Weitergabe und ihrer Trennung.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Zusammenarbeit mit Auftragsverarbeitern und Dritten</h2>
+      <p>Sofern ich im Rahmen meiner Verarbeitung Daten gegenüber anderen Personen und Unternehmen (Auftragsverarbeitern oder Dritten) offenbare oder ihnen Zugriff gewähre, geschieht dies nur auf Grundlage einer gesetzlichen Erlaubnis, einer Einwilligung, einer rechtlichen Verpflichtung oder auf Grundlage meiner berechtigten Interessen. Sofern ich Dritte mit der Verarbeitung von Daten auf Grundlage eines Auftragsverarbeitungsvertrages beauftrage, geschieht dies auf Grundlage des Art. 28 DSGVO.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Rechte der betroffenen Personen</h2>
+      <ul>
+        <li>Recht auf Auskunft über verarbeitete Daten (Art. 15 DSGVO)</li>
+        <li>Recht auf Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+        <li>Recht auf Löschung (Art. 17 DSGVO) oder Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+        <li>Recht auf Datenportabilität (Art. 20 DSGVO)</li>
+        <li>Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde (Art. 77 DSGVO)</li>
+      </ul>
+      <h3>Widerrufsrecht</h3>
+      <p>Du hast das Recht, erteilte Einwilligungen gem. Art. 7 Abs. 3 DSGVO mit Wirkung für die Zukunft zu widerrufen.</p>
+      <h3>Widerspruchsrecht</h3>
+      <p>Du kannst der künftigen Verarbeitung der dich betreffenden Daten nach Maßgabe des Art. 21 DSGVO jederzeit widersprechen. Der Widerspruch kann insbesondere gegen die Verarbeitung für Zwecke der Direktwerbung erfolgen.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Cookies</h2>
+      <p>Als Cookies werden kleine Dateien bezeichnet, die auf Rechnern der Nutzerinnen gespeichert werden. Temporäre Cookies werden gelöscht, nachdem eine Nutzerin das Onlineangebot verlässt und den Browser schließt. Permanente Cookies bleiben auch nach dem Schließen des Browsers gespeichert. Falls Nutzerinnen nicht möchten, dass Cookies auf ihrem Rechner gespeichert werden, werden sie gebeten, die entsprechende Option in den Systemeinstellungen ihres Browsers zu deaktivieren.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Löschung von Daten</h2>
+      <p>Die von mir verarbeiteten Daten werden nach Maßgabe der Art. 17 und 18 DSGVO gelöscht oder in ihrer Verarbeitung eingeschränkt. Sofern nicht ausdrücklich angegeben, werden gespeicherte Daten gelöscht, sobald sie für ihre Zweckbestimmung nicht mehr erforderlich sind und der Löschung keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+      <p>Nach gesetzlichen Vorgaben in Deutschland erfolgt die Aufbewahrung insbesondere für 10 Jahre gemäß §§ 147 Abs. 1 AO, 257 Abs. 1 Nr. 1 und 4 HGB sowie für 6 Jahre gemäß § 257 Abs. 1 Nr. 2 und 3 HGB.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Hosting und E-Mail-Versand</h2>
+      <p>Die in Anspruch genommenen Hosting-Leistungen dienen der Zurverfügungstellung von Infrastruktur- und Plattformdienstleistungen, Rechenkapazität, Speicherplatz, Datenbankdiensten, E-Mail-Versand, Sicherheitsleistungen und technischer Wartung.</p>
+      <p>Hierbei werden Bestandsdaten, Kontaktdaten, Inhaltsdaten, Vertragsdaten, Nutzungsdaten sowie Meta- und Kommunikationsdaten auf Grundlage berechtigter Interessen gem. Art. 6 Abs. 1 lit. f DSGVO i.V.m. Art. 28 DSGVO verarbeitet.</p>
+      <h3>Erhebung von Zugriffsdaten und Logfiles</h3>
+      <p>Es werden Daten über jeden Zugriff auf den Server erhoben (Serverlogfiles): Name der abgerufenen Webseite, Datei, Datum und Uhrzeit des Abrufs, übertragene Datenmenge, Browsertyp nebst Version, Betriebssystem, Referrer-URL, IP-Adresse und der anfragende Provider. Logfile-Informationen werden aus Sicherheitsgründen für die Dauer von maximal 7 Tagen gespeichert und danach gelöscht.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Plausible Analytics</h2>
+      <p>Mit „Plausible Analytics“ analysiere ich das Nutzungsverhalten meiner Website, um diese kontinuierlich inhaltlich und technisch zu optimieren. Plausible ist eine Marke der Plausible Insights OÜ, Västriku tn 2, 50403, Tartu, Estland, Registration number 14709274, nachfolgend nur „Plausible“ genannt. Plausible Analytics ist vollständig DSGVO-konform.</p>
+      <p>Plausible verfolgt einen besonders datenschutzfreundlichen Ansatz zur Analyse Ihres Besuches. Meine selbstgehostete Plausible-Instanz erfasst zu diesem Zweck unter anderem die folgenden Informationen: Datum und Uhrzeit ihres Besuches, Titel und URL der besuchten Seiten, eingehende Links, das Land, in dem Du dich befindest und den User Agent deines Browsers. Plausible verwendet und speichert keine Cookies auf deinem Endgerät.</p>
+      <p>Sämtliche personenbezogenen Daten (z.B. deine IP-Adresse) werden vollständig anonymisiert in Form eines sogenannten Hashes gespeichert. Ein Hash ist eine Verschlüsselung von Daten, die nicht umkehrbar ist, also nicht „entschlüsselt“ werden kann. Auf diese Weise kann ich Ihren Besuch analysieren, ohne personenbezogenen Daten in einer Form zu speichern, die für mich oder fremde Dritte lesbar wäre.</p>
+      <p>Weitere Informationen zum Datenschutz bei Plausible finden Sie unter <a href="https://plausible.io/data-policy" target="_blank" rel="noopener noreferrer">plausible.io/data-policy</a>.</p>
+      <p>Die Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>pretix (Ticketsystem)</h2>
+      <p>Für Nutzerinnen meines Ticketsystems unter <a href="https://events.hutt.io" target="_blank" rel="noopener noreferrer">events.hutt.io</a> gelten folgende zusätzliche Hinweise: Ich verwende Funktionen des Dienstes <a href="https://pretix.eu" target="_blank" rel="noopener noreferrer">pretix</a>, angeboten durch rami.io GmbH, Berthold-Mogel-Straße 1, 69126 Heidelberg, Deutschland. Wenn du ein Ticket buchst oder kaufst, nutzt pretix ein technisch notwendiges Cookie, um den Bestellablauf zu ermöglichen. pretix speichert keine IP-Adressen oder andere unnötige Metadaten über die Dauer deiner Anfrage hinaus. Weitere Infos: <a href="https://pretix.eu/about/de/privacy" target="_blank" rel="noopener noreferrer">pretix.eu/about/de/privacy</a>.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Übermittlungen in Drittländer</h2>
+      <p>Sofern ich Daten in einem Drittland (d.h. außerhalb der EU/EWR) verarbeite oder dies im Rahmen von Diensten Dritter geschieht, erfolgt dies nur zur Erfüllung vorvertraglicher Pflichten, auf Grundlage einer Einwilligung, aufgrund einer rechtlichen Verpflichtung oder auf Grundlage berechtigter Interessen. Eine Verarbeitung in Drittländern erfolgt nur beim Vorliegen der besonderen Voraussetzungen der Art. 44 ff. DSGVO.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Einbindung von YouTube-Videos</h2>
+      <p>Auf dieser Website sind Videos von YouTube eingebunden. Diese werden nach einem bestätigenden Klick auf den Play-Button geladen. Davor tauscht ihr Browser keine Daten mit dritten Servern aus.</p>
+      <p>YouTube ist ein Dienst von Google. Aufgrund nationaler Gesetze kann dieser Anbieter gezwungen sein, Daten auf Anforderung an Sicherheitsbehörden herauszugeben. Personenbezogene Daten wie die IP-Adresse werden erst an YouTube übertragen, wenn du dies vor dem Aufruf eines Videos bestätigst. Bitte nimm die <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a> zur Kenntnis.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Fragen zum Datenschutz</h2>
+      <p>Bei Fragen oder Anmerkungen zum Datenschutz schreib mir gerne über das <a href="/#kontakt">Kontaktformular auf der Startseite</a>. Wenn dir Sicherheit am Herzen liegt, kannst du mir auch eine verschlüsselte E-Mail senden. Meinen Public Key findest du <a href="/.pubkey.asc">hier</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+
+<style>
+  /* ── Legal Hero ── */
+  .legal-hero {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-divider);
+    padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .legal-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+
+  .legal-lead {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    line-height: 1.7;
+  }
+
+  /* ── Legal Body ── */
+  .legal-body {
+    padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  }
+
+  .legal-section {
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-divider);
+    margin-bottom: var(--space-10);
+  }
+
+  .legal-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .legal-section h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin-bottom: var(--space-5);
+    color: var(--color-text);
+  }
+
+  .legal-section h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-section p {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    max-width: 68ch;
+  }
+
+  .legal-section p + p { margin-top: var(--space-3); }
+
+  .legal-section ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .legal-section ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  .legal-section ul li::before {
+    content: "–";
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  .legal-section a {
+    color: var(--color-primary);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
+  }
+
+  .legal-section a:hover {
+    border-bottom-color: var(--color-primary);
+  }
+
+  .legal-section address {
+    font-style: normal;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 2;
+  }
+</style>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-copy">
+      © 2010 – 2026 Jannis Hutt &nbsp;·&nbsp;
+      <a href="/datenschutz/">Datenschutz</a> &nbsp;·&nbsp;
+      <a href="/impressum/">Impressum</a>
+    </p>
+    <p class="footer-meta">
+      Gebaut mit <a href="https://www.11ty.dev" target="_blank" rel="noopener">Eleventy</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+  !function(){const e=document.documentElement,t=document.querySelector("[data-theme-toggle]");function n(n){e.setAttribute("data-theme",n),t&&(t.innerHTML="dark"===n?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',t.setAttribute("aria-label","dark"===n?"Zum hellen Modus wechseln":"Zum dunklen Modus wechseln"))}var r;try{r=localStorage.getItem("theme")}catch(e){}n(r||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(e){try{if(localStorage.getItem("theme"))return}catch(e){}n(e.matches?"dark":"light")}),t&&t.addEventListener("click",function(){const t="dark"===e.getAttribute("data-theme")?"light":"dark";try{localStorage.setItem("theme",t)}catch(e){}n(t)})}(),function(){const e=document.getElementById("portfolio-grid");if(!e)return;const t=Array.from(e.querySelectorAll(".card")),n={art:"all",skills:"all"};document.querySelectorAll(".filter-bar[data-filter-group]").forEach(function(e){const r=e.dataset.filterGroup,o=e.querySelectorAll(".filter-chip");o.forEach(function(e){e.addEventListener("click",function(){o.forEach(e=>e.setAttribute("aria-pressed","false")),e.setAttribute("aria-pressed","true"),n[r]=e.dataset.filter,t.forEach(function(e){const t="all"===n.art||e.dataset.art===n.art,r=(e.dataset.skills||"").split(" ").filter(Boolean),o="all"===n.skills||r.includes(n.skills);t&&o?e.removeAttribute("hidden"):e.setAttribute("hidden","")})})})})}(),function(){const e=document.getElementById("filter-skills"),t=document.getElementById("skills-expand-btn");e&&t&&t.addEventListener("click",function(){const n=e.classList.toggle("is-collapsed");t.textContent=n?"Mehr ▾":"Weniger ▴",t.setAttribute("aria-expanded",String(!n))})}(),function(){if(!document.querySelector("lite-youtube"))return;const e=document.createElement("script");e.src="/assets/js/lite-yt-embed.js",e.defer=!0,document.head.appendChild(e);const t=document.createElement("link");t.rel="stylesheet",t.href="/assets/css/lite-yt-embed.css",document.head.appendChild(t)}(),function(){const e=document.getElementById("kontakt-form"),t=document.getElementById("form-status");e&&t&&e.addEventListener("submit",async function(n){if(n.preventDefault(),e.elements.website&&e.elements.website.value)return;const r=e.querySelector('[type="submit"]');r.disabled=!0,r.textContent="Wird gesendet …",t.className="form-status",t.textContent="";const o={name:e.elements.name.value.trim(),email:e.elements.email.value.trim(),betreff:e.elements.betreff.value.trim(),nachricht:e.elements.nachricht.value.trim()};if(!o.name||!o.email||!o.nachricht)return t.className="form-status error",t.textContent="Bitte fülle alle Pflichtfelder aus.",r.disabled=!1,void(r.textContent="Nachricht senden");try{const n=await fetch("/api/kontakt",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o)});if(!n.ok)throw new Error(n.statusText);t.className="form-status success",t.textContent="Danke! Deine Nachricht ist angekommen. Ich melde mich so schnell wie möglich.",e.reset()}catch(e){t.className="form-status error",t.textContent="Etwas ist schiefgelaufen. Schreib mir direkt an jannis@hutt.io."}finally{r.disabled=!1,r.textContent="Nachricht senden"}})}(),function(){const e=document.querySelectorAll('.nav-link[href^="/#"]'),t=document.querySelectorAll("section[id], div[id]"),n=new IntersectionObserver(function(t){t.forEach(function(t){t.isIntersecting&&e.forEach(function(e){const n=e.getAttribute("href").replace("/","");e.setAttribute("aria-current",n==="#"+t.target.id?"true":"false")})})},{rootMargin:"-40% 0px -55% 0px"});t.forEach(e=>n.observe(e))}(),function(){const e=document.getElementById("pgp-modal"),t=document.getElementById("pgp-modal-btn");if(!e||!t)return;t.addEventListener("click",()=>{e.showModal()});e.querySelectorAll(".modal-close, .modal-close-btn").forEach(t=>{t.addEventListener("click",()=>{e.close()})}),e.addEventListener("click",t=>{const n=e.getBoundingClientRect();(t.clientX<n.left||t.clientX>n.right||t.clientY<n.top||t.clientY>n.bottom)&&e.close()})}(),function(){const e=document.querySelector(".hero-portrait");if(!e)return;let t,n=0;e.style.cursor="pointer",e.addEventListener("click",function(){if(e.classList.remove("is-wobbling"),e.offsetWidth,e.classList.add("is-wobbling"),e.addEventListener("animationend",()=>{e.classList.remove("is-wobbling")},{once:!0}),n++,clearTimeout(t),n>=5){n=0;const t=e.querySelector("img"),r=t.src.includes("telephon.jpg");t.src=r?"/assets/img/portrait.jpg":"/assets/img/telephon.jpg",t.alt=r?"Jannis Hutt":"Jannis Hutt am Telefon"}else t=setTimeout(()=>{n=0},2e3)})}(),function(){const e=document.querySelector(".hero .cube");if(!e)return;const t=30*Math.random()-15,n=20*Math.random()-10,r=22+20*Math.random(),o=Math.random()>.5?"normal":"reverse";e.style.setProperty("--tilt-x",`${t}deg`),e.style.setProperty("--tilt-z",`${n}deg`),e.style.animationDuration=`${r}s`,e.style.animationDirection=o}(),function(){const e=document.querySelector(".accent-cube-wrap"),t=document.querySelector(".accent-cube");if(!e||!t)return;const n=80*Math.random();e.style.left=`calc(${n}% - 8rem)`;const r=20+60*Math.random();e.style.top=`${r}%`,e.style.transform="translateY(-50%)";const o=50*Math.random()-25,s=30*Math.random()-15,a=Math.random()>.5?1:-1,i=20+20*Math.random();e.style.setProperty("--tilt-x",`${o}deg`),e.style.setProperty("--tilt-z",`${s}deg`),t.style.animationDuration=`${i}s`,t.style.animationDirection=a>0?"normal":"reverse"}();
+</script>
+</body>
+</html>

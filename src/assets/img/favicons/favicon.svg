@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <style>
+    :root {
+      --favicon-bg: #f5f4f0;
+      --favicon-fg: #0a4445;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --favicon-bg: #101210;
+        --favicon-fg: #4ca6a8;
+      }
+    }
+
+    .bg {
+      fill: var(--favicon-bg);
+    }
+
+    .mark {
+      stroke: var(--favicon-fg);
+      stroke-width: 3.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="64" height="64" rx="14"/>
+
+  <!-- Würfel / H-Monogramm -->
+  <g class="mark">
+    <!-- Front face -->
+    <path d="M18 20V44"/>
+    <path d="M18 32H32"/>
+    <path d="M32 20V44"/>
+
+    <!-- Cube extension -->
+    <path d="M32 20L44 14"/>
+    <path d="M32 44L44 38"/>
+    <path d="M44 14V38"/>
+
+    <!-- Connecting edges -->
+    <path d="M18 20L30 14H44"/>
+    <path d="M18 44L30 38H44"/>
+  </g>
+</svg>

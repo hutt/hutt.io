@@ -1,0 +1,188 @@
+---
+layout: layouts/base.njk
+title: "Impressum"
+beschreibung: "Impressum für hutt.io – Jannis Hutt."
+permalink: /impressum/
+noindex: true
+---
+
+{# ── Impressum-Header ── #}
+<div class="legal-hero">
+  <div class="wrap wrap--narrow">
+    <a href="/" class="back-link" aria-label="Zurück zur Startseite">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Startseite
+    </a>
+    <h1 class="legal-title">Impressum</h1>
+    <p class="legal-lead"></p>
+  </div>
+</div>
+
+{# ── Inhalt ── #}
+<main id="main-content" class="legal-body">
+  <div class="wrap wrap--narrow">
+
+    <section class="legal-section">
+      <h2>Verantwortliche Person</h2>
+      <address>
+        Jannis Hutt<br>
+        &incare; Die Linke im Bundestag<br>
+        Platz der Republik 1<br>
+        11011 Berlin
+      </address>
+    </section>
+
+    <section class="legal-section">
+      <h2>Kontakt</h2>
+      <p><a href="/#kontakt">Siehe Kontaktformular auf der Startseite</a>.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>Verantwortlich für den Inhalt</h2>
+      <address>
+        Jannis Hutt<br>
+        &incare; Die Linke im Bundestag<br>
+        Platz der Republik 1<br>
+        11011 Berlin
+      </address>
+    </section>
+
+    <section class="legal-section">
+      <h2>Haftungsausschluss</h2>
+      <h3>Haftung für Inhalte</h3>
+      <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+      <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.</p>
+      <h3>Haftung für Links</h3>
+      <p>Dieses Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+      <p>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.</p>
+      <h3>Urheberrecht</h3>
+      <p>Die durch mich erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen meiner schriftlichen Zustimmung. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+    </section>
+
+  </div>
+</main>
+
+{# ── Legal Page CSS ── #}
+<style>
+  .legal-hero {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-divider);
+    padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .legal-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+
+  .legal-lead {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    line-height: 1.7;
+  }
+
+  .legal-body {
+    padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+  }
+
+  .legal-section {
+    padding-bottom: var(--space-10);
+    border-bottom: 1px solid var(--color-divider);
+    margin-bottom: var(--space-10);
+  }
+
+  .legal-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .legal-section h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin-bottom: var(--space-5);
+    color: var(--color-text);
+  }
+
+  .legal-section h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-section p {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    max-width: 68ch;
+  }
+
+  .legal-section p + p { margin-top: var(--space-3); }
+
+  .legal-section ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .legal-section ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    max-width: 68ch;
+  }
+
+  .legal-section ul li::before {
+    content: "–";
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  .legal-section a {
+    color: var(--color-primary);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
+  }
+
+  .legal-section a:hover { border-bottom-color: var(--color-primary); }
+
+  .legal-section address {
+    font-style: normal;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 2;
+  }
+</style>

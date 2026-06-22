@@ -43,18 +43,5 @@ Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0, proxy-
 Header set Pragma "no-cache"
 </FilesMatch>
 
-# Redirect /photos/ to index.html#photographie
-RedirectMatch "^/photos/?$" "https://hutt.io/#photographie"
-
-# Redirect /jobs/ to index.html#jobs
-RedirectMatch "^/jobs/?$" "https://hutt.io/#jobs"
-
-# Redirect /kampagnen/ to index.html#kampagnen
-RedirectMatch "^/kampagnen/?$" "https://hutt.io/#kampagnen"
-
-# Redirect /projekte/ to index.html#kampagnen
-RedirectMatch "^/projekte/?$" "https://hutt.io/#kampagnen"
-
-# Redirect /termine/ to termine.html
-RedirectMatch "^/termine/?$" "https://hutt.io/termine.html"
-
+# Redirect /portfolio/ to index.html#portfolio
+RedirectMatch "^/portfolio/?$" "https://hutt.io/#portfolio"
