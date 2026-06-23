@@ -359,7 +359,7 @@ select {
 
 .logo {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: 900;
   letter-spacing: -0.025em;
   line-height: 1;
@@ -1561,6 +1561,92 @@ lite-youtube.lyt-activated .yt-thumb {
   object-fit: contain;
   /* Bild nicht beschneiden, sondern einpassen */
   border-radius: var(--radius-md, 8px);
+}
+
+/* Lightbox Trigger Reset */
+.lightbox-trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
+.lightbox-trigger img,
+.lightbox-trigger picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lightbox-trigger img {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.lightbox-trigger:hover img {
+  transform: scale(1.03);
+}
+
+
+/* Lightbox Modal */
+.lightbox-modal {
+  padding: 0;
+  border: 0;
+  margin: auto;
+  width: max-content;
+  max-width: 100vw;
+  max-height: 100dvh;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.lightbox-modal::backdrop {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-inner {
+  position: relative;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+  max-width: 100vw;
+  max-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.lightbox-content picture {
+  display: block;
+  margin: 0;
+}
+
+.lightbox-content img {
+  display: block;
+  max-width: min(92vw, 1600px);
+  max-height: 90dvh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: transparent;
+  box-shadow: var(--shadow-lg);
 }
 
 /* ── Animationen ── */

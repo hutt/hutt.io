@@ -588,7 +588,7 @@
       // Browser anweisen, die große Variante des Bildes zu laden
       content.querySelectorAll('img, source').forEach(el => {
         if (el.hasAttribute('sizes')) {
-          el.setAttribute('sizes', '90vw');
+          el.setAttribute('sizes', '960px');
         }
       });
 
@@ -616,7 +616,6 @@
 })();
 
 /* Hero Netzwerk-Canvas */
-/* Network Canvas: reusable for hero + accent block */
 (function () {
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -634,7 +633,7 @@
       minParticles: 14,
       maxParticles: 96,
 
-      idleFluxPerMinute: 2,
+      idleFluxPerMinute: 6,
       idleFluxPerMinuteReduced: 0.8,
 
       opacityPoint: 0.58,
@@ -661,7 +660,7 @@
       wallPadding: 46,
       wallForce: 0.0029,
 
-      minConnectionsPerParticle: 1,
+      minConnectionsPerParticle: 2,
       maxConnectionsPerParticle: 5,
       maxConnectionDistance: 240,
 

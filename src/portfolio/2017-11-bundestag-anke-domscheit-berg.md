@@ -1,6 +1,5 @@
 ---
 title: Anke Domscheit-Berg, MdB
-rolle: "Studentischer Mitarbeiter"
 title_url: "https://mdb.anke.domscheit-berg.de"
 bild: bundestag.png
 zeitraum: "November 2017 – Juni 2020"
@@ -14,4 +13,4 @@ skills:
   - Web-Entwicklung
 ---
 
-Netzpolitische Sprecherin der [Fraktion Die Linke im Bundestag](https://www.linksfraktion.de).
+**Studentischer Mitarbeiter** bei der netzpolitischen Sprecherin der [Fraktion Die Linke im Bundestag](https://www.linksfraktion.de).

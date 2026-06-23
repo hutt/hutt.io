@@ -1,6 +1,5 @@
 ---
 title: Felix Reda, MdEP
-rolle: "Communications Trainee"
 title_url: "https://felixreda.eu"
 zeitraum: "Juli 2016 – September 2016"
 ort: "Brüssel, Berlin, Straßburg"

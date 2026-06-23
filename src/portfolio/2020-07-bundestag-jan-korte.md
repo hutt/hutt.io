@@ -1,6 +1,5 @@
 ---
 title: Jan Korte, MdB
-rolle: "Mitarbeiter für Öffentlichkeitsarbeit"
 title_url: "https://jankorte.de"
 bild: bundestag.png
 zeitraum: "Juli 2020 – März 2025"
@@ -17,4 +16,4 @@ skills:
   - Recherche
 ---
 
-Erster Parlamentarischer Geschäftsführer der [Fraktion Die Linke im Bundestag](https://www.linksfraktion.de).
+**Mitarbeiter für Öffentlichkeitsarbeit** bei Jan Korte, MdB; Erster Parlamentarischer Geschäftsführer der [Fraktion Die Linke im Bundestag](https://www.linksfraktion.de).
