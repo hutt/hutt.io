@@ -185,7 +185,7 @@ module.exports = function (eleventyConfig) {
           concurrency: 2,
           // ── Puppeteer: System-Chromium im Docker-Container nutzen ────
           puppeteerOptions: {
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
           },
         });
