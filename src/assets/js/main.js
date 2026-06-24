@@ -53,8 +53,8 @@
       minParticles: 30,
       maxParticles: 120,
 
-      idleFluxPerMinute: 6,
-      idleFluxPerMinuteReduced: 0.8,
+      idleFluxPerMinute: 18,
+      idleFluxPerMinuteReduced: 2.4,
 
       opacityPoint: 0.58,
       opacityLine: 0.26,
@@ -80,8 +80,8 @@
       wallPadding: 46,
       wallForce: 0.0029,
 
-      minConnectionsPerParticle: 2,
-      maxConnectionsPerParticle: 5,
+      minConnectionsPerParticle: 1,
+      maxConnectionsPerParticle: 3,
       maxConnectionDistance: 340,
 
       spawnDurationMin: 1200,
@@ -103,8 +103,25 @@
 
       dragImpulseScale: 0.18,
 
-      idleMinDelayMs: 12000,
-      idleMaxDelayMs: 38000,
+      idleMinDelayMs: 2500,
+      idleMaxDelayMs: 9000,
+
+      relinkMinDelayMs: 2600,
+      relinkMaxDelayMs: 7600,
+      relinkChance: 0.78,
+      unlinkChance: 0.28,
+      minSpringAgeBeforeUnlinkMs: 9000,
+
+      linkBuildDurationMin: 420,
+      linkBuildDurationMax: 1100,
+
+      startupDurationMs: 2800,
+      startupDampingBoost: 0.02,
+      startupVelocityScale: 0.16,
+      startupSpringRamp: true,
+      prewarmSteps: 72,
+      prewarmDt: 0.9,
+      maxFrameDt: 1.1,
 
       interactive: true,
       deriveForDarkSurface: false
@@ -127,6 +144,7 @@
     let pendingRemovals = 0;
     let dragState = null;
     let theme = null;
+    let simStartedAt = 0;
 
     const random = (min, max) => Math.random() * (max - min) + min;
     const randomInt = (min, max) => Math.floor(random(min, max + 1));
@@ -244,6 +262,11 @@
       return isReducedMotion() ? CONFIG.idleFluxPerMinuteReduced : CONFIG.idleFluxPerMinute;
     }
 
+    function getStartupFactor(now) {
+      const t = clamp((now - simStartedAt) / CONFIG.startupDurationMs, 0, 1);
+      return easeInOut(t);
+    }
+
     function resizeCanvas() {
       const rect = section.getBoundingClientRect();
       width = Math.max(1, rect.width);
@@ -278,6 +301,10 @@
       return count;
     }
 
+    function getSpringsForParticle(id) {
+      return springs.filter(s => s.a === id || s.b === id);
+    }
+
     function hasSpring(aId, bId) {
       for (const spring of springs) {
         if (
@@ -296,14 +323,15 @@
         id: nextParticleId++,
         x,
         y,
-        vx: Math.cos(angle) * random(0.01, 0.06),
-        vy: Math.sin(angle) * random(0.01, 0.06),
+        vx: Math.cos(angle) * random(0.01, 0.06) * CONFIG.startupVelocityScale,
+        vy: Math.sin(angle) * random(0.01, 0.06) * CONFIG.startupVelocityScale,
         ax: 0,
         ay: 0,
         heading: angle,
         targetHeading: angle,
         headingLerp: random(0.003, 0.01),
         headingChangeAt: now + random(CONFIG.headingChangeMinMs, CONFIG.headingChangeMaxMs),
+        nextRelinkAt: now + random(CONFIG.relinkMinDelayMs, CONFIG.relinkMaxDelayMs),
         baseRadius: random(CONFIG.pointRadiusMin, CONFIG.pointRadiusMax),
         mass: random(0.86, 1.3),
         maxLinks: randomInt(CONFIG.minConnectionsPerParticle, CONFIG.maxConnectionsPerParticle),
@@ -333,7 +361,7 @@
       return clamp(getScale(p, now), 0, 1);
     }
 
-    function addSpring(a, b) {
+    function addSpring(a, b, options = {}) {
       if (!a || !b || a.id === b.id) return false;
       if (hasSpring(a.id, b.id)) return false;
       if (springCountForParticle(a.id) >= a.maxLinks) return false;
@@ -342,14 +370,30 @@
       const dist = distance(a, b);
       if (dist > CONFIG.maxConnectionDistance) return false;
 
+      const createdAt = options.createdAt ?? nowMs();
+
       springs.push({
         a: a.id,
         b: b.id,
         restLength: dist,
         minLength: dist * CONFIG.elasticityMin,
-        maxLength: dist * CONFIG.elasticityMax
+        maxLength: dist * CONFIG.elasticityMax,
+        createdAt,
+        buildDuration: random(CONFIG.linkBuildDurationMin, CONFIG.linkBuildDurationMax),
+        buildFromA: Math.random() > 0.5 ? 1 : 0,
+        markedForRemoval: false,
+        removeStart: 0,
+        removeDuration: 0
       });
 
+      return true;
+    }
+
+    function markSpringForRemoval(spring, now = nowMs()) {
+      if (!spring || spring.markedForRemoval) return false;
+      spring.markedForRemoval = true;
+      spring.removeStart = now;
+      spring.removeDuration = random(400, 1000);
       return true;
     }
 
@@ -403,6 +447,50 @@
       }
     }
 
+    function tryRelinkParticle(p, spatial, now) {
+      if (p.status !== 'alive') return;
+      if (p.dragLocked) return;
+      if (now < p.nextRelinkAt) return;
+
+      p.nextRelinkAt = now + random(CONFIG.relinkMinDelayMs, CONFIG.relinkMaxDelayMs);
+
+      const currentSprings = getSpringsForParticle(p.id);
+      const canAdd = currentSprings.length < p.maxLinks;
+
+      if (canAdd && Math.random() < CONFIG.relinkChance) {
+        const nearby = getNearbyParticles(p, spatial)
+          .filter(other => other.id !== p.id)
+          .filter(other => other.status !== 'despawning')
+          .filter(other => !other.dragLocked)
+          .filter(other => !hasSpring(p.id, other.id))
+          .map(other => ({ other, d: distance(other, p) }))
+          .filter(entry => entry.d <= CONFIG.maxConnectionDistance)
+          .filter(entry => springCountForParticle(entry.other.id) < entry.other.maxLinks)
+          .sort((a, b) => a.d - b.d);
+
+        if (nearby.length) {
+          const pick = nearby[randomInt(0, Math.min(nearby.length - 1, 2))];
+          addSpring(p, pick.other, { createdAt: now });
+        }
+      }
+
+      const refreshedSprings = getSpringsForParticle(p.id);
+      if (
+        refreshedSprings.length > 1 &&
+        Math.random() < CONFIG.unlinkChance
+      ) {
+        const removable = refreshedSprings.filter(s => {
+          if (s.markedForRemoval) return false;
+          return (now - s.createdAt) >= CONFIG.minSpringAgeBeforeUnlinkMs;
+        });
+
+        if (removable.length) {
+          const spring = removable[randomInt(0, removable.length - 1)];
+          markSpringForRemoval(spring, now);
+        }
+      }
+    }
+
     function seedSystem() {
       particles = [];
       springs = [];
@@ -417,6 +505,20 @@
 
       for (const particle of particles) {
         connectNewParticle(particle);
+      }
+    }
+
+    function prewarmSystem() {
+      const warmNow = nowMs();
+
+      for (let i = 0; i < CONFIG.prewarmSteps; i++) {
+        rebuildParticleMap();
+        updateParticles(warmNow + i * 16.666, CONFIG.prewarmDt);
+      }
+
+      for (const p of particles) {
+        p.vx *= 0.35;
+        p.vy *= 0.35;
       }
     }
 
@@ -448,6 +550,11 @@
       particle.status = 'despawning';
       particle.lifeStart = nowMs();
       particle.lifeDuration = random(CONFIG.despawnDurationMin, CONFIG.despawnDurationMax);
+
+      for (const spring of getSpringsForParticle(particle.id)) {
+        markSpringForRemoval(spring, particle.lifeStart);
+      }
+
       return true;
     }
 
@@ -466,10 +573,18 @@
         }
       }
 
-      if (!removedIds.size) return;
+      if (removedIds.size) {
+        particles = particles.filter(p => !removedIds.has(p.id));
+      }
 
-      particles = particles.filter(p => !removedIds.has(p.id));
-      springs = springs.filter(s => !removedIds.has(s.a) && !removedIds.has(s.b));
+      springs = springs.filter(s => {
+        if (removedIds.has(s.a) || removedIds.has(s.b)) return false;
+        if (!s.markedForRemoval) return true;
+
+        const t = clamp((now - s.removeStart) / s.removeDuration, 0, 1);
+        return t < 1;
+      });
+
       rebuildParticleMap();
     }
 
@@ -483,16 +598,17 @@
       p.headingChangeAt = now + random(CONFIG.headingChangeMinMs, CONFIG.headingChangeMaxMs);
     }
 
-    function applySelfSteering(p) {
+    function applySelfSteering(p, startupFactor) {
       if (p.dragLocked) return;
 
       p.heading += shortestAngleDelta(p.heading, p.targetHeading) * p.headingLerp;
 
       const desiredVX = Math.cos(p.heading) * currentSpeed();
       const desiredVY = Math.sin(p.heading) * currentSpeed();
+      const steering = currentSteering() * startupFactor;
 
-      p.ax += (desiredVX - p.vx) * currentSteering();
-      p.ay += (desiredVY - p.vy) * currentSteering();
+      p.ax += (desiredVX - p.vx) * steering;
+      p.ay += (desiredVY - p.vy) * steering;
     }
 
     function applyWallRepulsion(p) {
@@ -509,7 +625,11 @@
       }
     }
 
-    function applySprings() {
+    function applySprings(startupFactor) {
+      const springStrength = CONFIG.startupSpringRamp
+        ? CONFIG.springK * startupFactor
+        : CONFIG.springK;
+
       for (const spring of springs) {
         const a = particleById.get(spring.a);
         const b = particleById.get(spring.b);
@@ -527,7 +647,7 @@
         const relVY = b.vy - a.vy;
         const relDot = relVX * nx + relVY * ny;
 
-        const force = CONFIG.springK * stretch + CONFIG.springDamping * relDot;
+        const force = springStrength * stretch + CONFIG.springDamping * relDot;
         const fx = force * nx;
         const fy = force * ny;
 
@@ -544,15 +664,23 @@
     }
 
     function updateParticles(now, dt) {
+      const spatial = buildSpatialGrid();
+      const startupFactor = getStartupFactor(now);
+      const damping = Math.min(
+        currentDamping() + (1 - startupFactor) * CONFIG.startupDampingBoost,
+        0.9995
+      );
+
       for (const p of particles) {
         p.ax = 0;
         p.ay = 0;
         scheduleHeadingShift(p, now);
-        applySelfSteering(p);
+        applySelfSteering(p, startupFactor);
         applyWallRepulsion(p);
+        tryRelinkParticle(p, spatial, now);
       }
 
-      applySprings();
+      applySprings(startupFactor);
 
       for (const p of particles) {
         if (p.dragLocked && dragState?.particleId === p.id) {
@@ -565,8 +693,8 @@
 
         p.vx += p.ax * dt;
         p.vy += p.ay * dt;
-        p.vx *= currentDamping();
-        p.vy *= currentDamping();
+        p.vx *= damping;
+        p.vy *= damping;
         p.x += p.vx * dt * 60;
         p.y += p.vy * dt * 60;
         p.x = clamp(p.x, 0, width);
@@ -587,13 +715,28 @@
         const opacity = Math.min(getOpacity(a, now), getOpacity(b, now));
         const dist = distance(a, b);
         const alphaByDistance = clamp(1 - dist / CONFIG.maxConnectionDistance, 0.04, 1);
-        const alpha = CONFIG.opacityLine * alphaByDistance * opacity;
 
+        let buildT = clamp((now - spring.createdAt) / spring.buildDuration, 0, 1);
+        buildT = easeInOut(buildT);
+
+        let removalFactor = 1;
+        if (spring.markedForRemoval) {
+          const rt = clamp((now - spring.removeStart) / spring.removeDuration, 0, 1);
+          removalFactor = 1 - easeInOut(rt);
+        }
+
+        const alpha = CONFIG.opacityLine * alphaByDistance * opacity * removalFactor;
         if (alpha <= 0.003) continue;
 
+        const from = spring.buildFromA ? a : b;
+        const to = spring.buildFromA ? b : a;
+
+        const endX = from.x + (to.x - from.x) * buildT;
+        const endY = from.y + (to.y - from.y) * buildT;
+
         ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(endX, endY);
         ctx.lineWidth = CONFIG.lineWidth;
         ctx.strokeStyle = rgba(theme.line, alpha);
         ctx.stroke();
@@ -632,7 +775,7 @@
 
         const shouldAdd =
           active < target ||
-          (Math.random() > 0.5 && active < Math.min(CONFIG.maxParticles, target + driftBudget));
+          (Math.random() > 0.42 && active < Math.min(CONFIG.maxParticles, target + driftBudget));
 
         if (shouldAdd) {
           spawnParticle();
@@ -830,7 +973,7 @@
 
     function animate(time) {
       if (!lastTime) lastTime = time;
-      const dt = Math.min((time - lastTime) / 16.666, 1.6);
+      const dt = Math.min((time - lastTime) / 16.666, CONFIG.maxFrameDt);
       lastTime = time;
 
       rebuildParticleMap();
@@ -843,6 +986,9 @@
     refreshTheme();
     resizeCanvas();
     seedSystem();
+    simStartedAt = nowMs();
+    prewarmSystem();
+
     resizeObserver.observe(section);
     themeObserver.observe(document.documentElement, {
       attributes: true,
@@ -864,13 +1010,32 @@
   initNetworkCanvas('.hero', '.hero-network', {
     interactive: true,
     deriveForDarkSurface: false,
-    densityArea: 40000,
-    densityAreaReduced: 24000,
+    densityArea: 30000,
+    densityAreaReduced: 40000,
     opacityPoint: 0.58,
     opacityLine: 0.26,
     opacityGlow: 0.12,
     maxConnectionDistance: 240,
-    lineWidth: 0.85
+    lineWidth: 0.95,
+    steeringForce: 0.0018,
+    idleFluxPerMinute: 18,
+    idleFluxPerMinuteReduced: 2.4,
+    idleMinDelayMs: 2500,
+    idleMaxDelayMs: 9000,
+    relinkMinDelayMs: 2400,
+    relinkMaxDelayMs: 6200,
+    relinkChance: 0.8,
+    unlinkChance: 0.28,
+    linkBuildDurationMin: 420,
+    linkBuildDurationMax: 1100,
+    startupDurationMs: 2800,
+    startupDampingBoost: 0.08,
+    startupVelocityScale: 0.1,
+    speed: 0.018,
+    startupSpringRamp: true,
+    prewarmSteps: 1024,
+    prewarmDt: 0.9,
+    maxFrameDt: 1.1
   });
 
   initNetworkCanvas('.accent-block', '.accent-network', {
@@ -890,8 +1055,23 @@
     steeringForceReduced: 0.0008,
     maxConnectionDistance: 180,
     wallPadding: 32,
-    idleFluxPerMinute: 1.2,
-    idleFluxPerMinuteReduced: 0.5
+    idleFluxPerMinute: 2.4,
+    idleFluxPerMinuteReduced: 0.8,
+    idleMinDelayMs: 5000,
+    idleMaxDelayMs: 14000,
+    relinkMinDelayMs: 4200,
+    relinkMaxDelayMs: 9800,
+    relinkChance: 0.62,
+    unlinkChance: 0.18,
+    linkBuildDurationMin: 520,
+    linkBuildDurationMax: 1300,
+    startupDurationMs: 2400,
+    startupDampingBoost: 0.024,
+    startupVelocityScale: 0.12,
+    startupSpringRamp: true,
+    prewarmSteps: 64,
+    prewarmDt: 0.85,
+    maxFrameDt: 1.0
   });
 })();
 
