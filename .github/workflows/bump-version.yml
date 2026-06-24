@@ -44,15 +44,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Version erhöhen ohne Tag
+      - name: Version erhöhen und Tag anlegen
         run: |
-          npm version ${{ steps.bump.outputs.type }} --no-git-tag-version
+          npm version ${{ steps.bump.outputs.type }} -m "chore: bump version to %s [skip ci]"
 
-      - name: Änderungen committen
+      - name: Commit und Tag pushen
         run: |
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to $(node -p "require('./package.json').version") [skip ci]"
-
-      - name: Änderungen pushen
-        run: |
-          git push origin main
+          git push origin main --follow-tags
