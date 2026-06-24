@@ -143,7 +143,6 @@ module.exports = function (eleventyConfig) {
   });
 
   // ── Critical CSS (nach dem Build) ────────────────────────────
-  // ── Critical CSS (nach dem Build) ────────────────────────────
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode === "serve") {
       logger.info("Critical CSS übersprungen (serve-Modus) — nur bei npm run build aktiv");
@@ -184,6 +183,11 @@ module.exports = function (eleventyConfig) {
           },
           rebase: false,
           concurrency: 2,
+          // ── Puppeteer: System-Chromium im Docker-Container nutzen ────
+          puppeteerOptions: {
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          },
         });
 
         // Temporäre CSS-Datei wieder aufräumen
