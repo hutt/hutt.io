@@ -60,7 +60,7 @@
       opacityLine: 0.26,
       opacityGlow: 0.12,
 
-      pointRadiusMin: 1.3,
+      pointRadiusMin: 1.5,
       pointRadiusMax: 3.0,
       pointDragRadius: 16,
       lineWidth: 0.85,
@@ -82,7 +82,7 @@
 
       minConnectionsPerParticle: 1,
       maxConnectionsPerParticle: 3,
-      maxConnectionDistance: 400,
+      maxConnectionDistance: 500,
 
       spawnDurationMin: 1200,
       spawnDurationMax: 2800,
@@ -1010,7 +1010,7 @@
   initNetworkCanvas('.hero', '.hero-network', {
     interactive: true,
     deriveForDarkSurface: false,
-    densityArea: 25000,
+    densityArea: 30000,
     densityAreaReduced: 40000,
     opacityPoint: 0.58,
     opacityLine: 0.26,
@@ -1050,7 +1050,7 @@
     lineWidth: 0.7,
     steeringForce: 0.0012,
     steeringForceReduced: 0.0008,
-    maxConnectionDistance: 180,
+    maxConnectionDistance: 250,
     wallPadding: 32,
     idleFluxPerMinute: 2.4,
     idleFluxPerMinuteReduced: 0.8,
