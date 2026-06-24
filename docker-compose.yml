@@ -35,7 +35,6 @@ services:
       - .env
     labels:
       - "traefik.enable=true"
-      # Routing NUR für /api/ Pfade
       - "traefik.http.routers.hutt-io-api.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && PathPrefix(`/api`)"
       - "traefik.http.routers.hutt-io-api.entrypoints=websecure"
       - "traefik.http.routers.hutt-io-api.tls=true"
@@ -56,10 +55,7 @@ services:
     environment:
       - WEBHOOK_SECRET=${WEBHOOK_SECRET}
     volumes:
-      # Zugriff auf das Repo-Verzeichnis
       - /opt/containers/hutt.io:/workspace
-      # Docker-Socket, damit der Listener `docker compose` ausführen kann
-      - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hutt-io-webhook.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && Path(`/webhook`)"
