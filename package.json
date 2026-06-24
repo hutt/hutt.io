@@ -1,6 +1,6 @@
 {
   "name": "hutt.io",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "description": "Portfolio-Website",
   "main": "index.js",
   "scripts": {
