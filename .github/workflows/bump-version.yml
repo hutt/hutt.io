@@ -61,7 +61,7 @@ jobs:
         run: |
           git add package.json
           if [ -f package-lock.json ]; then git add package-lock.json; fi
-          git commit -m "chore: bump version to v${{ steps.version.outputs.value }} [skip ci]"
+          git commit -m "chore: bump version to v${{ steps.version.outputs.value }}"
 
       - name: Tag anlegen
         run: |
