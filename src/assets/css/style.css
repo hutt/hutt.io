@@ -108,11 +108,11 @@
   --color-text-faint: #5a584f;
   --color-text-inverse: #101210;
 
-  --color-primary: #4ca6a8;
-  --color-primary-hover: #66b8ba;
-  --color-primary-active: #2d8486;
-  --color-primary-soft: #172f30;
-  --color-primary-edge: color-mix(in oklab, #4ca6a8 28%, transparent);
+  --color-primary: #4fb19f;
+  --color-primary-hover: #69c3b2;
+  --color-primary-active: #378f7f;
+  --color-primary-soft: #16302b;
+  --color-primary-edge: color-mix(in oklab, #4fb19f 28%, transparent);
 
   --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.28);
   --shadow-md: 0 6px 20px oklch(0 0 0 / 0.36);
@@ -1665,8 +1665,8 @@ lite-youtube.lyt-activated .yt-thumb {
 .hero-title,
 .hero-sub,
 .hero-actions,
-main > .section,
-main > .accent-block {
+main>.section,
+main>.accent-block {
   opacity: 0;
   animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -1687,8 +1687,8 @@ main > .accent-block {
   animation-delay: 0.42s;
 }
 
-main > .section,
-main > .accent-block {
+main>.section,
+main>.accent-block {
   animation-delay: 0.55s;
 }
 
