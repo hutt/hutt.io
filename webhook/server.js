@@ -26,7 +26,7 @@ app.post('/webhook', (req, res) => {
     return res.status(401).send('Invalid signature');
   }
 
-  // 2. Nur auf Create-Events reagieren
+  // 2. Nur auf neu erstellte Tags reagieren
   const event = req.headers['x-github-event'];
   if (event !== 'create') {
     console.log(`[${new Date().toISOString()}] Event "${event}" ignoriert.`);
@@ -34,10 +34,15 @@ app.post('/webhook', (req, res) => {
   }
 
   const payload = JSON.parse(req.body);
+  const ref_type = payload.ref_type;
+  if (ref_type !== 'tag') {
+    console.log(`[${new Date().toISOString()}] Create event "${ref_type}" ignoriert.`);
+    return res.status(200).send('Ignored');
+  }
 
   // 3. Nur auf Pushes auf den master-Branch reagieren
-  if (payload.ref !== 'refs/heads/master') {
-    console.log(`[${new Date().toISOString()}] Push auf "${payload.ref}" ignoriert (nicht master).`);
+  if (payload.master_branch !== 'master') {
+    console.log(`[${new Date().toISOString()}] Push auf "${payload.master_branch}" ignoriert (nicht master).`);
     return res.status(200).send('Not master');
   }
 
