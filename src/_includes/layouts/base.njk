@@ -1,93 +1,113 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Theme: blocking, ganz früh — verhindert FOUC -->
-  <script>
-    (function(){
-      var stored;
-      try { stored = localStorage.getItem('theme'); } catch(_){}
-      var theme = stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
+    <!-- Theme: blocking, ganz früh — verhindert FOUC -->
+    <script>
+      (function () {
+        var stored;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch (_) {}
+        var theme = stored || (
+          matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light');
+        document
+          .documentElement
+          .setAttribute('data-theme', theme);
+      })();
+    </script>
 
-  <!-- Preload: Fonts und CSS früh ankündigen -->
-  <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/css/style.min.css?v={{ pkg.version }}" as="style"
+    <!-- Preload: Fonts und CSS früh ankündigen -->
+    <link rel="preload" href="/assets/fonts/CabinetGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/css/style.min.css?v={{ pkg.version }}" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/assets/css/style.min.css?v={{ pkg.version }}"></noscript>
+    <noscript><link rel="stylesheet" href="/assets/css/style.min.css?v={{ pkg.version }}"></noscript>
 
-  <!-- Analytics: defer, blockiert nichts -->
-  <script defer data-domain="{{ site.plausible_domain }}"
+    <!-- Analytics: defer, blockiert nichts -->
+    <script defer data-domain="{{ site.plausible_domain }}"
           data-api="/pa/event"
           src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
 
-  <!-- Meta, Title, SEO -->
-  {% if noindex %}
-  <meta name="robots" content="noindex, nofollow">
-  {% endif %}
-  <title>{% if title %}{{ title }} – {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
-  <meta name="author" content="{{ site.autor }}">
-  <meta property="og:title" content="{% if title %}{{ title }} – {% endif %}{{ site.title }}">
-  <meta property="og:description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}">
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <!-- Meta, Title, SEO -->
+    {% if noindex %}
+      <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+    <title>
+      {% if title %}{{ title }} – {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
+    <meta name="author" content="{{ site.autor }}">
+    <meta property="og:title" content="{% if title %}{{ title }} – {% endif %}{{ site.title }}">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hutt.io{{ page.url }}">
+    <meta property="og:image" content="https://hutt.io/assets/img/og/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Porträt und Website-Vorschau von Jannis Hutt">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ site.title }}">
+    <meta name="twitter:description" content="{{ beschreibung if beschreibung else site.beschreibung }}">
+    <meta name="twitter:image" content="https://hutt.io/assets/img/og/og-image.jpg">
+    <meta name="twitter:image:alt" content="Porträt und Website-Vorschau von Jannis Hutt">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
-  <!-- Icons und Manifest: niedrigste Priorität, ganz ans Ende -->
-  <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
-  <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-180x180.png">
-  <link rel="manifest" href="/assets/img/favicons/manifest.json">
-  <meta name="theme-color" content="#0a4445">
-</head>
-<body>
+    <!-- Icons und Manifest: niedrigste Priorität, ganz ans Ende -->
+    <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-180x180.png">
+    <link rel="manifest" href="/assets/img/favicons/manifest.json">
+    <meta name="theme-color" content="#0a4445">
+  </head>
+  <body>
 
-<!-- Skip Link -->
-<a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <!-- Skip Link -->
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-<!-- Header -->
-<header class="header" role="banner">
-  <div class="header-inner">
-    <a href="/" class="logo" aria-label="{{ site.title }} – Startseite">hutt<span>.</span></a>
-    <nav aria-label="Hauptnavigation">
-      <a href="/#ueber-mich" class="nav-link">Über mich</a>
-      <a href="/#portfolio" class="nav-link">Portfolio</a>
-      <a href="/#kontakt" class="nav-link">Kontakt</a>
-      <button class="theme-toggle" data-theme-toggle aria-label="Zum hellen Modus wechseln">
-        <!-- Icon wird per JS gesetzt -->
-      </button>
-    </nav>
-  </div>
-</header>
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <a href="/" class="logo" aria-label="{{ site.title }} – Startseite">hutt<span>.</span></a>
+        <nav aria-label="Hauptnavigation">
+          <a href="/#ueber-mich" class="nav-link">Über mich</a>
+          <a href="/#portfolio" class="nav-link">Portfolio</a>
+          <a href="/#kontakt" class="nav-link">Kontakt</a>
+          <button class="theme-toggle" data-theme-toggle aria-label="Zum hellen Modus wechseln">
+            <!-- Icon wird per JS gesetzt -->
+          </button>
+        </nav>
+      </div>
+    </header>
 
-<!-- Main -->
-<main id="main">
-  {{ content | safe }}
-</main>
+    <!-- Main -->
+    <main id="main">
+      {{ content | safe }}
+    </main>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-inner">
-    <p class="footer-copy">
-      © 2010 – {% jahr %} {{ site.autor }} &nbsp;·&nbsp;
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <p class="footer-copy">
+      © 2010 – {% jahr %}
+          {{ site.autor }} &nbsp;·&nbsp;
       <a href="/datenschutz/">Datenschutz</a> &nbsp;·&nbsp;
       <a href="/impressum/">Impressum</a>
-    </p>
-    <p class="footer-meta">
+        </p>
+        <p class="footer-meta">
       Gebaut mit <a href="https://www.11ty.dev" target="_blank" rel="noopener">11ty</a>. Quellcode dieser Website <a href="https://github.com/hutt/hutt.io" target="_blank" rel="noopener">bei GitHub ansehen</a>.
     </p>
-  </div>
-</footer>
+      </div>
+    </footer>
 
-<script>
-  {%- set js %}{% include "../../assets/js/main.js" %}{%- endset %}
-  {{ js | jsmin | safe }}
-</script>
-</body>
+    <script>
+      {%- set js %}{% include "../../assets/js/main.js" %}{%- endset %}
+      {{ js | jsmin | safe }}
+    </script>
+  </body>
 </html>

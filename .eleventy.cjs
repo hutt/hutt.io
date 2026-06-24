@@ -43,6 +43,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/css/lite-yt-embed.css");
   eleventyConfig.addPassthroughCopy("src/assets/img/favicons");
+  eleventyConfig.addPassthroughCopy("src/assets/img/og");
   eleventyConfig.addPassthroughCopy("src/pubkey.asc");
   eleventyConfig.addPassthroughCopy("src/me/jannis_hutt.vcf");
 
