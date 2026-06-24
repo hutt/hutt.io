@@ -94,6 +94,10 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addShortcode("jahr", () => String(new Date().getFullYear()));
 
+  eleventyConfig.addFilter("dateISO", function (date) {
+    return new Date(date).toISOString();
+  });
+
   // ── Build: CSS + JS minifizieren ─────────────────────────────
   eleventyConfig.on("eleventy.before", async () => {
     // CSS: PostCSS → Autoprefixer → cssnano (ersetzt clean-css)
