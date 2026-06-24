@@ -1,0 +1,51 @@
+services:
+  frontend:
+    container_name: hutt-io-frontend
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./_site:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      # HTTP-Redirect
+      - "traefik.http.routers.hutt-io-insecure.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
+      - "traefik.http.routers.hutt-io-insecure.entrypoints=web"
+      - "traefik.http.middlewares.hutt-io-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.hutt-io-insecure.middlewares=hutt-io-https-redirect"
+      
+      # HTTPS-Routing für die Website
+      - "traefik.http.routers.hutt-io.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
+      - "traefik.http.routers.hutt-io.entrypoints=websecure"
+      - "traefik.http.routers.hutt-io.tls=true"
+      - "traefik.http.routers.hutt-io.tls.certresolver=http_resolver"
+      - "traefik.http.routers.hutt-io.middlewares=cloudflarewarp@file"
+      - "traefik.http.services.hutt-io-frontend.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
+  # 2. FastAPI Mail-Backend
+  mailer:
+    container_name: hutt-io-mailer
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      # Routing NUR für /api/ Pfade
+      - "traefik.http.routers.hutt-io-api.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && PathPrefix(`/api`)"
+      - "traefik.http.routers.hutt-io-api.entrypoints=websecure"
+      - "traefik.http.routers.hutt-io-api.tls=true"
+      - "traefik.http.routers.hutt-io-api.tls.certresolver=http_resolver"
+      - "traefik.http.routers.hutt-io-api.middlewares=cloudflarewarp@file"
+      - "traefik.http.services.hutt-io-mailer.loadbalancer.server.port=8000"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
