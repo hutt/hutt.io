@@ -1664,7 +1664,9 @@ lite-youtube.lyt-activated .yt-thumb {
 .hero-copy .label,
 .hero-title,
 .hero-sub,
-.hero-actions {
+.hero-actions,
+main > .section,
+main > .accent-block {
   opacity: 0;
   animation: fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -1683,6 +1685,11 @@ lite-youtube.lyt-activated .yt-thumb {
 
 .hero-actions {
   animation-delay: 0.42s;
+}
+
+main > .section,
+main > .accent-block {
+  animation-delay: 0.55s;
 }
 
 /* 2. Filter-Chips: aktiver Zustand */
