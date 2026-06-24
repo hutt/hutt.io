@@ -29,14 +29,16 @@ services:
 
   frontend:
     container_name: hutt-io-frontend
-    image: nginx:alpine
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
       webhook:
         condition: service_healthy
     volumes:
       - ./_site:/usr/share/nginx/html:ro
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hutt-io-insecure.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
