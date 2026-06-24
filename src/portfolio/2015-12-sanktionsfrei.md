@@ -4,6 +4,7 @@ rolle: "Kollege für alles"
 title_url: "https://sanktionsfrei.de"
 zeitraum: "November 2015 – Juli 2016"
 ort: "Berlin"
+bild: sanktionsfrei.png
 art:
   - Job
 skills:

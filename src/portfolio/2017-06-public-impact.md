@@ -4,6 +4,7 @@ rolle: "Projektassistent für Kommunikations- und Social-Media-Beratung"
 title_url: "https://publicimpact.de"
 zeitraum: "Juni 2017 – Oktober 2017"
 ort: "Berlin"
+bild: public-impact.png
 art:
   - Job
 skills:

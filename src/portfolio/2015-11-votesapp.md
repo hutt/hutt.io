@@ -4,6 +4,7 @@ rolle: "Kollege für alles"
 title_url: "https://votesapp.net"
 zeitraum: "November 2015 – Juni 2016"
 ort: "Berlin"
+bild: votesapp.png
 art:
   - Job
 skills:

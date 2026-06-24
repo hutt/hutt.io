@@ -4,6 +4,7 @@ rolle: "Bedingungsloser Praktikant"
 title_url: "https://mein-grundeinkommen.de"
 zeitraum: "November 2015 – Juli 2016"
 ort: "Berlin"
+bild: mein-grundeinkommen.png
 art:
   - Job
 skills:
