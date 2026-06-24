@@ -1,0 +1,159 @@
+---
+layout: layouts/base.njk
+title: "404: Seite nicht gefunden"
+beschreibung: "Seite nicht gefunden."
+permalink: 404.html
+eleventyExcludeFromCollections: true
+---
+
+<section class="legal-hero not-found-hero" aria-labelledby="h-404">
+  <div class="wrap wrap--narrow not-found-wrap">
+    <a href="/" class="back-link not-found-back-link" aria-label="Zurück zur Startseite">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"></path>
+        <path d="M12 5l-7 7 7 7"></path>
+      </svg>
+      Startseite
+    </a>
+
+    <p class="label not-found-label">404</p>
+
+    <h1 class="legal-title not-found-title" id="h-404">
+      Diese Seite ist <span class="accent">nicht da</span>.
+    </h1>
+
+    <p class="legal-lead not-found-lead">
+      Vielleicht ist der Link veraltet, vielleicht habe ich etwas verschoben, vielleicht war da ein Tippfehler im Spiel. Auf jeden Fall führt dich dieser Pfad gerade ins Leere.
+    </p>
+
+    <div class="hero-actions not-found-actions">
+      <a href="/" class="btn btn-primary">Zur Startseite</a>
+      <a href="/#kontakt" class="btn btn-secondary">Kontakt aufnehmen</a>
+    </div>
+  </div>
+</section>
+
+<main id="main-content" class="legal-body not-found-body">
+  <div class="wrap wrap--narrow">
+    <section class="legal-section not-found-section">
+      <h2>Was du tun kannst</h2>
+      <ul>
+        <li>Prüfe, ob die URL korrekt geschrieben ist.</li>
+        <li>Gehe zurück zur Startseite und navigiere von dort weiter.</li>
+        <li>Wenn der Link eigentlich funktionieren sollte, schreib mir kurz.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<style>
+  .not-found-hero {
+    min-height: clamp(24rem, 62vh, 38rem);
+    display: flex;
+    align-items: center;
+    padding-block: clamp(var(--space-12), 9vw, var(--space-20));
+  }
+
+  .not-found-wrap {
+    display: grid;
+    gap: 0;
+  }
+
+  .not-found-back-link {
+    margin-bottom: var(--space-8);
+  }
+
+  .not-found-label {
+    margin-bottom: var(--space-3);
+  }
+
+  .not-found-title {
+    max-width: 11.5ch;
+    margin-bottom: var(--space-5);
+    line-height: 1.03;
+  }
+
+  .not-found-lead {
+    max-width: 54ch;
+    margin-bottom: 0;
+  }
+
+  .not-found-actions {
+    margin-top: var(--space-6);
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .not-found-body {
+    padding-top: clamp(var(--space-1), 1vw, var(--space-3));
+    padding-bottom: clamp(var(--space-10), 6vw, var(--space-16));
+    margin-bottom: var(--space-12);
+  }
+
+  .not-found-section {
+    margin-bottom: 0;
+    padding-top: var(--space-1);
+    padding-bottom: var(--space-6);
+    border-bottom: none;
+  }
+
+  .not-found-section h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .not-found-section ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    margin-top: 0;
+  }
+
+  .not-found-section li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+
+  .not-found-section li::before {
+    content: "✦";
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    .not-found-hero {
+      min-height: auto;
+      padding-block: clamp(var(--space-12), 12vw, var(--space-16));
+    }
+
+    .not-found-back-link {
+      margin-bottom: var(--space-6);
+    }
+
+    .not-found-title {
+      max-width: 10ch;
+      margin-bottom: var(--space-4);
+    }
+
+    .not-found-actions {
+      display: grid;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+      align-items: stretch;
+    }
+
+    .not-found-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .not-found-section {
+      padding-top: var(--space-3);
+    }
+  }
+</style>
