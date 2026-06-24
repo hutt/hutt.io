@@ -1,6 +1,8 @@
+project_name: hutt-io
+
 services:
   webhook:
-    container_name: hutt-io-webhook
+    container_name: webhook
     build:
       context: ./webhook
       dockerfile: Dockerfile
@@ -28,7 +30,7 @@ services:
       - proxy
 
   frontend:
-    container_name: hutt-io-frontend
+    container_name: frontend
     image: nginx:alpine
     restart: unless-stopped
     depends_on:
@@ -54,7 +56,7 @@ services:
       - proxy
 
   mailer:
-    container_name: hutt-io-mailer
+    container_name: mailer
     build:
       context: ./api
       dockerfile: Dockerfile
