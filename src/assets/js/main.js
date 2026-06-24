@@ -49,7 +49,7 @@
 
     const BASE_CONFIG = {
       densityArea: 20000,
-      densityAreaReduced: 24000,
+      densityAreaReduced: 35000,
       minParticles: 30,
       maxParticles: 120,
 
@@ -80,8 +80,8 @@
       wallPadding: 46,
       wallForce: 0.0029,
 
-      minConnectionsPerParticle: 2,
-      maxConnectionsPerParticle: 4,
+      minConnectionsPerParticle: 1,
+      maxConnectionsPerParticle: 3,
       maxConnectionDistance: 400,
 
       spawnDurationMin: 1200,
@@ -1010,12 +1010,11 @@
   initNetworkCanvas('.hero', '.hero-network', {
     interactive: true,
     deriveForDarkSurface: false,
-    densityArea: 30000,
+    densityArea: 25000,
     densityAreaReduced: 40000,
     opacityPoint: 0.58,
     opacityLine: 0.26,
     opacityGlow: 0.12,
-    maxConnectionDistance: 240,
     lineWidth: 0.95,
     steeringForce: 0.0018,
     idleFluxPerMinute: 18,
@@ -1043,8 +1042,6 @@
     deriveForDarkSurface: true,
     densityArea: 26000,
     densityAreaReduced: 32000,
-    minParticles: 10,
-    maxParticles: 40,
     opacityPoint: 0.32,
     opacityLine: 0.16,
     opacityGlow: 0.07,
