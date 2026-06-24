@@ -46,6 +46,31 @@ services:
     networks:
       - proxy
 
+  # 3. Webhook-Listener (CI/CD)
+  webhook:
+    container_name: hutt-io-webhook
+    build:
+      context: ./webhook
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+    volumes:
+      # Zugriff auf das Repo-Verzeichnis
+      - /opt/containers/hutt.io:/workspace
+      # Docker-Socket, damit der Listener `docker compose` ausführen kann
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hutt-io-webhook.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && Path(`/webhook`)"
+      - "traefik.http.routers.hutt-io-webhook.entrypoints=websecure"
+      - "traefik.http.routers.hutt-io-webhook.tls=true"
+      - "traefik.http.routers.hutt-io-webhook.tls.certresolver=http_resolver"
+      - "traefik.http.services.hutt-io-webhook.loadbalancer.server.port=9000"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
 networks:
   proxy:
     external: true
