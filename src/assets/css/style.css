@@ -596,7 +596,7 @@ select {
 }
 
 .hero-portrait.is-wobbling {
-  transform-origin: center top;
+  transform-origin: center center;
   animation-name: portrait-wobble;
   animation-duration: 0.55s;
   animation-timing-function: cubic-bezier(0.36, 0.07, 0.19, 0.97);

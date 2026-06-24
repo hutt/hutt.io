@@ -35,586 +35,6 @@
   }
 })();
 
-/* ── Portfolio-Filter ── */
-(function () {
-  const grid = document.getElementById('portfolio-grid');
-  const artBar = document.getElementById('filter-art');
-  const skillBar = document.getElementById('filter-skills');
-  const cardsMoreBtn = document.getElementById('cards-more-btn');
-  const expandBtn = document.getElementById('skills-expand-btn');
-  const featuredBtn = document.getElementById('filter-featured');
-
-  if (!grid || !artBar || !skillBar) return;
-
-  const cards = Array.from(grid.querySelectorAll('.card'));
-  const artChips = Array.from(artBar.querySelectorAll('.filter-chip')).filter(chip => chip.id !== 'filter-featured');
-  const skillChips = Array.from(skillBar.querySelectorAll('.filter-chip'));
-  const expandableSkillChips = skillChips.filter(chip => chip.dataset.value !== '');
-
-  // LOGIK-ÄNDERUNG: activeArt = null bedeutet "kein Chip leuchtet in der ersten Reihe"
-  let activeArt = null;
-  let activeSkill = '';
-  let activeFeatured = true;
-  let cardsExpanded = false;
-
-  const limitDesktop = parseInt(grid.dataset.limit, 10) || 8;
-  const limitMobile = parseInt(grid.dataset.limitMobile, 10) || 4;
-
-  function getLimit() {
-    return window.innerWidth < 600 ? limitMobile : limitDesktop;
-  }
-
-  function parseList(str) {
-    if (!str) return [];
-    return str.split(',').map(s => s.trim()).filter(Boolean);
-  }
-
-  function updateSkillChips() {
-    const availableSkills = new Set();
-
-    cards.forEach(card => {
-      const cardArts = parseList(card.getAttribute('data-art'));
-      const cardSkills = parseList(card.getAttribute('data-skills'));
-      const isFeatured = card.getAttribute('data-featured') === 'true';
-
-      // null wird hier wie 'Alle' behandelt (zeigt alle an, die featured sind)
-      const matchArt = (activeArt === null || activeArt === '' || cardArts.includes(activeArt));
-      const matchFeatured = (!activeFeatured || isFeatured);
-
-      if (matchArt && matchFeatured) {
-        cardSkills.forEach(skill => availableSkills.add(skill));
-      }
-    });
-
-    expandableSkillChips.forEach(chip => {
-      const val = chip.dataset.value.trim();
-      if (availableSkills.has(val)) {
-        chip.hidden = false;
-        chip.removeAttribute('hidden');
-        chip.style.display = '';
-      } else {
-        chip.hidden = true;
-        chip.setAttribute('hidden', '');
-        chip.style.display = 'none';
-      }
-    });
-
-    if (activeSkill !== '' && !availableSkills.has(activeSkill)) {
-      activeSkill = '';
-    }
-
-    setPressedState(skillChips, activeSkill);
-    updateSkillsOverflow();
-  }
-
-  function updateSkillsOverflow() {
-    if (!expandBtn) return;
-
-    requestAnimationFrame(() => {
-      skillBar.classList.remove('is-collapsed');
-
-      const visibleChips = skillChips.filter(c => !c.hidden && c.id !== 'skills-expand-btn');
-      if (visibleChips.length === 0) {
-        expandBtn.hidden = true;
-        expandBtn.style.display = 'none';
-        return;
-      }
-
-      const firstRowTop = visibleChips[0].offsetTop;
-      const hasOverflow = visibleChips.some(chip => chip.offsetTop > firstRowTop + 10);
-
-      if (hasOverflow) {
-        expandBtn.hidden = false;
-        expandBtn.style.display = '';
-        skillBar.classList.add('is-collapsed');
-        expandBtn.textContent = 'Mehr ▾';
-        expandBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        expandBtn.hidden = true;
-        expandBtn.style.display = 'none';
-      }
-    });
-  }
-
-  function setPressedState(chips, activeValue) {
-    chips.forEach(chip => {
-      const val = (chip.dataset.value || '').trim();
-      // Bei activeValue = null (Featured Modus) wird hier für alle Art-Chips richtigerweise 'false' gesetzt
-      chip.setAttribute('aria-pressed', val === activeValue ? 'true' : 'false');
-    });
-  }
-
-  function setFeaturedPressedState() {
-    if (!featuredBtn) return;
-    featuredBtn.setAttribute('aria-pressed', activeFeatured ? 'true' : 'false');
-  }
-
-  function applyFilters() {
-    const matchingCards = [];
-
-    cards.forEach(card => {
-      const cardArts = parseList(card.getAttribute('data-art'));
-      const cardSkills = parseList(card.getAttribute('data-skills'));
-      const isFeatured = card.getAttribute('data-featured') === 'true';
-
-      const matchArt = (activeArt === null || activeArt === '' || cardArts.includes(activeArt));
-      const matchSkill = (activeSkill === '' || cardSkills.includes(activeSkill));
-      const matchFeatured = (!activeFeatured || isFeatured);
-
-      if (matchArt && matchSkill && matchFeatured) {
-        matchingCards.push(card);
-      } else {
-        card.hidden = true;
-        card.setAttribute('hidden', '');
-        card.style.display = 'none';
-      }
-    });
-
-    matchingCards.forEach((card, index) => {
-      if (!cardsExpanded && index >= getLimit()) {
-        card.hidden = true;
-        card.setAttribute('hidden', '');
-        card.style.display = 'none';
-      } else {
-        card.hidden = false;
-        card.removeAttribute('hidden');
-        card.style.display = '';
-      }
-    });
-
-    if (cardsMoreBtn) {
-      if (matchingCards.length <= getLimit()) {
-        cardsMoreBtn.hidden = true;
-        cardsMoreBtn.setAttribute('hidden', '');
-        cardsMoreBtn.style.display = 'none';
-      } else {
-        cardsMoreBtn.hidden = false;
-        cardsMoreBtn.removeAttribute('hidden');
-        cardsMoreBtn.style.display = '';
-        if (cardsExpanded) {
-          cardsMoreBtn.textContent = 'Weniger anzeigen';
-          cardsMoreBtn.classList.replace('btn-primary', 'btn-secondary');
-        } else {
-          cardsMoreBtn.textContent = `Alle ${matchingCards.length} ansehen`;
-          cardsMoreBtn.classList.replace('btn-secondary', 'btn-primary');
-        }
-      }
-    }
-  }
-
-  /* ── Event Listeners ── */
-  if (featuredBtn) {
-    featuredBtn.addEventListener('click', () => {
-      if (activeFeatured) {
-        // Klickt man Featured nochmal an (deaktivieren), Fallback auf "Alle"
-        activeFeatured = false;
-        activeArt = '';
-      } else {
-        // Klickt man Featured an, alle normalen Art-Chips inaktiv schalten
-        activeFeatured = true;
-        activeArt = null;
-      }
-      cardsExpanded = false;
-      setFeaturedPressedState();
-      setPressedState(artChips, activeArt);
-      updateSkillChips();
-      applyFilters();
-    });
-  }
-
-  artChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const val = (chip.dataset.value || '').trim();
-
-      // Sobald ein Art-Chip geklickt wird, ist der globale Featured-Modus aus
-      activeFeatured = false;
-
-      // Normales Toggle-Verhalten für die restliche Zeile
-      if (activeArt === val) {
-        activeArt = ''; // Zurück auf "Alle", wenn man denselben klickt
-      } else {
-        activeArt = val;
-      }
-
-      cardsExpanded = false;
-      setFeaturedPressedState();
-      setPressedState(artChips, activeArt);
-      updateSkillChips();
-      applyFilters();
-    });
-  });
-
-  skillChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      if (chip.hidden) return;
-      const val = (chip.dataset.value || '').trim();
-      activeSkill = (activeSkill === val) ? '' : val;
-      cardsExpanded = false;
-      setPressedState(skillChips.filter(c => !c.hidden), activeSkill);
-      applyFilters();
-    });
-  });
-
-  if (cardsMoreBtn) {
-    cardsMoreBtn.addEventListener('click', () => {
-      cardsExpanded = !cardsExpanded;
-      applyFilters();
-    });
-  }
-
-  if (expandBtn) {
-    expandBtn.addEventListener('click', () => {
-      const collapsed = skillBar.classList.toggle('is-collapsed');
-      expandBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      expandBtn.textContent = collapsed ? 'Mehr ▾' : 'Weniger ▴';
-    });
-  }
-
-  window.addEventListener('resize', () => {
-    updateSkillsOverflow();
-    applyFilters();
-  });
-
-  /* ── Initialisierung ── */
-  setPressedState(artChips, activeArt);
-  setPressedState(skillChips, activeSkill);
-  setFeaturedPressedState();
-  updateSkillChips();
-  applyFilters();
-})();
-
-/* ── Lite-YouTube: Script laden ── */
-(function () {
-  if (!document.querySelector('lite-youtube')) return;
-  const s = document.createElement('script');
-  s.src = '/assets/js/lite-yt-embed.js';
-  s.defer = true;
-  document.head.appendChild(s);
-  const l = document.createElement('link');
-  l.rel = 'stylesheet';
-  l.href = '/assets/css/lite-yt-embed.css';
-  document.head.appendChild(l);
-})();
-
-/* ── Kontaktformular ── */
-(function () {
-  const form = document.getElementById('kontakt-form');
-  const status = document.getElementById('form-status');
-  if (!form || !status) return;
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    if (form.elements['website'] && form.elements['website'].value) return;
-
-    const btn = form.querySelector('[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Wird gesendet …';
-    status.className = 'form-status';
-    status.textContent = '';
-
-    const data = {
-      name: form.elements['name'].value.trim(),
-      email: form.elements['email'].value.trim(),
-      betreff: form.elements['betreff'].value.trim(),
-      nachricht: form.elements['nachricht'].value.trim(),
-    };
-
-    if (!data.name || !data.email || !data.nachricht) {
-      status.className = 'form-status error';
-      status.textContent = 'Bitte fülle alle Pflichtfelder aus.';
-      btn.disabled = false;
-      btn.textContent = 'Nachricht senden';
-      return;
-    }
-
-    try {
-      const res = await fetch('/api/kontakt', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        status.className = 'form-status success';
-        status.textContent = 'Danke! Deine Nachricht ist angekommen. Ich melde mich so schnell wie möglich.';
-        form.reset();
-      } else {
-        throw new Error(res.statusText);
-      }
-    } catch (err) {
-      status.className = 'form-status error';
-      status.textContent = 'Etwas ist schiefgelaufen. Schreib mir direkt an jannis@hutt.io.';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Nachricht senden';
-    }
-  });
-})();
-
-/* ── Aktiver Nav-Link (Hash-basiert) ── */
-(function () {
-  const links = document.querySelectorAll('.nav-link[href^="/#"]');
-  const sections = document.querySelectorAll('section[id], div[id]');
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      links.forEach(function (link) {
-        const target = link.getAttribute('href').replace('/', '');
-        link.setAttribute('aria-current', target === '#' + entry.target.id ? 'true' : 'false');
-      });
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-
-  sections.forEach(s => observer.observe(s));
-})();
-
-/* ── PGP Modal Logic ── */
-(function () {
-  const modal = document.getElementById('pgp-modal');
-  const openBtn = document.getElementById('pgp-modal-btn');
-  if (!modal || !openBtn) return;
-
-  openBtn.addEventListener('click', () => { modal.showModal(); });
-
-  modal.querySelectorAll('.modal-close, .modal-close-btn').forEach(btn => {
-    btn.addEventListener('click', () => { modal.close(); });
-  });
-
-  modal.addEventListener('click', (e) => {
-    const r = modal.getBoundingClientRect();
-    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
-      modal.close();
-    }
-  });
-
-  const supportsStartingStyle = CSS.supports('selector(dialog)') &&
-    typeof CSSStartingStyleRule !== 'undefined';
-
-  if (!supportsStartingStyle) {
-    openBtn.addEventListener('click', () => {
-      modal.showModal();
-      requestAnimationFrame(() => modal.classList.add('is-open'));
-    });
-    modal.addEventListener('close', () => { modal.classList.remove('is-open'); });
-  }
-})();
-
-/* ── Portrait Easter Egg ── */
-(function () {
-  const portrait = document.querySelector('.hero-portrait');
-  if (!portrait) return;
-
-  const style = document.createElement('style');
-  style.textContent = '.hero-portrait.ready:not(.is-wobbling) { animation: none !important; }';
-  document.head.appendChild(style);
-
-  let clicks = 0;
-  let resetTimer = null;
-  let cooldown = false;
-  let cooldownScale = 1;
-  const SCALE_STEP = 0.07;
-  const MIN_SCALE = 0.0;
-
-  portrait.style.cursor = 'grab';
-
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (reducedMotion) {
-    portrait.style.setProperty('opacity', '1', 'important');
-    portrait.classList.add('ready');
-  } else {
-    portrait.style.cssText += ';opacity:0;animation:fade-up 0.65s cubic-bezier(0.16,1,0.3,1) 0.05s forwards';
-    portrait.addEventListener('animationend', function lockOpacity(ev) {
-      if (ev.animationName !== 'fade-up') return;
-      portrait.style.animation = '';
-      portrait.style.setProperty('opacity', '1', 'important');
-      portrait.classList.add('ready');
-      portrait.removeEventListener('animationend', lockOpacity);
-    });
-  }
-
-  function buildPicture(telephon) {
-    const name = telephon ? 'telephon' : 'portrait';
-    const alt = telephon ? 'Jannis Hutt am Telefon' : 'Jannis Hutt';
-    const widths = [96, 176, 352, 480, 960];
-    const sizes = '(max-width: 860px) 6rem, 11rem';
-    const srcset = ext => widths.map(w => `/assets/img/${name}-${w}w.${ext} ${w}w`).join(', ');
-    return `<picture>
-      <source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}">
-      <source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}">
-      <img
-        src="/assets/img/${name}-96w.jpeg"
-        srcset="${srcset('jpeg')}"
-        sizes="${sizes}"
-        alt="${alt}"
-        width="960" height="1280"
-        loading="eager"
-        decoding="async"
-        style="width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.3s ease;"
-        onload="this.style.opacity='1'">
-    </picture>`;
-  }
-
-  function spawnDust(clickX, clickY) {
-    if (reducedMotion) return;
-    const container = portrait.closest('.hero-inner') || portrait.parentElement;
-    const containerRect = container.getBoundingClientRect();
-
-    if (getComputedStyle(container).position === 'static') {
-      container.style.position = 'relative';
-    }
-
-    const absX = clickX - containerRect.left;
-    const absY = clickY - containerRect.top;
-
-    const count = 9 + Math.floor(Math.random() * 4);
-    for (let i = 0; i < count; i++) {
-      const puff = document.createElement('span');
-      puff.className = 'dust-puff';
-
-      puff.style.setProperty('mix-blend-mode', 'normal', 'important');
-      puff.style.setProperty('background', 'radial-gradient(circle, rgba(220,220,220,0.95) 0%, rgba(180,180,180,0.6) 40%, transparent 75%)', 'important');
-
-      const angle = Math.random() * Math.PI * 2;
-      const distance = 8 + Math.random() * 25;
-      const dx = Math.cos(angle) * distance;
-      const dy = Math.sin(angle) * distance - (4 + Math.random() * 10);
-      const scale = 1.4 + Math.random() * 2.0;
-
-      puff.style.setProperty('--x', `${absX}px`);
-      puff.style.setProperty('--y', `${absY}px`);
-      puff.style.setProperty('--dx', `${dx}px`);
-      puff.style.setProperty('--dy', `${dy}px`);
-      puff.style.setProperty('--scale', scale.toFixed(2));
-
-      container.appendChild(puff);
-      puff.addEventListener('animationend', () => puff.remove(), { once: true });
-    }
-  }
-
-  function switchToTelephon() {
-    cooldown = true;
-    cooldownScale = 1;
-    clicks = 0;
-    clearTimeout(resetTimer);
-
-    portrait.innerHTML = buildPicture(true);
-    portrait.style.setProperty('opacity', '1', 'important');
-    portrait.style.cursor = 'grab';
-
-    setTimeout(() => {
-      const numSteps = 3 + Math.floor(Math.random() * 4);
-      const weights = Array.from({ length: numSteps }, () => 0.1 + Math.random() * 0.9);
-      const weightSum = weights.reduce((a, b) => a + b, 0);
-      const steps = weights.map(w => w / weightSum);
-      const pauses = Array.from({ length: numSteps }, () => 250 + Math.random() * 2000);
-      let currentScale = 0;
-
-      steps.forEach((stepSize, i) => {
-        const delay = pauses.slice(0, i).reduce((a, b) => a + b, 0);
-        setTimeout(() => {
-          currentScale = Math.min(1, currentScale + stepSize);
-          const isLast = i === steps.length - 1;
-
-          portrait.style.setProperty(
-            'transition',
-            `transform ${isLast ? '0.6s' : '0.3s'} cubic-bezier(0.34, 1.56, 0.64, 1)`,
-            'important'
-          );
-          portrait.style.setProperty('transform', `scale(${currentScale.toFixed(3)})`, 'important');
-
-          if (isLast) {
-            setTimeout(() => {
-              portrait.innerHTML = buildPicture(false);
-            }, 300);
-
-            setTimeout(() => {
-              portrait.style.removeProperty('transition');
-              portrait.style.removeProperty('transform');
-              cooldownScale = 1;
-              clicks = 0;
-              cooldown = false;
-            }, 650);
-          }
-        }, delay);
-      });
-    }, 5000);
-  }
-
-  portrait.addEventListener('click', function (e) {
-    clicks++;
-    clearTimeout(resetTimer);
-
-    if (cooldown) {
-      cooldownScale = Math.max(MIN_SCALE, cooldownScale - SCALE_STEP);
-      portrait.style.setProperty('transition', 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)', 'important');
-      portrait.style.setProperty('transform', `scale(${cooldownScale.toFixed(3)})`, 'important');
-      spawnDust(e.clientX, e.clientY);
-      return;
-    }
-
-    spawnDust(e.clientX, e.clientY);
-    portrait.classList.remove('is-wobbling');
-    void portrait.offsetWidth;
-    portrait.classList.add('is-wobbling');
-    portrait.addEventListener('animationend', function onWobbleEnd(ev) {
-      if (ev.animationName !== 'portrait-wobble') return;
-      portrait.classList.remove('is-wobbling');
-      portrait.removeEventListener('animationend', onWobbleEnd);
-    });
-
-    if (clicks >= 10) {
-      clicks = 0;
-      switchToTelephon();
-      return;
-    }
-
-    resetTimer = setTimeout(() => { clicks = 0; }, 2000);
-  });
-})();
-
-/* ── Lightbox Logic ── */
-(function () {
-  const triggers = document.querySelectorAll('.lightbox-trigger');
-  const modal = document.getElementById('lightbox-modal');
-  const content = document.getElementById('lightbox-content');
-  if (!modal || !content || triggers.length === 0) return;
-
-  triggers.forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      // Bild-Markup in die Lightbox kopieren
-      content.innerHTML = trigger.innerHTML;
-
-      // Browser anweisen, die große Variante des Bildes zu laden
-      content.querySelectorAll('img, source').forEach(el => {
-        if (el.hasAttribute('sizes')) {
-          el.setAttribute('sizes', '960px');
-        }
-      });
-
-      modal.showModal();
-    });
-  });
-
-  // Modal schließen über den Button
-  modal.querySelectorAll('.modal-close').forEach(btn => {
-    btn.addEventListener('click', () => modal.close());
-  });
-
-  // Modal schließen beim Klick auf den Hintergrund (Backdrop)
-  modal.addEventListener('click', (e) => {
-    // Bei <dialog> entspricht e.target === modal dem Klick auf den ::backdrop
-    if (e.target === modal) {
-      modal.close();
-    }
-  });
-
-  // Nach dem Schließen den Inhalt leeren (spart Speicher)
-  modal.addEventListener('close', () => {
-    setTimeout(() => { content.innerHTML = ''; }, 300); // Warten bis CSS-Transition fertig ist
-  });
-})();
-
 /* Hero Netzwerk-Canvas */
 (function () {
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -630,7 +50,7 @@
     const BASE_CONFIG = {
       densityArea: 20000,
       densityAreaReduced: 24000,
-      minParticles: 14,
+      minParticles: 26,
       maxParticles: 96,
 
       idleFluxPerMinute: 6,
@@ -645,11 +65,11 @@
       pointDragRadius: 16,
       lineWidth: 0.85,
 
-      speed: 0.016,
-      speedReduced: 0.009,
-      steeringForce: 0.0017,
+      speed: 0.024,
+      speedReduced: 0.015,
+      steeringForce: 0.0024,
       steeringForceReduced: 0.001,
-      damping: 0.992,
+      damping: 0.994,
       dampingReduced: 0.994,
 
       springK: 0.0016,
@@ -662,7 +82,7 @@
 
       minConnectionsPerParticle: 2,
       maxConnectionsPerParticle: 5,
-      maxConnectionDistance: 240,
+      maxConnectionDistance: 340,
 
       spawnDurationMin: 1200,
       spawnDurationMax: 2800,
@@ -1444,7 +864,7 @@
   initNetworkCanvas('.hero', '.hero-network', {
     interactive: true,
     deriveForDarkSurface: false,
-    densityArea: 20000,
+    densityArea: 40000,
     densityAreaReduced: 24000,
     opacityPoint: 0.58,
     opacityLine: 0.26,
@@ -1466,13 +886,591 @@
     pointRadiusMin: 1.0,
     pointRadiusMax: 2.3,
     lineWidth: 0.7,
-    speed: 0.012,
-    speedReduced: 0.007,
     steeringForce: 0.0012,
     steeringForceReduced: 0.0008,
     maxConnectionDistance: 180,
     wallPadding: 32,
     idleFluxPerMinute: 1.2,
     idleFluxPerMinuteReduced: 0.5
+  });
+})();
+
+/* ── Portfolio-Filter ── */
+(function () {
+  const grid = document.getElementById('portfolio-grid');
+  const artBar = document.getElementById('filter-art');
+  const skillBar = document.getElementById('filter-skills');
+  const cardsMoreBtn = document.getElementById('cards-more-btn');
+  const expandBtn = document.getElementById('skills-expand-btn');
+  const featuredBtn = document.getElementById('filter-featured');
+
+  if (!grid || !artBar || !skillBar) return;
+
+  const cards = Array.from(grid.querySelectorAll('.card'));
+  const artChips = Array.from(artBar.querySelectorAll('.filter-chip')).filter(chip => chip.id !== 'filter-featured');
+  const skillChips = Array.from(skillBar.querySelectorAll('.filter-chip'));
+  const expandableSkillChips = skillChips.filter(chip => chip.dataset.value !== '');
+
+  // LOGIK-ÄNDERUNG: activeArt = null bedeutet "kein Chip leuchtet in der ersten Reihe"
+  let activeArt = null;
+  let activeSkill = '';
+  let activeFeatured = true;
+  let cardsExpanded = false;
+
+  const limitDesktop = parseInt(grid.dataset.limit, 10) || 8;
+  const limitMobile = parseInt(grid.dataset.limitMobile, 10) || 4;
+
+  function getLimit() {
+    return window.innerWidth < 600 ? limitMobile : limitDesktop;
+  }
+
+  function parseList(str) {
+    if (!str) return [];
+    return str.split(',').map(s => s.trim()).filter(Boolean);
+  }
+
+  function updateSkillChips() {
+    const availableSkills = new Set();
+
+    cards.forEach(card => {
+      const cardArts = parseList(card.getAttribute('data-art'));
+      const cardSkills = parseList(card.getAttribute('data-skills'));
+      const isFeatured = card.getAttribute('data-featured') === 'true';
+
+      // null wird hier wie 'Alle' behandelt (zeigt alle an, die featured sind)
+      const matchArt = (activeArt === null || activeArt === '' || cardArts.includes(activeArt));
+      const matchFeatured = (!activeFeatured || isFeatured);
+
+      if (matchArt && matchFeatured) {
+        cardSkills.forEach(skill => availableSkills.add(skill));
+      }
+    });
+
+    expandableSkillChips.forEach(chip => {
+      const val = chip.dataset.value.trim();
+      if (availableSkills.has(val)) {
+        chip.hidden = false;
+        chip.removeAttribute('hidden');
+        chip.style.display = '';
+      } else {
+        chip.hidden = true;
+        chip.setAttribute('hidden', '');
+        chip.style.display = 'none';
+      }
+    });
+
+    if (activeSkill !== '' && !availableSkills.has(activeSkill)) {
+      activeSkill = '';
+    }
+
+    setPressedState(skillChips, activeSkill);
+    updateSkillsOverflow();
+  }
+
+  function updateSkillsOverflow() {
+    if (!expandBtn) return;
+
+    requestAnimationFrame(() => {
+      skillBar.classList.remove('is-collapsed');
+
+      const visibleChips = skillChips.filter(c => !c.hidden && c.id !== 'skills-expand-btn');
+      if (visibleChips.length === 0) {
+        expandBtn.hidden = true;
+        expandBtn.style.display = 'none';
+        return;
+      }
+
+      const firstRowTop = visibleChips[0].offsetTop;
+      const hasOverflow = visibleChips.some(chip => chip.offsetTop > firstRowTop + 10);
+
+      if (hasOverflow) {
+        expandBtn.hidden = false;
+        expandBtn.style.display = '';
+        skillBar.classList.add('is-collapsed');
+        expandBtn.textContent = 'Mehr ▾';
+        expandBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        expandBtn.hidden = true;
+        expandBtn.style.display = 'none';
+      }
+    });
+  }
+
+  function setPressedState(chips, activeValue) {
+    chips.forEach(chip => {
+      const val = (chip.dataset.value || '').trim();
+      // Bei activeValue = null (Featured Modus) wird hier für alle Art-Chips richtigerweise 'false' gesetzt
+      chip.setAttribute('aria-pressed', val === activeValue ? 'true' : 'false');
+    });
+  }
+
+  function setFeaturedPressedState() {
+    if (!featuredBtn) return;
+    featuredBtn.setAttribute('aria-pressed', activeFeatured ? 'true' : 'false');
+  }
+
+  function applyFilters() {
+    const matchingCards = [];
+
+    cards.forEach(card => {
+      const cardArts = parseList(card.getAttribute('data-art'));
+      const cardSkills = parseList(card.getAttribute('data-skills'));
+      const isFeatured = card.getAttribute('data-featured') === 'true';
+
+      const matchArt = (activeArt === null || activeArt === '' || cardArts.includes(activeArt));
+      const matchSkill = (activeSkill === '' || cardSkills.includes(activeSkill));
+      const matchFeatured = (!activeFeatured || isFeatured);
+
+      if (matchArt && matchSkill && matchFeatured) {
+        matchingCards.push(card);
+      } else {
+        card.hidden = true;
+        card.setAttribute('hidden', '');
+        card.style.display = 'none';
+      }
+    });
+
+    matchingCards.forEach((card, index) => {
+      if (!cardsExpanded && index >= getLimit()) {
+        card.hidden = true;
+        card.setAttribute('hidden', '');
+        card.style.display = 'none';
+      } else {
+        card.hidden = false;
+        card.removeAttribute('hidden');
+        card.style.display = '';
+      }
+    });
+
+    if (cardsMoreBtn) {
+      if (matchingCards.length <= getLimit()) {
+        cardsMoreBtn.hidden = true;
+        cardsMoreBtn.setAttribute('hidden', '');
+        cardsMoreBtn.style.display = 'none';
+      } else {
+        cardsMoreBtn.hidden = false;
+        cardsMoreBtn.removeAttribute('hidden');
+        cardsMoreBtn.style.display = '';
+        if (cardsExpanded) {
+          cardsMoreBtn.textContent = 'Weniger anzeigen';
+          cardsMoreBtn.classList.replace('btn-primary', 'btn-secondary');
+        } else {
+          cardsMoreBtn.textContent = `Alle ${matchingCards.length} ansehen`;
+          cardsMoreBtn.classList.replace('btn-secondary', 'btn-primary');
+        }
+      }
+    }
+  }
+
+  /* ── Event Listeners ── */
+  if (featuredBtn) {
+    featuredBtn.addEventListener('click', () => {
+      if (activeFeatured) {
+        // Klickt man Featured nochmal an (deaktivieren), Fallback auf "Alle"
+        activeFeatured = false;
+        activeArt = '';
+      } else {
+        // Klickt man Featured an, alle normalen Art-Chips inaktiv schalten
+        activeFeatured = true;
+        activeArt = null;
+      }
+      cardsExpanded = false;
+      setFeaturedPressedState();
+      setPressedState(artChips, activeArt);
+      updateSkillChips();
+      applyFilters();
+    });
+  }
+
+  artChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const val = (chip.dataset.value || '').trim();
+
+      // Sobald ein Art-Chip geklickt wird, ist der globale Featured-Modus aus
+      activeFeatured = false;
+
+      // Normales Toggle-Verhalten für die restliche Zeile
+      if (activeArt === val) {
+        activeArt = ''; // Zurück auf "Alle", wenn man denselben klickt
+      } else {
+        activeArt = val;
+      }
+
+      cardsExpanded = false;
+      setFeaturedPressedState();
+      setPressedState(artChips, activeArt);
+      updateSkillChips();
+      applyFilters();
+    });
+  });
+
+  skillChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (chip.hidden) return;
+      const val = (chip.dataset.value || '').trim();
+      activeSkill = (activeSkill === val) ? '' : val;
+      cardsExpanded = false;
+      setPressedState(skillChips.filter(c => !c.hidden), activeSkill);
+      applyFilters();
+    });
+  });
+
+  if (cardsMoreBtn) {
+    cardsMoreBtn.addEventListener('click', () => {
+      cardsExpanded = !cardsExpanded;
+      applyFilters();
+    });
+  }
+
+  if (expandBtn) {
+    expandBtn.addEventListener('click', () => {
+      const collapsed = skillBar.classList.toggle('is-collapsed');
+      expandBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      expandBtn.textContent = collapsed ? 'Mehr ▾' : 'Weniger ▴';
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    updateSkillsOverflow();
+    applyFilters();
+  });
+
+  /* ── Initialisierung ── */
+  setPressedState(artChips, activeArt);
+  setPressedState(skillChips, activeSkill);
+  setFeaturedPressedState();
+  updateSkillChips();
+  applyFilters();
+})();
+
+/* ── Lite-YouTube: Script laden ── */
+(function () {
+  if (!document.querySelector('lite-youtube')) return;
+  const s = document.createElement('script');
+  s.src = '/assets/js/lite-yt-embed.js';
+  s.defer = true;
+  document.head.appendChild(s);
+  const l = document.createElement('link');
+  l.rel = 'stylesheet';
+  l.href = '/assets/css/lite-yt-embed.css';
+  document.head.appendChild(l);
+})();
+
+/* ── Kontaktformular ── */
+(function () {
+  const form = document.getElementById('kontakt-form');
+  const status = document.getElementById('form-status');
+  if (!form || !status) return;
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (form.elements['website'] && form.elements['website'].value) return;
+
+    const btn = form.querySelector('[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet …';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    const data = {
+      name: form.elements['name'].value.trim(),
+      email: form.elements['email'].value.trim(),
+      betreff: form.elements['betreff'].value.trim(),
+      nachricht: form.elements['nachricht'].value.trim(),
+    };
+
+    if (!data.name || !data.email || !data.nachricht) {
+      status.className = 'form-status error';
+      status.textContent = 'Bitte fülle alle Pflichtfelder aus.';
+      btn.disabled = false;
+      btn.textContent = 'Nachricht senden';
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        status.className = 'form-status success';
+        status.textContent = 'Danke! Deine Nachricht ist angekommen. Ich melde mich so schnell wie möglich.';
+        form.reset();
+      } else {
+        throw new Error(res.statusText);
+      }
+    } catch (err) {
+      status.className = 'form-status error';
+      status.textContent = 'Etwas ist schiefgelaufen. Schreib mir direkt an jannis@hutt.io.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Nachricht senden';
+    }
+  });
+})();
+
+/* ── Aktiver Nav-Link (Hash-basiert) ── */
+(function () {
+  const links = document.querySelectorAll('.nav-link[href^="/#"]');
+  const sections = document.querySelectorAll('section[id], div[id]');
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      links.forEach(function (link) {
+        const target = link.getAttribute('href').replace('/', '');
+        link.setAttribute('aria-current', target === '#' + entry.target.id ? 'true' : 'false');
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+/* ── PGP Modal Logic ── */
+(function () {
+  const modal = document.getElementById('pgp-modal');
+  const openBtn = document.getElementById('pgp-modal-btn');
+  if (!modal || !openBtn) return;
+
+  openBtn.addEventListener('click', () => { modal.showModal(); });
+
+  modal.querySelectorAll('.modal-close, .modal-close-btn').forEach(btn => {
+    btn.addEventListener('click', () => { modal.close(); });
+  });
+
+  modal.addEventListener('click', (e) => {
+    const r = modal.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+      modal.close();
+    }
+  });
+
+  const supportsStartingStyle = CSS.supports('selector(dialog)') &&
+    typeof CSSStartingStyleRule !== 'undefined';
+
+  if (!supportsStartingStyle) {
+    openBtn.addEventListener('click', () => {
+      modal.showModal();
+      requestAnimationFrame(() => modal.classList.add('is-open'));
+    });
+    modal.addEventListener('close', () => { modal.classList.remove('is-open'); });
+  }
+})();
+
+/* ── Portrait Easter Egg ── */
+(function () {
+  const portrait = document.querySelector('.hero-portrait');
+  if (!portrait) return;
+
+  const style = document.createElement('style');
+  style.textContent = '.hero-portrait.ready:not(.is-wobbling) { animation: none !important; }';
+  document.head.appendChild(style);
+
+  let clicks = 0;
+  let resetTimer = null;
+  let cooldown = false;
+  let cooldownScale = 1;
+  const SCALE_STEP = 0.07;
+  const MIN_SCALE = 0.0;
+
+  portrait.style.cursor = 'grab';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reducedMotion) {
+    portrait.style.setProperty('opacity', '1', 'important');
+    portrait.classList.add('ready');
+  } else {
+    portrait.style.cssText += ';opacity:0;animation:fade-up 0.65s cubic-bezier(0.16,1,0.3,1) 0.05s forwards';
+    portrait.addEventListener('animationend', function lockOpacity(ev) {
+      if (ev.animationName !== 'fade-up') return;
+      portrait.style.animation = '';
+      portrait.style.setProperty('opacity', '1', 'important');
+      portrait.classList.add('ready');
+      portrait.removeEventListener('animationend', lockOpacity);
+    });
+  }
+
+  function buildPicture(telephon) {
+    const name = telephon ? 'telephon' : 'portrait';
+    const alt = telephon ? 'Jannis Hutt am Telefon' : 'Jannis Hutt';
+    const widths = [96, 176, 352, 480, 960];
+    const sizes = '(max-width: 860px) 6rem, 11rem';
+    const srcset = ext => widths.map(w => `/assets/img/${name}-${w}w.${ext} ${w}w`).join(', ');
+    return `<picture>
+      <source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}">
+      <source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}">
+      <img
+        src="/assets/img/${name}-96w.jpeg"
+        srcset="${srcset('jpeg')}"
+        sizes="${sizes}"
+        alt="${alt}"
+        width="960" height="1280"
+        loading="eager"
+        decoding="async"
+        style="width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.3s ease;"
+        onload="this.style.opacity='1'">
+    </picture>`;
+  }
+
+  function spawnDust(clickX, clickY) {
+    if (reducedMotion) return;
+    const container = portrait.closest('.hero-inner') || portrait.parentElement;
+    const containerRect = container.getBoundingClientRect();
+
+    if (getComputedStyle(container).position === 'static') {
+      container.style.position = 'relative';
+    }
+
+    const absX = clickX - containerRect.left;
+    const absY = clickY - containerRect.top;
+
+    const count = 9 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < count; i++) {
+      const puff = document.createElement('span');
+      puff.className = 'dust-puff';
+
+      puff.style.setProperty('mix-blend-mode', 'normal', 'important');
+      puff.style.setProperty('background', 'radial-gradient(circle, rgba(220,220,220,0.95) 0%, rgba(180,180,180,0.6) 40%, transparent 75%)', 'important');
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 8 + Math.random() * 25;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - (4 + Math.random() * 10);
+      const scale = 1.4 + Math.random() * 2.0;
+
+      puff.style.setProperty('--x', `${absX}px`);
+      puff.style.setProperty('--y', `${absY}px`);
+      puff.style.setProperty('--dx', `${dx}px`);
+      puff.style.setProperty('--dy', `${dy}px`);
+      puff.style.setProperty('--scale', scale.toFixed(2));
+
+      container.appendChild(puff);
+      puff.addEventListener('animationend', () => puff.remove(), { once: true });
+    }
+  }
+
+  function switchToTelephon() {
+    cooldown = true;
+    cooldownScale = 1;
+    clicks = 0;
+    clearTimeout(resetTimer);
+
+    portrait.innerHTML = buildPicture(true);
+    portrait.style.setProperty('opacity', '1', 'important');
+    portrait.style.cursor = 'grab';
+
+    setTimeout(() => {
+      const numSteps = 3 + Math.floor(Math.random() * 4);
+      const weights = Array.from({ length: numSteps }, () => 0.1 + Math.random() * 0.9);
+      const weightSum = weights.reduce((a, b) => a + b, 0);
+      const steps = weights.map(w => w / weightSum);
+      const pauses = Array.from({ length: numSteps }, () => 250 + Math.random() * 2000);
+      let currentScale = 0;
+
+      steps.forEach((stepSize, i) => {
+        const delay = pauses.slice(0, i).reduce((a, b) => a + b, 0);
+        setTimeout(() => {
+          currentScale = Math.min(1, currentScale + stepSize);
+          const isLast = i === steps.length - 1;
+
+          portrait.style.setProperty(
+            'transition',
+            `transform ${isLast ? '0.6s' : '0.3s'} cubic-bezier(0.34, 1.56, 0.64, 1)`,
+            'important'
+          );
+          portrait.style.setProperty('transform', `scale(${currentScale.toFixed(3)})`, 'important');
+
+          if (isLast) {
+            setTimeout(() => {
+              portrait.innerHTML = buildPicture(false);
+            }, 300);
+
+            setTimeout(() => {
+              portrait.style.removeProperty('transition');
+              portrait.style.removeProperty('transform');
+              cooldownScale = 1;
+              clicks = 0;
+              cooldown = false;
+            }, 650);
+          }
+        }, delay);
+      });
+    }, 5000);
+  }
+
+  portrait.addEventListener('click', function (e) {
+    clicks++;
+    clearTimeout(resetTimer);
+
+    if (cooldown) {
+      cooldownScale = Math.max(MIN_SCALE, cooldownScale - SCALE_STEP);
+      portrait.style.setProperty('transition', 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)', 'important');
+      portrait.style.setProperty('transform', `scale(${cooldownScale.toFixed(3)})`, 'important');
+      spawnDust(e.clientX, e.clientY);
+      return;
+    }
+
+    spawnDust(e.clientX, e.clientY);
+    portrait.classList.remove('is-wobbling');
+    void portrait.offsetWidth;
+    portrait.classList.add('is-wobbling');
+    portrait.addEventListener('animationend', function onWobbleEnd(ev) {
+      if (ev.animationName !== 'portrait-wobble') return;
+      portrait.classList.remove('is-wobbling');
+      portrait.removeEventListener('animationend', onWobbleEnd);
+    });
+
+    if (clicks >= 10) {
+      clicks = 0;
+      switchToTelephon();
+      return;
+    }
+
+    resetTimer = setTimeout(() => { clicks = 0; }, 2000);
+  });
+})();
+
+/* ── Lightbox Logic ── */
+(function () {
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+  const modal = document.getElementById('lightbox-modal');
+  const content = document.getElementById('lightbox-content');
+  if (!modal || !content || triggers.length === 0) return;
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      // Bild-Markup in die Lightbox kopieren
+      content.innerHTML = trigger.innerHTML;
+
+      // Browser anweisen, die große Variante des Bildes zu laden
+      content.querySelectorAll('img, source').forEach(el => {
+        if (el.hasAttribute('sizes')) {
+          el.setAttribute('sizes', '960px');
+        }
+      });
+
+      modal.showModal();
+    });
+  });
+
+  // Modal schließen über den Button
+  modal.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', () => modal.close());
+  });
+
+  // Modal schließen beim Klick auf den Hintergrund (Backdrop)
+  modal.addEventListener('click', (e) => {
+    // Bei <dialog> entspricht e.target === modal dem Klick auf den ::backdrop
+    if (e.target === modal) {
+      modal.close();
+    }
+  });
+
+  // Nach dem Schließen den Inhalt leeren (spart Speicher)
+  modal.addEventListener('close', () => {
+    setTimeout(() => { content.innerHTML = ''; }, 300); // Warten bis CSS-Transition fertig ist
   });
 })();

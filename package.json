@@ -30,5 +30,10 @@
     "lite-youtube-embed": "^0.3.4",
     "postcss": "^8.5.15",
     "terser": "^5.48.0"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true,
+    "fsevents@2.3.3": true,
+    "puppeteer@25.1.0": true
   }
 }
