@@ -50,8 +50,8 @@
     const BASE_CONFIG = {
       densityArea: 20000,
       densityAreaReduced: 24000,
-      minParticles: 26,
-      maxParticles: 96,
+      minParticles: 30,
+      maxParticles: 120,
 
       idleFluxPerMinute: 6,
       idleFluxPerMinuteReduced: 0.8,
