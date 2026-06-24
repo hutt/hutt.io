@@ -29,9 +29,7 @@ services:
 
   frontend:
     container_name: hutt-io-frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: fholzer/nginx-brotli
     restart: unless-stopped
     depends_on:
       webhook:
