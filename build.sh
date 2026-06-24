@@ -1,7 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-cd /opt/containers/hutt.io
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
+cd /workspace
 
 echo "[build] git pull..."
 git pull
