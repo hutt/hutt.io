@@ -81,5 +81,27 @@ app.get('/webhook', (req, res) => {
 });
 
 app.listen(9000, () => {
-  console.log(`[${new Date().toISOString()}] Webhook listener gestartet auf :9000`);
+  console.log(`[${new Date().toISOString()}] Webhook listener gestartet`);
+
+  // Initialer Build beim Container-Start
+  console.log(`[${new Date().toISOString()}] Starte initialen Build...`);
+  const init = spawn('bash', ['build.sh'], {
+    cwd: WORKSPACE,
+    timeout: 300_000
+  });
+
+  init.stdout.on('data', (data) => process.stdout.write(`[INIT] ${data}`));
+  init.stderr.on('data', (data) => process.stderr.write(`[INIT ERR] ${data}`));
+
+  init.on('close', (code) => {
+    if (code === 0) {
+      console.log(`[${new Date().toISOString()}] ✓ Initialer Build abgeschlossen.`);
+    } else {
+      console.error(`[${new Date().toISOString()}] ✗ Initialer Build fehlgeschlagen (Exit-Code ${code}).`);
+    }
+  });
+
+  init.on('error', (err) => {
+    console.error(`[${new Date().toISOString()}] ✗ build.sh konnte nicht gestartet werden: ${err.message}`);
+  });
 });

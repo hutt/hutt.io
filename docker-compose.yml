@@ -1,51 +1,4 @@
 services:
-  frontend:
-    container_name: hutt-io-frontend
-    image: nginx:alpine
-    restart: unless-stopped
-    volumes:
-      - ./_site:/usr/share/nginx/html:ro
-    labels:
-      - "traefik.enable=true"
-      # HTTP-Redirect
-      - "traefik.http.routers.hutt-io-insecure.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
-      - "traefik.http.routers.hutt-io-insecure.entrypoints=web"
-      - "traefik.http.middlewares.hutt-io-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.hutt-io-insecure.middlewares=hutt-io-https-redirect"
-      
-      # HTTPS-Routing für die Website
-      - "traefik.http.routers.hutt-io.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
-      - "traefik.http.routers.hutt-io.entrypoints=websecure"
-      - "traefik.http.routers.hutt-io.tls=true"
-      - "traefik.http.routers.hutt-io.tls.certresolver=http_resolver"
-      - "traefik.http.routers.hutt-io.middlewares=cloudflarewarp@file"
-      - "traefik.http.services.hutt-io-frontend.loadbalancer.server.port=80"
-      - "traefik.docker.network=proxy"
-    networks:
-      - proxy
-
-  # 2. FastAPI Mail-Backend
-  mailer:
-    container_name: hutt-io-mailer
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    env_file:
-      - .env
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hutt-io-api.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && PathPrefix(`/api`)"
-      - "traefik.http.routers.hutt-io-api.entrypoints=websecure"
-      - "traefik.http.routers.hutt-io-api.tls=true"
-      - "traefik.http.routers.hutt-io-api.tls.certresolver=http_resolver"
-      - "traefik.http.routers.hutt-io-api.middlewares=cloudflarewarp@file"
-      - "traefik.http.services.hutt-io-mailer.loadbalancer.server.port=8000"
-      - "traefik.docker.network=proxy"
-    networks:
-      - proxy
-
-  # 3. Webhook-Listener (CI/CD)
   webhook:
     container_name: hutt-io-webhook
     build:
@@ -56,6 +9,13 @@ services:
       - WEBHOOK_SECRET=${WEBHOOK_SECRET}
     volumes:
       - /opt/containers/hutt.io:/workspace
+    healthcheck:
+      # Wird "healthy", sobald _site/index.html existiert (= Build fertig)
+      test: ["CMD", "test", "-f", "/workspace/_site/index.html"]
+      interval: 10s
+      timeout: 5s
+      retries: 30        # 30 × 10s = 5 Minuten Geduld
+      start_period: 10s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.hutt-io-webhook.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && Path(`/webhook`)"
@@ -63,6 +23,54 @@ services:
       - "traefik.http.routers.hutt-io-webhook.tls=true"
       - "traefik.http.routers.hutt-io-webhook.tls.certresolver=http_resolver"
       - "traefik.http.services.hutt-io-webhook.loadbalancer.server.port=9000"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
+  frontend:
+    container_name: hutt-io-frontend
+    image: nginx:alpine
+    restart: unless-stopped
+    depends_on:
+      webhook:
+        condition: service_healthy  # wartet bis _site/index.html existiert
+    volumes:
+      - ./_site:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hutt-io-insecure.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
+      - "traefik.http.routers.hutt-io-insecure.entrypoints=web"
+      - "traefik.http.middlewares.hutt-io-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.hutt-io-insecure.middlewares=hutt-io-https-redirect"
+      - "traefik.http.routers.hutt-io.rule=(Host(`hutt.io`) || Host(`jannishutt.de`))"
+      - "traefik.http.routers.hutt-io.entrypoints=websecure"
+      - "traefik.http.routers.hutt-io.tls=true"
+      - "traefik.http.routers.hutt-io.tls.certresolver=http_resolver"
+      - "traefik.http.routers.hutt-io.middlewares=cloudflarewarp@file"
+      - "traefik.http.services.hutt-io-frontend.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
+  mailer:
+    container_name: hutt-io-mailer
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      webhook:
+        condition: service_healthy
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hutt-io-api.rule=(Host(`hutt.io`) || Host(`jannishutt.de`)) && PathPrefix(`/api`)"
+      - "traefik.http.routers.hutt-io-api.entrypoints=websecure"
+      - "traefik.http.routers.hutt-io-api.tls=true"
+      - "traefik.http.routers.hutt-io-api.tls.certresolver=http_resolver"
+      - "traefik.http.routers.hutt-io-api.middlewares=cloudflarewarp@file"
+      - "traefik.http.services.hutt-io-mailer.loadbalancer.server.port=8000"
       - "traefik.docker.network=proxy"
     networks:
       - proxy
