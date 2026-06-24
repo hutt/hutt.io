@@ -77,7 +77,7 @@
       elasticityMin: 0.9,
       elasticityMax: 1.1,
 
-      wallPadding: 46,
+      wallPadding: 35,
       wallForce: 0.0029,
 
       minConnectionsPerParticle: 1,
@@ -1088,7 +1088,6 @@
   const skillChips = Array.from(skillBar.querySelectorAll('.filter-chip'));
   const expandableSkillChips = skillChips.filter(chip => chip.dataset.value !== '');
 
-  // LOGIK-ÄNDERUNG: activeArt = null bedeutet "kein Chip leuchtet in der ersten Reihe"
   let activeArt = null;
   let activeSkill = '';
   let activeFeatured = true;
@@ -1114,7 +1113,6 @@
       const cardSkills = parseList(card.getAttribute('data-skills'));
       const isFeatured = card.getAttribute('data-featured') === 'true';
 
-      // null wird hier wie 'Alle' behandelt (zeigt alle an, die featured sind)
       const matchArt = (activeArt === null || activeArt === '' || cardArts.includes(activeArt));
       const matchFeatured = (!activeFeatured || isFeatured);
 
@@ -1176,7 +1174,6 @@
   function setPressedState(chips, activeValue) {
     chips.forEach(chip => {
       const val = (chip.dataset.value || '').trim();
-      // Bei activeValue = null (Featured Modus) wird hier für alle Art-Chips richtigerweise 'false' gesetzt
       chip.setAttribute('aria-pressed', val === activeValue ? 'true' : 'false');
     });
   }
@@ -1243,11 +1240,9 @@
   if (featuredBtn) {
     featuredBtn.addEventListener('click', () => {
       if (activeFeatured) {
-        // Klickt man Featured nochmal an (deaktivieren), Fallback auf "Alle"
         activeFeatured = false;
         activeArt = '';
       } else {
-        // Klickt man Featured an, alle normalen Art-Chips inaktiv schalten
         activeFeatured = true;
         activeArt = null;
       }
@@ -1263,12 +1258,10 @@
     chip.addEventListener('click', () => {
       const val = (chip.dataset.value || '').trim();
 
-      // Sobald ein Art-Chip geklickt wird, ist der globale Featured-Modus aus
       activeFeatured = false;
 
-      // Normales Toggle-Verhalten für die restliche Zeile
       if (activeArt === val) {
-        activeArt = ''; // Zurück auf "Alle", wenn man denselben klickt
+        activeArt = '';
       } else {
         activeArt = val;
       }
