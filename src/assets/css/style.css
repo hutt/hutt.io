@@ -1775,7 +1775,6 @@ dialog.modal[open] {
   }
 }
 
-/* Fallback-Klasse für ältere Browser */
 dialog.modal.is-open {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -1802,7 +1801,6 @@ dialog.modal[open]::backdrop {
   }
 }
 
-/* prefers-reduced-motion: alles sofort */
 @media (prefers-reduced-motion: reduce) {
 
   .hero-copy .label,
