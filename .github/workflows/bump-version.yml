@@ -69,4 +69,4 @@ jobs:
 
       - name: Commit und Tag pushen
         run: |
-          git push origin master --follow-tags
+          git push origin master --tags
