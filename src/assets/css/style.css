@@ -1724,7 +1724,6 @@ lite-youtube.lyt-activated .yt-thumb {
     border-color var(--transition-fast),
     box-shadow var(--transition-fast),
     transform var(--transition-fast);
-  /* neu */
 }
 
 .btn:active {
@@ -1744,7 +1743,6 @@ details .refs-list {
 
 details .refs-list>* {
   min-height: 0;
-  /* nötig für grid-Trick */
 }
 
 details[open] .refs-list {
