@@ -26,9 +26,9 @@ app.post('/webhook', (req, res) => {
     return res.status(401).send('Invalid signature');
   }
 
-  // 2. Nur auf Push-Events reagieren
+  // 2. Nur auf Create-Events reagieren
   const event = req.headers['x-github-event'];
-  if (event !== 'push') {
+  if (event !== 'create') {
     console.log(`[${new Date().toISOString()}] Event "${event}" ignoriert.`);
     return res.status(200).send('Ignored');
   }
