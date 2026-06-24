@@ -12,7 +12,6 @@ services:
     volumes:
       - /opt/containers/hutt.io:/workspace
     healthcheck:
-      # Wird "healthy", sobald _site/index.html existiert (= Build fertig)
       test: ["CMD", "test", "-f", "/workspace/_site/index.html"]
       interval: 10s
       timeout: 5s
