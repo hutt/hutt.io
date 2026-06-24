@@ -35,10 +35,10 @@ app.post('/webhook', (req, res) => {
 
   const payload = JSON.parse(req.body);
 
-  // 3. Nur auf Pushes auf den main-Branch reagieren
-  if (payload.ref !== 'refs/heads/main') {
-    console.log(`[${new Date().toISOString()}] Push auf "${payload.ref}" ignoriert (nicht main).`);
-    return res.status(200).send('Not main');
+  // 3. Nur auf Pushes auf den master-Branch reagieren
+  if (payload.ref !== 'refs/heads/master') {
+    console.log(`[${new Date().toISOString()}] Push auf "${payload.ref}" ignoriert (nicht master).`);
+    return res.status(200).send('Not master');
   }
 
   const pusher  = payload.pusher?.name ?? 'unbekannt';
