@@ -1031,7 +1031,7 @@
     startupDurationMs: 2800,
     startupDampingBoost: 0.08,
     startupVelocityScale: 0.1,
-    speed: 0.018,
+    speed: 0.028,
     startupSpringRamp: true,
     prewarmSteps: 1024,
     prewarmDt: 0.9,
