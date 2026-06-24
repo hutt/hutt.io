@@ -3,7 +3,7 @@ name: Bump package version
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: write
@@ -69,4 +69,4 @@ jobs:
 
       - name: Commit und Tag pushen
         run: |
-          git push origin main --follow-tags
+          git push origin master --follow-tags
