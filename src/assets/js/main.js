@@ -80,9 +80,9 @@
       wallPadding: 46,
       wallForce: 0.0029,
 
-      minConnectionsPerParticle: 1,
-      maxConnectionsPerParticle: 3,
-      maxConnectionDistance: 340,
+      minConnectionsPerParticle: 2,
+      maxConnectionsPerParticle: 4,
+      maxConnectionDistance: 400,
 
       spawnDurationMin: 1200,
       spawnDurationMax: 2800,
