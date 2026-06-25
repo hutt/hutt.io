@@ -15,4 +15,6 @@ referenzen:
 featured: true
 ---
 
-Der Deutsche Bundestag stellt seine Tagesordnung online zur Verfügung – nur leider in keinem maschinenlesbaren Format. Das führt dazu, dass in Sitzungswochen mindestens 734 Abgeordnetenbüros händisch die Tagesordnungspunkte in ihren Kalendern aktualisieren müssen. Deshalb habe ich eine inoffizielle API entwickelt, mit der man sich die aktuelle Tagesordnung direkt als iCal-Feed holen und so in den eigenen Kalender einbetten kann. Immer aktuell, mit allen Infos, die man auch auf der Website findet. Mehr Informationen gibt es unter [api.hutt.io/bt-to/](https://api.hutt.io/bt-to/) oder direkt [bei GitHub](https://github.com/hutt/bt-to).
+Der Deutsche Bundestag stellt seine Tagesordnung online zur Verfügung – nur leider in keinem maschinenlesbaren Format. Das führt dazu, dass in Sitzungswochen mindestens 734 Abgeordnetenbüros händisch die Tagesordnungspunkte in ihren Kalendern aktualisieren müssen. 
+
+Deshalb habe ich eine inoffizielle API entwickelt, mit der man sich die aktuelle Tagesordnung direkt als iCal-Feed holen und so in den eigenen Kalender einbetten kann. Immer aktuell, mit allen Infos, die man auch auf der Website findet. Mehr Informationen gibt es unter [api.hutt.io/bt-to/](https://api.hutt.io/bt-to/) oder direkt [bei GitHub](https://github.com/hutt/bt-to).
