@@ -52,9 +52,9 @@ if (progressBar) {
   const resizeObserver = new ResizeObserver(() => {
     updateScrollProgress();
   });
-  
+
   resizeObserver.observe(document.body);
-  
+
   updateScrollProgress();
 }
 
@@ -1298,7 +1298,7 @@ if (progressBar) {
         activeFeatured = true;
         activeArt = null;
       }
-      cardsExpanded = false;
+
       setFeaturedPressedState();
       setPressedState(artChips, activeArt);
       updateSkillChips();
@@ -1318,7 +1318,6 @@ if (progressBar) {
         activeArt = val;
       }
 
-      cardsExpanded = false;
       setFeaturedPressedState();
       setPressedState(artChips, activeArt);
       updateSkillChips();
@@ -1331,7 +1330,6 @@ if (progressBar) {
       if (chip.hidden) return;
       const val = (chip.dataset.value || '').trim();
       activeSkill = (activeSkill === val) ? '' : val;
-      cardsExpanded = false;
       setPressedState(skillChips.filter(c => !c.hidden), activeSkill);
       applyFilters();
     });
@@ -1706,13 +1704,13 @@ if (accentWord) {
 
   accentWord.addEventListener('mouseover', event => {
     let iterations = 0;
-    
+
     const currentWidth = event.target.getBoundingClientRect().width;
     event.target.style.width = currentWidth + 'px';
     event.target.style.display = 'inline-block';
-    
+
     clearInterval(accentWord.dataset.interval);
-    
+
     accentWord.dataset.interval = setInterval(() => {
       event.target.innerText = originalWord.split("")
         .map((letter, index) => {
@@ -1722,16 +1720,16 @@ if (accentWord) {
           return letters[Math.floor(Math.random() * letters.length)];
         })
         .join("");
-      
+
       if (iterations >= originalWord.length) {
         clearInterval(accentWord.dataset.interval);
-        event.target.innerText = originalWord; 
-        
-        event.target.style.width = 'auto'; 
+        event.target.innerText = originalWord;
+
+        event.target.style.width = 'auto';
       }
-      
-      iterations += 1 / 5; 
-    }, 20); 
+
+      iterations += 1 / 5;
+    }, 20);
   });
 }
 
