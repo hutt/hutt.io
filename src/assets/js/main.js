@@ -35,6 +35,29 @@
   }
 })();
 
+/* Scrolly Spy */
+const progressBar = document.getElementById('scroll-progress');
+
+if (progressBar) {
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+    progressBar.style.transform = `scaleX(${progress})`;
+  };
+
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+
+  const resizeObserver = new ResizeObserver(() => {
+    updateScrollProgress();
+  });
+  
+  resizeObserver.observe(document.body);
+  
+  updateScrollProgress();
+}
+
 /* Hero Netzwerk-Canvas */
 (function () {
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
