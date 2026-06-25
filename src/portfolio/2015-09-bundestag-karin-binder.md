@@ -12,4 +12,4 @@ skills:
   - Büroorganisation
 ---
 
-Ernährungspolitische Sprecherin und Parlamentarische Geschäftsführerin.
+Ernährungspolitische Sprecherin und Parlamentarische Geschäftsführerin in der [Fraktion Die Linke im Bundestag](https://linksfraktion.de).

@@ -69,4 +69,6 @@ referenzen:
 featured: true
 ---
 
-Nach der Twitter-Übernahme durch Elon Musk gewannen dezentrale Plattformen wie *Mastodon* schlagartig an Bedeutung. Damit politisch interessierte Nutzer_innen den Bundestag dort besser im Blick behalten können, stelle ich auf meiner eigenen Instanz **28 kleine Bots** zur Verfügung.
+Nach der Twitter-Übernahme durch Elon Musk gewannen dezentrale Plattformen wie *Mastodon* schlagartig an Bedeutung. 
+
+Damit politisch interessierte Nutzer_innen den Bundestag dort besser im Blick behalten können, stelle ich auf meiner eigenen Instanz **28 kleine Bots** zur Verfügung.
