@@ -57,7 +57,7 @@
       idleFluxPerMinuteReduced: 2.4,
 
       opacityPoint: 0.58,
-      opacityLine: 0.26,
+      opacityLine: 0.35,
       opacityGlow: 0.12,
 
       pointRadiusMin: 1.5,
@@ -77,11 +77,11 @@
       elasticityMin: 0.9,
       elasticityMax: 1.1,
 
-      wallPadding: 35,
+      wallPadding: 40,
       wallForce: 0.0029,
 
       minConnectionsPerParticle: 1,
-      maxConnectionsPerParticle: 3,
+      maxConnectionsPerParticle: 4,
       maxConnectionDistance: 500,
 
       spawnDurationMin: 1200,
@@ -612,16 +612,45 @@
     }
 
     function applyWallRepulsion(p) {
-      if (p.x < CONFIG.wallPadding) {
-        p.ax += (CONFIG.wallPadding - p.x) * CONFIG.wallForce;
-      } else if (p.x > width - CONFIG.wallPadding) {
-        p.ax -= (p.x - (width - CONFIG.wallPadding)) * CONFIG.wallForce;
+      const pad = CONFIG.wallPadding;
+      let hitWall = false;
+
+      // Linker Rand
+      if (p.x < pad) {
+        p.ax += (pad - p.x) * CONFIG.wallForce;
+        if (Math.cos(p.targetHeading) < 0) {
+          p.targetHeading = Math.PI - p.targetHeading; // Spiegele X-Richtung
+          hitWall = true;
+        }
+      }
+      // Rechter Rand
+      else if (p.x > width - pad) {
+        p.ax += ((width - pad) - p.x) * CONFIG.wallForce;
+        if (Math.cos(p.targetHeading) > 0) {
+          p.targetHeading = Math.PI - p.targetHeading; // Spiegele X-Richtung
+          hitWall = true;
+        }
       }
 
-      if (p.y < CONFIG.wallPadding) {
-        p.ay += (CONFIG.wallPadding - p.y) * CONFIG.wallForce;
-      } else if (p.y > height - CONFIG.wallPadding) {
-        p.ay -= (p.y - (height - CONFIG.wallPadding)) * CONFIG.wallForce;
+      // Oberer Rand
+      if (p.y < pad) {
+        p.ay += (pad - p.y) * CONFIG.wallForce;
+        if (Math.sin(p.targetHeading) < 0) {
+          p.targetHeading = -p.targetHeading; // Spiegele Y-Richtung
+          hitWall = true;
+        }
+      }
+      // Unterer Rand
+      else if (p.y > height - pad) {
+        p.ay += ((height - pad) - p.y) * CONFIG.wallForce;
+        if (Math.sin(p.targetHeading) > 0) {
+          p.targetHeading = -p.targetHeading; // Spiegele Y-Richtung
+          hitWall = true;
+        }
+      }
+
+      if (hitWall) {
+        p.headingChangeAt = nowMs() + random(CONFIG.headingChangeMinMs, CONFIG.headingChangeMaxMs);
       }
     }
 
@@ -1013,7 +1042,7 @@
     densityArea: 30000,
     densityAreaReduced: 40000,
     opacityPoint: 0.58,
-    opacityLine: 0.26,
+    opacityLine: 0.5,
     opacityGlow: 0.12,
     lineWidth: 0.95,
     steeringForce: 0.0018,
@@ -1030,7 +1059,7 @@
     startupDurationMs: 2800,
     startupDampingBoost: 0.08,
     startupVelocityScale: 0.1,
-    speed: 0.028,
+    speed: 0.04,
     startupSpringRamp: true,
     prewarmSteps: 1024,
     prewarmDt: 0.9,
