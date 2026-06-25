@@ -92,7 +92,7 @@ eleventyImport:
         data-limit="{{ site.portfolio.num_items }}"
         data-limit-mobile="{{ site.portfolio.num_items_mobile }}">
         {% for item in collections.portfolio %}
-          <article
+          <div
             class="card"
             data-art="{{ item.data.art }}"
             data-skills="{{ item.data.skills }}"
@@ -182,7 +182,7 @@ eleventyImport:
               {% endif %}
 
             </div>
-          </article>
+          </div>
         {% endfor %}
       </div>
     </div>
