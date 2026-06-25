@@ -1711,3 +1711,24 @@ if (accentWord) {
     }, 20); 
   });
 }
+
+/* Nach Tageszeit grüßen */
+const greetingElement = document.getElementById('h-ueber-mich');
+
+if (greetingElement) {
+  const hour = new Date().getHours();
+  let greeting = "Moin."; // Fallback
+
+  if (hour >= 6 && hour < 12) {
+    greeting = "Moin!";
+  } else if (hour >= 12 && hour < 19) {
+    greeting = "Hi!";
+  } else if (hour >= 19 && hour <= 23) {
+    greeting = "N'Abend.";
+  } else {
+    // 0 bis 5 Uhr ab
+    greeting = "Auch noch wach?!";
+  }
+
+  greetingElement.innerText = greeting;
+}
