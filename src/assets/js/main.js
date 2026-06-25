@@ -1673,3 +1673,41 @@
     setTimeout(() => { content.innerHTML = ''; }, 300); // Warten bis CSS-Transition fertig ist
   });
 })();
+
+/* onMouseOver-Matrix-Effekt für .hero-title .accent */
+const letters = "abcdefghijklnopqrstuvwxyz01";
+const accentWord = document.querySelector('.hero-title .accent');
+
+if (accentWord) {
+  const originalWord = accentWord.innerText.replace(/\s+/g, '');
+
+  accentWord.addEventListener('mouseover', event => {
+    let iterations = 0;
+    
+    const currentWidth = event.target.getBoundingClientRect().width;
+    event.target.style.width = currentWidth + 'px';
+    event.target.style.display = 'inline-block';
+    
+    clearInterval(accentWord.dataset.interval);
+    
+    accentWord.dataset.interval = setInterval(() => {
+      event.target.innerText = originalWord.split("")
+        .map((letter, index) => {
+          if (index < iterations) {
+            return originalWord[index];
+          }
+          return letters[Math.floor(Math.random() * letters.length)];
+        })
+        .join("");
+      
+      if (iterations >= originalWord.length) {
+        clearInterval(accentWord.dataset.interval);
+        event.target.innerText = originalWord; 
+        
+        event.target.style.width = 'auto'; 
+      }
+      
+      iterations += 1 / 5; 
+    }, 20); 
+  });
+}

@@ -459,6 +459,7 @@ select {
 
 .hero-title .accent {
   color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
 }
 
 .hero-sub {
