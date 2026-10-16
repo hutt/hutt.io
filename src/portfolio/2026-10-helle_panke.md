@@ -9,4 +9,4 @@ bild: helle_panke.png
 featured: false
 ---
 
-Die **Helle Panke e.V. – Rosa-Luxemburg-Stiftung Berlin** ist ein gemeinnütziger Bildungs- und Kulturverein in Berlin-Prenzlauer Berg mit dem Schwerpunkt auf linker politischer Bildung.
+Die **Helle Panke e.V. – Rosa-Luxemburg-Stiftung Berlin** ist ein gemeinnütziger Bildungs- und Kulturverein mit dem Schwerpunkt auf linker politischer Bildung.
