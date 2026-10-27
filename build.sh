@@ -6,6 +6,9 @@ export NVM_DIR="$HOME/.nvm"
 
 cd /workspace
 
+echo "[build] git stash..."
+git stash
+
 echo "[build] git pull..."
 git pull
 
