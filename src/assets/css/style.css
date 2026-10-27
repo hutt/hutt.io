@@ -1444,11 +1444,13 @@ lite-youtube.lyt-activated .yt-thumb {
 
   .hero-title {
     margin-top: var(--space-2);
+    /*
     hyphens: auto;
     hyphenate-limit-chars: 7 3 3;
     hyphenate-limit-lines: 2;
     -webkit-hyphenate-limit-before: 3;
     -webkit-hyphenate-limit-after: 3;
+    */
   }
 
   .hero-sub {
