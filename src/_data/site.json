@@ -7,9 +7,11 @@
   "kontakt": {
     "email": "jannis@hutt.io",
     "pgp_fingerprint": "C59B 6CD5 E980 6365 A69C 9046 9BAD 2EA1 5BCF 1DFF",
-    "signal": "https://signal.me/#eu/ROdReCjcEYMiVqI8-r0CA_08NCXJxobpe-ZjJ4BuEFs85_ZsCPNE7IIn-kqyCrED",
+    "signal_link": "https://signal.me/#eu/ROdReCjcEYMiVqI8-r0CA_08NCXJxobpe-ZjJ4BuEFs85_ZsCPNE7IIn-kqyCrED",
+    "signal_username": "@hutt.01",
     "matrix": "@jannis:hutt.io",
-    "mastodon": "https://hutt.social/@jannis",
+    "mastodon_link": "https://hutt.social/@jannis",
+    "mastodon_username": "@jannis@hutt.social",
     "instagram": "https://www.instagram.com/aluhutt.jpg/",
     "flickr": "https://www.flickr.com/photos/jannishutt/",
     "github": "https://github.com/hutt",
