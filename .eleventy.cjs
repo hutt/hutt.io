@@ -40,6 +40,9 @@ module.exports = function (eleventyConfig) {
 
   logger.info("Konfiguration wird geladen …");
 
+  // ── Build Date erfassen ──────────────────────────────────────
+  eleventyConfig.addGlobalData("buildDate", () => new Date());
+
   // ── Passthrough ──────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/css/lite-yt-embed.css");
