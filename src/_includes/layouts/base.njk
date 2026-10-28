@@ -29,9 +29,12 @@
     <noscript><link rel="stylesheet" href="/assets/css/style.min.css?v={{ pkg.version }}"></noscript>
 
     <!-- Analytics: defer, blockiert nichts -->
-    <script defer data-domain="{{ site.plausible_domain }}"
-          data-api="/pa/event"
-          src="/pa/script.file-downloads.outbound-links.pageview-props.js"></script>
+    <script async src="https://plausible.hutt.io/js/pa-41y1LzXNeXCXTZCWWXn1t.js"></script>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+
 
     <!-- Meta, Title, SEO -->
     {% if noindex %}
