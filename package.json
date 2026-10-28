@@ -4,7 +4,6 @@
   "description": "Portfolio-Website",
   "main": "index.js",
   "scripts": {
-    "setup:browser": "playwright install chromium",
     "thumbs": "node scripts/fetch-thumbs.js",
     "start": "npm run thumbs && eleventy --config=.eleventy.cjs --serve",
     "build": "npm run thumbs && eleventy --config=.eleventy.cjs"

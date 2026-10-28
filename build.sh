@@ -16,7 +16,7 @@ echo "[build] npm install..."
 npm install
 
 echo "[build] Setup Browser..."
-npm run setup:browser
+playwright install --with-deps chromium
 
 echo "[build] npm run build..."
 npm run build
