@@ -2,15 +2,11 @@ FROM node:24-trixie
 
 # Chromium + nötige Abhängigkeiten für Puppeteer/Critical
 RUN apt update
-RUN apt install \
+RUN apt install -y \
     git \
     bash \
     chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
+    ca-certificates
 
 RUN git config --global --add safe.directory /workspace
 
