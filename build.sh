@@ -15,6 +15,9 @@ git pull
 echo "[build] npm install..."
 npm install
 
+echo "[build] Setup Browser..."
+npm run setup:browser
+
 echo "[build] npm run build..."
 npm run build
 
