@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24
 
 # Chromium + nötige Abhängigkeiten für Puppeteer/Critical
 RUN apk add --no-cache \
@@ -12,13 +12,10 @@ RUN apk add --no-cache \
     ttf-freefont \
   && git config --global --add safe.directory /workspace
 
-# Puppeteer soll das System-Chromium nutzen, nicht selbst eines herunterladen
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
 WORKDIR /app
 COPY package.json .
 RUN npm install
+RUN npx playwright install --with-deps chromium
 
 COPY server.js .
 

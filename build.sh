@@ -15,9 +15,6 @@ git pull
 echo "[build] npm install..."
 npm install
 
-echo "[build] Setup Browser..."
-npx playwright install --with-deps chromium
-
 echo "[build] npm run build..."
 npm run build
 

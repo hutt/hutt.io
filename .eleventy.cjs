@@ -235,7 +235,7 @@ module.exports = function (eleventyConfig) {
           );
 
           for (const warning of result.report.warnings ?? []) {
-            logger.info(`⚠️ Critical CSS (${page.html}): ${warning}`);
+            logger.info(`Critical CSS (${page.html}): ${warning}`);
           }
         }
       } catch (err) {
