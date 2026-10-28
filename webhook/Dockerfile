@@ -1,7 +1,7 @@
-FROM node:24
+FROM node:24-trixie
 
 # Chromium + nötige Abhängigkeiten für Puppeteer/Critical
-RUN apk add --no-cache \
+RUN apt install \
     git \
     bash \
     chromium \
