@@ -1748,7 +1748,7 @@ if (greetingElement) {
     greeting = "N'Abend.";
   } else {
     // 0 bis 5 Uhr ab
-    greeting = "Auch noch wach?!";
+    greeting = "Um diese Zeit noch wach?";
   }
 
   greetingElement.innerText = greeting;
