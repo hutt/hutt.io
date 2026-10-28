@@ -20,12 +20,13 @@
   },
   "homepage": "https://github.com/hutt/hutt.io#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6"
+    "@11ty/eleventy": "^3.1.6",
+    "critical": "^9.0.0",
+    "playwright": "^1.64.1"
   },
   "dependencies": {
     "@11ty/eleventy-img": "^7.0.0",
     "autoprefixer": "^10.5.0",
-    "critical": "^8.0.0",
     "cssnano": "^7.1.9",
     "lite-youtube-embed": "^0.3.4",
     "postcss": "^8.5.25",
@@ -34,7 +35,6 @@
   },
   "allowScripts": {
     "sharp@0.33.5": true,
-    "fsevents@2.3.3": true,
-    "puppeteer@25.1.0": true
+    "fsevents@2.3.3": true
   }
 }

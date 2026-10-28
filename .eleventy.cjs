@@ -155,17 +155,31 @@ module.exports = function (eleventyConfig) {
   // ── Critical CSS (nach dem Build) ────────────────────────────
   eleventyConfig.on("eleventy.after", async ({ runMode }) => {
     if (runMode === "serve") {
-      logger.info("Critical CSS übersprungen (serve-Modus) — nur bei npm run build aktiv");
+      logger.info(
+        "Critical CSS übersprungen (serve-Modus) — nur bei npm run build aktiv"
+      );
       return;
     }
 
-    const { generate } = await import("critical");
+    const { critical } = await import("critical");
 
     const pages = [
-      { html: "_site/index.html", css: "_site/assets/css/critical-index.css" },
-      { html: "_site/datenschutz/index.html", css: "_site/assets/css/critical-datenschutz.css" },
-      { html: "_site/impressum/index.html", css: "_site/assets/css/critical-impressum.css" },
-      { html: "_site/me/index.html", css: "_site/assets/css/critical-me.css" },
+      {
+        html: "_site/index.html",
+        css: "_site/assets/css/critical-index.css",
+      },
+      {
+        html: "_site/datenschutz/index.html",
+        css: "_site/assets/css/critical-datenschutz.css",
+      },
+      {
+        html: "_site/impressum/index.html",
+        css: "_site/assets/css/critical-impressum.css",
+      },
+      {
+        html: "_site/me/index.html",
+        css: "_site/assets/css/critical-me.css",
+      },
     ];
 
     for (const page of pages) {
@@ -177,38 +191,57 @@ module.exports = function (eleventyConfig) {
       try {
         const before = fs.statSync(page.html).size;
 
-        await generate({
+        const result = await critical({
           base: "_site/",
           src: page.html,
-          target: {
-            html: page.html,
-            css: page.css,
-          },
-          inline: true,
+
+          // Viewportgenaue Analyse mit Playwright
+          engine: "render",
           width: 1440,
           height: 900,
-          ignore: {
-            atrule: ["@font-face"],
-            rule: [/\.dust-puff/, /\.is-wobbling/],
-          },
-          rebase: false,
-          concurrency: 2,
-          penthouse: {
-            puppeteer: {
-              executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-              args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            },
-          },
+
+          // Critical CSS inline einfügen und übrige Stylesheets
+          // gemäß Critical-Strategie nicht renderblockierend laden
+          inline: true,
         });
 
-        // Temporäre CSS-Datei wieder aufräumen
-        if (fs.existsSync(page.css)) fs.unlinkSync(page.css);
+        // Optimiertes HTML am bisherigen Pfad speichern
+        fs.writeFileSync(page.html, result.html, "utf8");
+
+        // Kritisches CSS separat am bisherigen Pfad exportieren
+        fs.mkdirSync(path.dirname(page.css), { recursive: true });
+        fs.writeFileSync(page.css, result.css, "utf8");
 
         const after = fs.statSync(page.html).size;
-        logger.css(`Critical CSS: ${page.html} (${formatBytes(before)} → ${formatBytes(after)})`);
+        const cssSize = Buffer.byteLength(result.css, "utf8");
+
+        logger.css(
+          `Critical CSS: ${page.html} ` +
+            `(${formatBytes(before)} → ${formatBytes(after)})`
+        );
+
+        logger.info(
+          `Critical CSS exportiert: ${page.css} (${formatBytes(cssSize)})`
+        );
+
+        // Engine und Verarbeitungsergebnis protokollieren
+        if (result.report) {
+          logger.info(
+            `Critical CSS Report (${page.html}): ` +
+              `Engine=${result.report.engine}, ` +
+              `Regeln=${result.report.rules?.kept ?? "?"}/` +
+              `${result.report.rules?.total ?? "?"}, ` +
+              `Dauer=${result.report.durationMs ?? "?"} ms`
+          );
+
+          for (const warning of result.report.warnings ?? []) {
+            logger.info(`⚠ Critical CSS (${page.html}): ${warning}`);
+          }
+        }
       } catch (err) {
-        logger.err(`Critical CSS (${page.html}): ${err.message}`);
-        if (fs.existsSync(page.css)) fs.unlinkSync(page.css);
+        logger.err(
+          `Critical CSS (${page.html}): ${err.stack || err.message}`
+        );
       }
     }
   });
