@@ -1,6 +1,7 @@
 FROM node:24-trixie
 
 # Chromium + nötige Abhängigkeiten für Puppeteer/Critical
+RUN apt update
 RUN apt install \
     git \
     bash \
@@ -9,8 +10,9 @@ RUN apt install \
     freetype \
     harfbuzz \
     ca-certificates \
-    ttf-freefont \
-  && git config --global --add safe.directory /workspace
+    ttf-freefont
+
+RUN git config --global --add safe.directory /workspace
 
 WORKDIR /app
 COPY package.json .
